@@ -193,20 +193,6 @@ export const SUBJECTS: Subject[] = [
     ],
   },
   {
-    id: 'bio',
-    name: '生物学',
-    emoji: '🧬',
-    color: 'from-emerald-400 to-teal-600',
-    goal: '搭好知识框架，为专业课打底',
-    tasks: [
-      { id: 'b1', title: '细胞结构与功能', minutes: 40, tip: '画一张细胞器分工思维导图' },
-      { id: 'b2', title: '细胞代谢：呼吸与光合', minutes: 50, tip: '对比记忆两大代谢的场所与产物' },
-      { id: 'b3', title: '遗传的分子基础', minutes: 45, tip: 'DNA 复制 / 转录 / 翻译画流程图' },
-      { id: 'b4', title: '基因表达调控', minutes: 40, tip: '原核乳糖操纵子是经典考点' },
-      { id: 'b5', title: '生物进化与多样性', minutes: 35, tip: '现代进化理论四大要点' },
-    ],
-  },
-  {
     id: 'toefl',
     name: '托福',
     emoji: '🌍',

@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import {
   ArrowLeft,
   Bell,
+  BookOpen,
   BookOpenCheck,
   CalendarDays,
   CheckCircle2,
@@ -24,9 +25,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
 import { NEWS, SCHOOL_LINKS, SUBJECTS, DIDI_SUBJECTS } from '@/data/content'
-import { booksOfSubject } from '@/lib/books'
+import { booksOfUser } from '@/lib/books'
 import { DIDI_LINKS, DIDI_NEWS } from '@/data/newsDidi'
-import BookPanel from '@/components/BookPanel'
 import { actions, useAuth, useActiveUserId, useBoard, useRole } from '@/store/useBoard'
 import { monthOf, relevance } from '@/agent/relevance'
 import FloatingChat from '@/components/FloatingChat'
@@ -396,6 +396,40 @@ function SubjectCard({ s, onOpen }: { s: Subject; onOpen: () => void }) {
   )
 }
 
+function BookCard({
+  id,
+  title,
+  emoji,
+  chapters,
+}: {
+  id: string
+  title: string
+  emoji?: string
+  chapters: number
+}) {
+  return (
+    <Link
+      to={`/book/${id}`}
+      className="relative overflow-hidden rounded-2xl p-4 text-left text-white shadow-md transition hover:shadow-lg"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-700" />
+      <div className="relative">
+        <div className="flex items-start justify-between">
+          <span className="text-2xl">{emoji ?? '📖'}</span>
+          <Badge className="bg-white/20 text-white border-0 text-[10px] hover:bg-white/20">
+            教材精读
+          </Badge>
+        </div>
+        <h3 className="mt-2 text-lg font-bold">《{title}》</h3>
+        <p className="text-[11px] text-white/80 mt-0.5">原文笔记 + 本章测试</p>
+        <div className="mt-3 flex items-center gap-1.5 text-[10px] text-white/75">
+          <BookOpen className="h-3 w-3" /> 已整理 {chapters} 章
+        </div>
+      </div>
+    </Link>
+  )
+}
+
 function SubjectDetail({
   s,
   onBack,
@@ -460,11 +494,6 @@ function SubjectDetail({
         })}
       </div>
 
-      {(() => {
-        const book = booksOfSubject(s.id)[0]
-        return book ? <BookPanel book={book} /> : null
-      })()}
-
       <p className="text-center text-[11px] text-zinc-400 pb-20">
         打卡数据实时同步，完成的每一步都会留下记录 ✨
       </p>
@@ -473,9 +502,11 @@ function SubjectDetail({
 }
 
 function StudyTab({ readOnly }: { readOnly: boolean }) {
-  const isDidi = useActiveUserId() === 'u-didi'
+  const userId = useActiveUserId()
+  const isDidi = userId === 'u-didi'
   const subjects = isDidi ? DIDI_SUBJECTS : SUBJECTS
-  // 深链接：…#study/<subjectId> 直达学科详情（如 …#study/bio）
+  const books = booksOfUser(userId ?? '')
+  // 深链接：…#study/<subjectId> 直达学科详情（如 …#study/math）
   const [openId, setOpenId] = useState<string | null>(() => {
     const m = window.location.hash.match(/#study\/(\w+)/)
     return m && subjects.some((s) => s.id === m[1]) ? m[1] : null
@@ -495,9 +526,12 @@ function StudyTab({ readOnly }: { readOnly: boolean }) {
         {subjects.map((s) => (
           <SubjectCard key={s.id} s={s} onOpen={() => setOpenId(s.id)} />
         ))}
+        {books.map((b) => (
+          <BookCard key={b.id} id={b.id} title={b.title} emoji={b.emoji} chapters={b.chapters.length} />
+        ))}
       </div>
       <p className="text-center text-[11px] text-zinc-400">
-        更多学科正在路上；后续这里会升级为「笔记 + 教材原文」的互动学习页
+        更多学科和教材正在路上；教材点进去就是「原文笔记 + 本章测试」
       </p>
     </div>
   )

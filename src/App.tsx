@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router'
 import Home from './pages/Home'
 import Brother from './pages/Brother'
 import Login from './pages/Login'
+import BookPage from './pages/BookPage'
 import { useAuth } from './store/useBoard'
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/book/:bookId" element={<BookPage />} />
       <Route
         path="/brother"
         element={currentUser.role === 'admin' ? <Brother /> : <Navigate to="/" replace />}

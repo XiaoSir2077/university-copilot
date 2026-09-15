@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router'
+import { useNavigate, useSearchParams, useLocation } from 'react-router'
 import { GraduationCap, KeyRound, LogIn, UserRound } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuth, getCurrentUser } from '@/store/useBoard'
@@ -7,6 +7,7 @@ import { useAuth, getCurrentUser } from '@/store/useBoard'
 export default function Login() {
   const auth = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
   const [params] = useSearchParams()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -19,11 +20,14 @@ export default function Login() {
     const p = params.get('p')
     if (u && p) {
       void auth.login(u, p).then((err) => {
-        if (!err)
-          navigate(
-            (getCurrentUser()?.role === 'admin' ? '/brother' : '/') + window.location.hash,
-            { replace: true },
-          )
+        if (err) return
+        const user = getCurrentUser()
+        // 保留目标路径；仅默认首页时管理员分流到管理看板
+        const target =
+          location.pathname === '/' && user?.role === 'admin'
+            ? '/brother'
+            : location.pathname + location.search + location.hash
+        navigate(target, { replace: true })
       })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

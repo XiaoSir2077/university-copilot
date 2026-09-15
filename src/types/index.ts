@@ -87,8 +87,8 @@ export interface Book {
   id: string
   title: string
   emoji?: string
-  /** 归属学科（对应 Subject.id，如 'bio'） */
-  subjectId: string
+  /** 归属用户（只给该用户展示） */
+  userId: string
   chapters: BookChapter[]
 }
 

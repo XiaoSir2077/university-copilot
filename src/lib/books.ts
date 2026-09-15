@@ -8,7 +8,7 @@ import type { Book, BookChapter } from '@/types'
 interface BookMeta {
   title: string
   emoji?: string
-  subjectId: string
+  userId: string
 }
 
 interface ChapterFrontmatter {
@@ -66,13 +66,13 @@ function loadBooks(): Book[] {
       if (ch) chapters.push(ch)
     }
     chapters.sort((a, b) => a.order - b.order)
-    books.push({ id: bookId, title: meta.title, emoji: meta.emoji, subjectId: meta.subjectId, chapters })
+    books.push({ id: bookId, title: meta.title, emoji: meta.emoji, userId: meta.userId, chapters })
   }
   return books
 }
 
 export const BOOKS: Book[] = loadBooks()
 
-export function booksOfSubject(subjectId: string): Book[] {
-  return BOOKS.filter((b) => b.subjectId === subjectId)
+export function booksOfUser(userId: string): Book[] {
+  return BOOKS.filter((b) => b.userId === userId)
 }
