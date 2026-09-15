@@ -1,0 +1,78 @@
+import type { Book, BookChapter } from '@/types'
+
+// ─────────────────────────────────────────────────────────────────────────
+// 教材内容加载器：构建时把 src/content/books/ 下的 md 全部打包进来。
+// 新增一本书 = 新建 <id>/meta.json + 若干章节 .md；新增一章 = 丢一个 .md。
+// ─────────────────────────────────────────────────────────────────────────
+
+interface BookMeta {
+  title: string
+  emoji?: string
+  subjectId: string
+}
+
+interface ChapterFrontmatter {
+  no: string
+  title: string
+  order: number
+  quiz?: BookChapter['quiz']
+}
+
+const metaFiles = import.meta.glob<BookMeta>('../content/books/*/meta.json', {
+  eager: true,
+  import: 'default',
+})
+const chapterFiles = import.meta.glob<string>('../content/books/*/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+})
+
+const FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---\r?\n/
+
+function parseChapter(id: string, raw: string): BookChapter | null {
+  const m = raw.match(FRONTMATTER_RE)
+  if (!m) {
+    console.warn(`[books] ${id} 缺少 JSON frontmatter，已跳过`)
+    return null
+  }
+  let fm: ChapterFrontmatter
+  try {
+    fm = JSON.parse(m[1]) as ChapterFrontmatter
+  } catch (e) {
+    console.warn(`[books] ${id} frontmatter 不是合法 JSON，已跳过`, e)
+    return null
+  }
+  return {
+    id,
+    no: fm.no ?? '',
+    title: fm.title ?? id,
+    order: fm.order ?? 0,
+    body: raw.slice(m[0].length),
+    quiz: Array.isArray(fm.quiz) ? fm.quiz : [],
+  }
+}
+
+function loadBooks(): Book[] {
+  const books: Book[] = []
+  for (const [path, meta] of Object.entries(metaFiles)) {
+    const bookId = path.match(/books\/([^/]+)\//)?.[1]
+    if (!bookId) continue
+    const chapters: BookChapter[] = []
+    for (const [cpath, raw] of Object.entries(chapterFiles)) {
+      const cm = cpath.match(/books\/([^/]+)\/(.+)\.md$/)
+      if (!cm || cm[1] !== bookId) continue
+      const ch = parseChapter(cm[2], raw)
+      if (ch) chapters.push(ch)
+    }
+    chapters.sort((a, b) => a.order - b.order)
+    books.push({ id: bookId, title: meta.title, emoji: meta.emoji, subjectId: meta.subjectId, chapters })
+  }
+  return books
+}
+
+export const BOOKS: Book[] = loadBooks()
+
+export function booksOfSubject(subjectId: string): Book[] {
+  return BOOKS.filter((b) => b.subjectId === subjectId)
+}

@@ -24,7 +24,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
 import { NEWS, SCHOOL_LINKS, SUBJECTS, DIDI_SUBJECTS } from '@/data/content'
-import { BOOKS } from '@/data/books'
+import { booksOfSubject } from '@/lib/books'
 import { DIDI_LINKS, DIDI_NEWS } from '@/data/newsDidi'
 import BookPanel from '@/components/BookPanel'
 import { actions, useAuth, useActiveUserId, useBoard, useRole } from '@/store/useBoard'
@@ -461,7 +461,7 @@ function SubjectDetail({
       </div>
 
       {(() => {
-        const book = BOOKS.find((b) => b.subjectId === s.id)
+        const book = booksOfSubject(s.id)[0]
         return book ? <BookPanel book={book} /> : null
       })()}
 

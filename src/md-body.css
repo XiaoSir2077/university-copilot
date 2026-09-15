@@ -1,0 +1,61 @@
+/* Markdown 笔记排版（MarkdownView 组件使用） */
+.md-body {
+  @apply text-sm leading-relaxed text-zinc-700;
+}
+.md-body h1 {
+  @apply mb-3 mt-1 text-xl font-bold text-zinc-800;
+}
+.md-body h2 {
+  @apply mb-2 mt-6 flex items-center gap-1.5 border-b border-zinc-100 pb-1.5 text-base font-bold text-zinc-800 first:mt-0;
+}
+.md-body h3 {
+  @apply mb-1.5 mt-4 text-[15px] font-semibold text-zinc-700;
+}
+.md-body h4 {
+  @apply mb-1 mt-3 text-sm font-semibold text-zinc-700;
+}
+.md-body p {
+  @apply my-2;
+}
+.md-body ul {
+  @apply my-2 list-disc space-y-1 pl-5;
+}
+.md-body ol {
+  @apply my-2 list-decimal space-y-1 pl-5;
+}
+.md-body li {
+  @apply leading-relaxed;
+}
+.md-body blockquote {
+  @apply my-3 rounded-r-xl border-l-4 border-amber-200 bg-amber-50/60 px-3 py-2 text-zinc-600;
+}
+.md-body blockquote p {
+  @apply my-0.5;
+}
+.md-body code {
+  @apply rounded bg-zinc-100 px-1 py-0.5 text-[13px] text-rose-600;
+}
+.md-body pre {
+  @apply my-3 overflow-x-auto rounded-xl bg-zinc-900 p-3.5 text-[13px] leading-relaxed text-zinc-100;
+}
+.md-body pre code {
+  @apply bg-transparent p-0 text-inherit;
+}
+.md-body table {
+  @apply my-3 w-full border-collapse overflow-hidden rounded-xl text-[13px];
+}
+.md-body th {
+  @apply border border-zinc-200 bg-zinc-50 px-2.5 py-1.5 text-left font-semibold text-zinc-700;
+}
+.md-body td {
+  @apply border border-zinc-200 px-2.5 py-1.5 align-top text-zinc-600;
+}
+.md-body hr {
+  @apply my-4 border-zinc-100;
+}
+.md-body a {
+  @apply text-emerald-600 underline underline-offset-2;
+}
+.md-body strong {
+  @apply font-semibold text-zinc-800;
+}

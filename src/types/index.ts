@@ -53,43 +53,40 @@ export interface SisterProfile {
   interests: string[]
 }
 
-// ── 教材精读 ─────────────────────────────────────────────────────────────
-/** 思维导图的层级节点：text + 可选子节点 */
-export interface OutlineNode {
-  text: string
-  note?: string // 悬停/展开可见的批注
-  children?: OutlineNode[]
-}
+// ── 教材精读（Markdown 驱动）────────────────────────────────────────────
+/**
+ * 内容约定：src/content/books/<书id>/meta.json 放书籍元数据，
+ * 同目录下每个 .md 文件是一个章节，文件头用 JSON frontmatter 描述章节：
+ *
+ * ---
+ * {"no":"第一章","title":"生命的本质","order":1,
+ *  "quiz":[{"type":"choice","q":"…","choices":["A","B","C","D"],"answer":0,"explain":"…"},
+ *          {"type":"qa","q":"…","a":"参考答案"}]}
+ * ---
+ * （正文就是普通 Markdown）
+ *
+ * 新增一章 = 丢一个 .md 文件进去，构建后自动出现。
+ */
 
-/** 笔记正文的一个小节 */
-export interface NoteSection {
-  heading: string
-  body: string // 支持简单换行
-}
-
-/** 原文摘抄 */
-export interface Quote {
-  text: string
-  page?: string
-  comment?: string // 哥哥的批注
-}
+/** 选择题（自动判分）或自答题（点击看参考答案） */
+export type QuizItem =
+  | { type: 'choice'; q: string; choices: string[]; answer: number; explain?: string }
+  | { type: 'qa'; q: string; a: string; explain?: string }
 
 export interface BookChapter {
   id: string
   no: string // 「第一章」
   title: string
-  /** 本章思维导图 */
-  mindmap: OutlineNode[]
-  /** 读书笔记正文 */
-  notes?: NoteSection[]
-  /** 原文摘抄 */
-  quotes?: Quote[]
+  order: number
+  /** Markdown 正文（已去掉 frontmatter） */
+  body: string
+  quiz: QuizItem[]
 }
 
 export interface Book {
   id: string
   title: string
-  author?: string
+  emoji?: string
   /** 归属学科（对应 Subject.id，如 'bio'） */
   subjectId: string
   chapters: BookChapter[]
