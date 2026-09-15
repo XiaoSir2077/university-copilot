@@ -53,6 +53,48 @@ export interface SisterProfile {
   interests: string[]
 }
 
+// ── 教材精读 ─────────────────────────────────────────────────────────────
+/** 思维导图的层级节点：text + 可选子节点 */
+export interface OutlineNode {
+  text: string
+  note?: string // 悬停/展开可见的批注
+  children?: OutlineNode[]
+}
+
+/** 笔记正文的一个小节 */
+export interface NoteSection {
+  heading: string
+  body: string // 支持简单换行
+}
+
+/** 原文摘抄 */
+export interface Quote {
+  text: string
+  page?: string
+  comment?: string // 哥哥的批注
+}
+
+export interface BookChapter {
+  id: string
+  no: string // 「第一章」
+  title: string
+  /** 本章思维导图 */
+  mindmap: OutlineNode[]
+  /** 读书笔记正文 */
+  notes?: NoteSection[]
+  /** 原文摘抄 */
+  quotes?: Quote[]
+}
+
+export interface Book {
+  id: string
+  title: string
+  author?: string
+  /** 归属学科（对应 Subject.id，如 'bio'） */
+  subjectId: string
+  chapters: BookChapter[]
+}
+
 export interface StudyTask {
   id: string
   title: string

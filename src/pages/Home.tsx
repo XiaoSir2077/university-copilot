@@ -24,7 +24,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
 import { NEWS, SCHOOL_LINKS, SUBJECTS, DIDI_SUBJECTS } from '@/data/content'
+import { BOOKS } from '@/data/books'
 import { DIDI_LINKS, DIDI_NEWS } from '@/data/newsDidi'
+import BookPanel from '@/components/BookPanel'
 import { actions, useAuth, useActiveUserId, useBoard, useRole } from '@/store/useBoard'
 import { monthOf, relevance } from '@/agent/relevance'
 import FloatingChat from '@/components/FloatingChat'
@@ -458,6 +460,11 @@ function SubjectDetail({
         })}
       </div>
 
+      {(() => {
+        const book = BOOKS.find((b) => b.subjectId === s.id)
+        return book ? <BookPanel book={book} /> : null
+      })()}
+
       <p className="text-center text-[11px] text-zinc-400 pb-20">
         打卡数据实时同步，完成的每一步都会留下记录 ✨
       </p>
@@ -466,12 +473,17 @@ function SubjectDetail({
 }
 
 function StudyTab({ readOnly }: { readOnly: boolean }) {
-  const [openId, setOpenId] = useState<string | null>(null)
   const isDidi = useActiveUserId() === 'u-didi'
   const subjects = isDidi ? DIDI_SUBJECTS : SUBJECTS
+  // 深链接：…#study/<subjectId> 直达学科详情（如 …#study/bio）
+  const [openId, setOpenId] = useState<string | null>(() => {
+    const m = window.location.hash.match(/#study\/(\w+)/)
+    return m && subjects.some((s) => s.id === m[1]) ? m[1] : null
+  })
   const open = useMemo(() => subjects.find((s) => s.id === openId), [subjects, openId])
 
-  if (open) return <SubjectDetail s={open} onBack={() => setOpenId(null)} readOnly={readOnly} />
+  if (open)
+    return <SubjectDetail s={open} onBack={() => setOpenId(null)} readOnly={readOnly} />
 
   return (
     <div className="pt-4 flex flex-col gap-3">
@@ -546,7 +558,13 @@ export default function Home() {
         </header>
 
         <Tabs
-          defaultValue={window.location.hash === '#relevant' ? 'relevant' : 'official'}
+          defaultValue={
+            window.location.hash.includes('#study')
+              ? 'study'
+              : window.location.hash.includes('#relevant')
+                ? 'relevant'
+                : 'official'
+          }
           onValueChange={(v) => history.replaceState(null, '', `#${v}`)}
         >
           <TabsList className="grid w-full max-w-lg grid-cols-3 rounded-full bg-zinc-200/60 p-1">
