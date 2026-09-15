@@ -221,3 +221,55 @@ export const SUBJECTS: Subject[] = [
     ],
   },
 ]
+
+// ── 弟弟的学习板块（中南邓迪 · 机械设计制造及其自动化 · 全英文授课）──────────
+export const DIDI_SUBJECTS: Subject[] = [
+  {
+    id: 'eng-math',
+    name: '工科数学分析',
+    emoji: '📐',
+    color: 'from-sky-400 to-blue-600',
+    goal: '全英文教材跟住节奏，期末冲 85+',
+    tasks: [
+      { id: 'em1', title: 'Limits & Continuity · 课后习题一组', minutes: 60, tip: 'ε-δ 定义要会用英文表述' },
+      { id: 'em2', title: 'Derivatives · 链式法则刷题', minutes: 50, tip: '注意 implicit differentiation' },
+      { id: 'em3', title: 'Integrals · 换元与分部积分', minutes: 60, tip: '每天保持 10 题手感' },
+      { id: 'em4', title: '专业词汇整理 · 数学英文术语 30 个', minutes: 30, tip: '考试读题速度全靠它' },
+    ],
+  },
+  {
+    id: 'physics',
+    name: '大学物理（力学）',
+    emoji: '⚙️',
+    color: 'from-amber-400 to-orange-600',
+    goal: '力学是机械的基础，打牢受力分析',
+    tasks: [
+      { id: 'p1', title: '运动学与牛顿定律 · 习题一组', minutes: 50, tip: '画图！受力分析图先行' },
+      { id: 'p2', title: '动量与能量 · 典型题 10 道', minutes: 45, tip: '守恒条件先判断再列式' },
+      { id: 'p3', title: '刚体转动 · 概念 + 习题', minutes: 50, tip: '转动惯量公式对比记忆' },
+    ],
+  },
+  {
+    id: 'eng-drawing',
+    name: '工程图学 / 制图',
+    emoji: '📏',
+    color: 'from-emerald-400 to-teal-600',
+    goal: '空间想象 + 规范作图，机械人基本功',
+    tasks: [
+      { id: 'd1', title: '三视图练习 · 徒手 + 尺规各 3 组', minutes: 45, tip: '长对正、高平齐、宽相等' },
+      { id: 'd2', title: 'CAD 软件熟悉 · 画简单零件图', minutes: 60, tip: '先把图层和标注规范建好' },
+    ],
+  },
+  {
+    id: 'academic-eng',
+    name: '学术英语（全英文授课适应）',
+    emoji: '🌍',
+    color: 'from-violet-400 to-purple-600',
+    goal: '听懂全英文课堂，敢于开口提问',
+    tasks: [
+      { id: 'a1', title: '课前预习 · 把下节课 PPT 生词扫一遍', minutes: 40, tip: '带着问题听课效率翻倍' },
+      { id: 'a2', title: '课后复盘 · 用英文写 5 句课堂要点', minutes: 30, tip: '写不出 = 没听懂，回去重看' },
+      { id: 'a3', title: '听力磨耳朵 · 英语科技视频 20 分钟', minutes: 25, tip: '推荐工程类科普频道' },
+    ],
+  },
+]

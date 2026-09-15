@@ -23,7 +23,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
-import { NEWS, SCHOOL_LINKS, SUBJECTS } from '@/data/content'
+import { NEWS, SCHOOL_LINKS, SUBJECTS, DIDI_SUBJECTS } from '@/data/content'
 import { DIDI_LINKS, DIDI_NEWS } from '@/data/newsDidi'
 import { actions, useAuth, useActiveUserId, useBoard, useRole } from '@/store/useBoard'
 import { monthOf, relevance } from '@/agent/relevance'
@@ -467,7 +467,9 @@ function SubjectDetail({
 
 function StudyTab({ readOnly }: { readOnly: boolean }) {
   const [openId, setOpenId] = useState<string | null>(null)
-  const open = useMemo(() => SUBJECTS.find((s) => s.id === openId), [openId])
+  const isDidi = useActiveUserId() === 'u-didi'
+  const subjects = isDidi ? DIDI_SUBJECTS : SUBJECTS
+  const open = useMemo(() => subjects.find((s) => s.id === openId), [subjects, openId])
 
   if (open) return <SubjectDetail s={open} onBack={() => setOpenId(null)} readOnly={readOnly} />
 
@@ -478,7 +480,7 @@ function StudyTab({ readOnly }: { readOnly: boolean }) {
         {readOnly ? '学习打卡情况（只读）' : '每完成一项打一次卡，哥哥那边会实时看到学习进度～'}
       </div>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {SUBJECTS.map((s) => (
+        {subjects.map((s) => (
           <SubjectCard key={s.id} s={s} onOpen={() => setOpenId(s.id)} />
         ))}
       </div>
@@ -495,6 +497,7 @@ export default function Home() {
   const auth = useAuth()
   const role = useRole()
   const readOnly = role === 'viewer'
+  const isDidi = useActiveUserId() === 'u-didi'
   const active = board.requests.filter((r) => r.status === 'pending' || r.status === 'in_progress').length
 
   return (
@@ -548,7 +551,7 @@ export default function Home() {
         >
           <TabsList className="grid w-full max-w-lg grid-cols-3 rounded-full bg-zinc-200/60 p-1">
             <TabsTrigger value="official" className="rounded-full text-sm">
-              🏫 东师官方
+              🏫 {isDidi ? '中南官方' : '东师官方'}
             </TabsTrigger>
             <TabsTrigger value="relevant" className="rounded-full text-sm">
               🎯 与我有关
