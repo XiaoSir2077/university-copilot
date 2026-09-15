@@ -90,7 +90,7 @@ function seedSisterBoard(): BoardState {
       createdAt: mk(6),
       updatedAt: mk(1),
       log: [
-        { time: mk(6), text: '妹妹通过 AI 管家提交' },
+        { time: mk(6), text: '妹妹通过 University Copilot 提交' },
         { time: mk(5), text: '哥哥已确认，开始制定计划' },
         { time: mk(1), text: '微积分部分已整理完毕，线性代数进行中' },
       ],
@@ -109,7 +109,7 @@ function seedSisterBoard(): BoardState {
       createdAt: mk(4),
       updatedAt: mk(2),
       log: [
-        { time: mk(4), text: '妹妹通过 AI 管家提交' },
+        { time: mk(4), text: '妹妹通过 University Copilot 提交' },
         { time: mk(2), text: '哥哥已同意，准备资料中' },
       ],
     },
@@ -126,7 +126,7 @@ function seedSisterBoard(): BoardState {
       progress: 0,
       createdAt: mk(2),
       updatedAt: mk(2),
-      log: [{ time: mk(2), text: '妹妹通过 AI 管家提交' }],
+      log: [{ time: mk(2), text: '妹妹通过 University Copilot 提交' }],
     },
   ]
   const messages: ChatMessage[] = [
@@ -148,7 +148,7 @@ function seedSisterBoard(): BoardState {
       id: uid(),
       channel: 'agent',
       role: 'agent',
-      text: '收到！这属于「学习习惯养成」类请求，可行性高。已帮你记入需求清单，哥哥能看到哦～',
+      text: '收到！这属于「学习习惯养成」类请求，可行性高。已帮你记入待办清单，会尽快跟进～',
       createdAt: mk(3) + 60000,
     },
   ]
@@ -183,7 +183,7 @@ function seedBrotherBoard(): BoardState {
       createdAt: mk(5),
       updatedAt: mk(1),
       log: [
-        { time: mk(5), text: '弟弟通过 AI 管家提交' },
+        { time: mk(5), text: '弟弟通过 University Copilot 提交' },
         { time: mk(1), text: '路线初稿完成，Python 小项目选题中' },
       ],
     },
@@ -200,7 +200,7 @@ function seedBrotherBoard(): BoardState {
       progress: 0,
       createdAt: mk(1),
       updatedAt: mk(1),
-      log: [{ time: mk(1), text: '弟弟通过 AI 管家提交' }],
+      log: [{ time: mk(1), text: '弟弟通过 University Copilot 提交' }],
     },
   ]
   const messages: ChatMessage[] = [
@@ -410,7 +410,7 @@ export const actions = {
       progress: 0,
       createdAt: now,
       updatedAt: now,
-      log: [{ time: now, text: '通过 AI 管家提交' }],
+      log: [{ time: now, text: '通过 University Copilot 提交' }],
     }
     updateBoard((b) => ({ ...b, requests: [full, ...b.requests] }))
     return full

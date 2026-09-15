@@ -39,7 +39,7 @@ function Bubble({
                 : 'bg-gradient-to-br from-amber-400 to-orange-500 text-white',
           )}
         >
-          {isMe ? '妹' : role === 'brother' ? '哥' : 'AI'}
+          {isMe ? '我' : role === 'brother' ? '✉' : 'AI'}
         </AvatarFallback>
       </Avatar>
       <div
@@ -82,12 +82,12 @@ function Channel({
     actions.addMessage({ channel, role: 'sister', text })
 
     if (channel === 'brother') {
-      // 原型：消息直达哥哥看板，哥哥在那边回复（此处模拟一条回执提示）
+      // 原型：消息直达管理端，管理员在那边回复（此处模拟一条回执提示）
       setTimeout(() => {
         actions.addMessage({
           channel,
           role: 'agent',
-          text: '已悄悄传给哥哥啦，他去他的看板就能看到。 prototype 阶段哥哥在那边回复你哦～',
+          text: '已送达 ✉ 对方看到后会回复你，耐心等等哦～',
         })
       }, 600)
       return
@@ -112,7 +112,7 @@ function Channel({
           {channel === 'brother' && (
             <div className="text-center">
               <Badge variant="secondary" className="bg-rose-50 text-rose-500 border-rose-100 gap-1">
-                <Heart className="h-3 w-3" /> 这里只有你和哥哥看得见
+                <Heart className="h-3 w-3" /> 这里只有你们两个人看得见
               </Badge>
             </div>
           )}
@@ -164,10 +164,10 @@ export default function FloatingChat() {
       <button
         onClick={() => setOpen(true)}
         className="fixed bottom-5 right-4 z-50 flex items-center gap-2 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 text-white pl-4 pr-5 py-3.5 shadow-lg shadow-rose-200 active:scale-95 transition-transform"
-        aria-label="打开 AI 管家"
+        aria-label="打开 University Copilot"
       >
         <Sparkles className="h-5 w-5" />
-        <span className="text-sm font-medium">AI 管家</span>
+        <span className="text-sm font-medium">University Copilot</span>
       </button>
 
       <Sheet open={open} onOpenChange={setOpen}>
@@ -180,7 +180,7 @@ export default function FloatingChat() {
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white">
                 <Bot className="h-4.5 w-4.5" />
               </span>
-              妹妹的小助手
+              University Copilot
               <Badge variant="secondary" className="text-[10px] font-normal">
                 原型 · 规则引擎
               </Badge>
@@ -190,17 +190,17 @@ export default function FloatingChat() {
           <Tabs defaultValue="agent" className="flex-1 flex flex-col min-h-0">
             <TabsList className="grid grid-cols-2 rounded-full bg-zinc-100 p-1">
               <TabsTrigger value="agent" className="rounded-full text-sm">
-                🤖 AI 管家
+                🤖 Copilot 助手
               </TabsTrigger>
               <TabsTrigger value="brother" className="rounded-full text-sm">
-                💌 和哥哥聊聊
+                💌 私信
               </TabsTrigger>
             </TabsList>
             <TabsContent value="agent" className="flex-1 min-h-0 mt-2 flex flex-col">
-              <Channel channel="agent" placeholder="试试：我想…（诉求会评估后进哥哥看板）" />
+              <Channel channel="agent" placeholder="告诉 University Copilot 你想做什么，比如：我想…" />
             </TabsContent>
             <TabsContent value="brother" className="flex-1 min-h-0 mt-2 flex flex-col">
-              <Channel channel="brother" placeholder="给哥哥发悄悄话…" />
+              <Channel channel="brother" placeholder="写点什么…只有你们两个人看得见" />
             </TabsContent>
           </Tabs>
         </SheetContent>

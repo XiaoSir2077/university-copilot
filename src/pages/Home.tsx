@@ -459,7 +459,7 @@ function SubjectDetail({
       </div>
 
       <p className="text-center text-[11px] text-zinc-400 pb-20">
-        打卡数据会同步到哥哥的看板，完成的每一步他都看得见 ✨
+        打卡数据实时同步，完成的每一步都会留下记录 ✨
       </p>
     </div>
   )
@@ -477,7 +477,7 @@ function StudyTab({ readOnly }: { readOnly: boolean }) {
     <div className="pt-4 flex flex-col gap-3">
       <div className="flex items-center gap-2 rounded-2xl bg-white border border-zinc-100 p-3.5 shadow-sm text-xs text-zinc-500">
         <BookOpenCheck className="h-4 w-4 text-violet-500" />
-        {readOnly ? '学习打卡情况（只读）' : '每完成一项打一次卡，哥哥那边会实时看到学习进度～'}
+        {readOnly ? '学习打卡情况（只读）' : '每完成一项打一次卡，进度会实时记录～'}
       </div>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {subjects.map((s) => (
@@ -485,7 +485,7 @@ function StudyTab({ readOnly }: { readOnly: boolean }) {
         ))}
       </div>
       <p className="text-center text-[11px] text-zinc-400">
-        更多学科正在路上；后续这里会升级为「哥哥笔记 + 教材原文」的互动学习页
+        更多学科正在路上；后续这里会升级为「笔记 + 教材原文」的互动学习页
       </p>
     </div>
   )
@@ -526,12 +526,12 @@ export default function Home() {
                   </span>
                 )}
               </div>
-              {role === 'kid' && (
+              {role === 'admin' && (
                 <Link
                   to="/brother"
                   className="rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs text-zinc-500 shadow-sm hover:border-indigo-200 hover:text-indigo-500"
                 >
-                  哥哥入口
+                  管理看板
                 </Link>
               )}
               <button

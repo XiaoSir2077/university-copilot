@@ -230,7 +230,7 @@ function BoardTab() {
         ))}
         {board.requests.length === 0 && (
           <p className="py-10 text-center text-sm text-zinc-400">
-            还没有诉求，{board.profile.name}跟 AI 管家说「我想…」就会出现在这里
+            还没有诉求，{board.profile.name}跟 University Copilot 说「我想…」就会出现在这里
           </p>
         )}
       </div>
@@ -288,7 +288,7 @@ function BrotherChatPanel() {
     <div className="flex flex-col gap-2 pt-3">
       <div className="rounded-2xl border border-zinc-100 bg-white p-4 shadow-sm">
         <p className="text-[11px] text-zinc-400 mb-3">
-          💌 {board.profile.name}在「和哥哥聊聊」频道说的话
+          💌 {board.profile.name}在「私信」频道说的话
         </p>
         <div className="flex flex-col gap-2">
           {msgs.length === 0 && <p className="text-xs text-zinc-400 py-4 text-center">还没有悄悄话</p>}

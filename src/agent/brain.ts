@@ -30,7 +30,7 @@ function makeTitle(text: string, category: Category): string {
 export function evaluateSisterInput(text: string): AgentReply {
   const trimmed = text.trim()
   if (!trimmed) {
-    return { kind: 'chat', text: '在呢～想说什么都可以，比如「我想……」我就会帮你记成任务清单给哥哥看。' }
+    return { kind: 'chat', text: '在呢～想说什么都可以，比如「我想……」我就会帮你记下来并跟进。' }
   }
 
   const isRequest = INTENT_PATTERN.test(trimmed)
@@ -38,7 +38,7 @@ export function evaluateSisterInput(text: string): AgentReply {
   if (!isRequest) {
     return {
       kind: 'chat',
-      text: '收到～如果你有什么想让哥哥帮忙的，直接说「我想……」就行，我会帮你评估可行性并放进哥哥的工作看板；如果只是想聊聊，就切到「和哥哥聊聊」频道哦。',
+      text: '收到～有什么想做的事，直接说「我想……」就行，我会帮你评估可行性并排进待办；如果只是想聊聊，就切到「私信」频道哦。',
     }
   }
 
@@ -59,21 +59,21 @@ export function evaluateSisterInput(text: string): AgentReply {
 
   const agentNote =
     feasibility === 'low'
-      ? '这件事涉及额外开销，已标记为「需哥哥人工评估」，哥哥会结合预算和你聊。'
+      ? '这件事涉及额外开销，已标记为「需人工评估」，建议结合预算再确认。'
       : feasibility === 'high'
-        ? (urgent ? '时间比较紧，可行性高，建议哥哥优先处理。' : '可行性高，属于学习计划类诉求，可以推进。')
-        : '可行性中等，建议哥哥确认细节后再推进。'
+        ? (urgent ? '时间比较紧，可行性高，建议优先处理。' : '可行性高，属于学习计划类诉求，可以推进。')
+        : '可行性中等，建议确认细节后再推进。'
 
   const nextStep =
     category === '高数' || category === '生物'
-      ? '哥哥确认后拆成每日学习任务，同步到学习板块打卡'
+      ? '确认后拆成每日学习任务，同步到学习板块打卡'
       : category === '托福'
-        ? '哥哥整理对应 TPO/资料包，挂到学习板块的托福清单'
+        ? '整理对应 TPO/资料包，挂到学习板块的托福清单'
         : category === '学校'
-          ? '哥哥核实学校官方信息后回复你'
+          ? '核实学校官方信息后回复'
           : category === '生活'
-            ? '等待哥哥评估预算与必要性'
-            : '等待哥哥确认后再安排'
+            ? '等待评估预算与必要性'
+            : '等待确认后再安排'
 
   const request: AgentReply['request'] = {
     title: makeTitle(trimmed, category),
@@ -90,9 +90,9 @@ export function evaluateSisterInput(text: string): AgentReply {
     text:
       `明白啦！我帮你把这件事记下来了 📋\n` +
       `· 分类：${category}\n` +
-      `· 可行性：${feasibility === 'high' ? '高' : feasibility === 'medium' ? '中' : '需哥哥把关'}\n` +
+      `· 可行性：${feasibility === 'high' ? '高' : feasibility === 'medium' ? '中' : '需要再评估'}\n` +
       `· 优先级：${priority === 'high' ? '高' : priority === 'mid' ? '中' : '低'}\n` +
-      `哥哥会在他的看板里看到，处理进度我也会随时同步给你～`,
+      `已加入待办清单，处理进度我会随时同步给你～`,
     request,
   }
 }
