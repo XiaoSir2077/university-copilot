@@ -27,10 +27,15 @@ const chapterFiles = import.meta.glob<string>('../content/books/*/*.md', {
   query: '?raw',
   import: 'default',
 })
+const chapterHtmlFiles = import.meta.glob<string>('../content/books/*/*.html', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+})
 
 const FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---\r?\n/
 
-function parseChapter(id: string, raw: string): BookChapter | null {
+function parseChapter(id: string, raw: string, format: 'md' | 'html'): BookChapter | null {
   const m = raw.match(FRONTMATTER_RE)
   if (!m) {
     console.warn(`[books] ${id} 缺少 JSON frontmatter，已跳过`)
@@ -48,6 +53,7 @@ function parseChapter(id: string, raw: string): BookChapter | null {
     no: fm.no ?? '',
     title: fm.title ?? id,
     order: fm.order ?? 0,
+    format,
     body: raw.slice(m[0].length),
     quiz: Array.isArray(fm.quiz) ? fm.quiz : [],
   }
@@ -62,7 +68,13 @@ function loadBooks(): Book[] {
     for (const [cpath, raw] of Object.entries(chapterFiles)) {
       const cm = cpath.match(/books\/([^/]+)\/(.+)\.md$/)
       if (!cm || cm[1] !== bookId) continue
-      const ch = parseChapter(cm[2], raw)
+      const ch = parseChapter(cm[2], raw, 'md')
+      if (ch) chapters.push(ch)
+    }
+    for (const [cpath, raw] of Object.entries(chapterHtmlFiles)) {
+      const cm = cpath.match(/books\/([^/]+)\/(.+)\.html$/)
+      if (!cm || cm[1] !== bookId) continue
+      const ch = parseChapter(cm[2], raw, 'html')
       if (ch) chapters.push(ch)
     }
     chapters.sort((a, b) => a.order - b.order)

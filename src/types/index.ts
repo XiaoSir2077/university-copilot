@@ -53,19 +53,23 @@ export interface SisterProfile {
   interests: string[]
 }
 
-// ── 教材精读（Markdown 驱动）────────────────────────────────────────────
+// ── 教材精读（Markdown / HTML 双格式驱动）────────────────────────────────
 /**
  * 内容约定：src/content/books/<书id>/meta.json 放书籍元数据，
- * 同目录下每个 .md 文件是一个章节，文件头用 JSON frontmatter 描述章节：
+ * 同目录下每个 .md 或 .html 文件是一个章节，文件头用 JSON frontmatter 描述章节：
  *
  * ---
  * {"no":"第一章","title":"生命的本质","order":1,
  *  "quiz":[{"type":"choice","q":"…","choices":["A","B","C","D"],"answer":0,"explain":"…"},
  *          {"type":"qa","q":"…","a":"参考答案"}]}
  * ---
- * （正文就是普通 Markdown）
  *
- * 新增一章 = 丢一个 .md 文件进去，构建后自动出现。
+ * 两种正文格式：
+ * - .md   → 普通 Markdown 渲染（快速笔记、方便 git diff）
+ * - .html → 完整独立 HTML 文档（可用 Trae 等工具生成精美排版），
+ *           在 sandbox iframe 中渲染，样式与主应用完全隔离
+ *
+ * 新增一章 = 丢一个 .md 或 .html 文件进去，构建后自动出现。
  */
 
 /** 选择题（自动判分）或自答题（点击看参考答案） */
@@ -78,7 +82,9 @@ export interface BookChapter {
   no: string // 「第一章」
   title: string
   order: number
-  /** Markdown 正文（已去掉 frontmatter） */
+  /** 正文格式：md = Markdown；html = 完整 HTML 文档（iframe 渲染） */
+  format: 'md' | 'html'
+  /** 正文（已去掉 frontmatter）：Markdown 源码或完整 HTML 文档 */
   body: string
   quiz: QuizItem[]
 }

@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router'
 import MarkdownView from '@/components/MarkdownView'
+import HtmlView from '@/components/HtmlView'
 import QuizView from '@/components/QuizView'
 import { BOOKS } from '@/lib/books'
 import { cn } from '@/lib/utils'
@@ -170,15 +171,20 @@ export default function BookPage() {
 
           <div className="my-4 rounded-2xl border border-zinc-100 bg-white p-5 shadow-sm sm:p-7">
             {mode === 'notes' ? (
-              <>
-                <h1 className="mb-1 text-xl font-bold text-zinc-800">
-                  {ch.no} {ch.title}
-                </h1>
-                <p className="mb-5 flex items-center gap-1 text-[11px] text-zinc-400">
-                  <FileText className="h-3.5 w-3.5" /> 原文笔记 · 阅读笔记持续更新
-                </p>
-                <MarkdownView md={ch.body} />
-              </>
+              ch.format === 'html' ? (
+                // HTML 章节：自带排版标题，直接整页渲染
+                <HtmlView html={ch.body} />
+              ) : (
+                <>
+                  <h1 className="mb-1 text-xl font-bold text-zinc-800">
+                    {ch.no} {ch.title}
+                  </h1>
+                  <p className="mb-5 flex items-center gap-1 text-[11px] text-zinc-400">
+                    <FileText className="h-3.5 w-3.5" /> 原文笔记 · 阅读笔记持续更新
+                  </p>
+                  <MarkdownView md={ch.body} />
+                </>
+              )
             ) : (
               <>
                 <h1 className="mb-1 text-xl font-bold text-zinc-800">{ch.no} 本章测试</h1>
@@ -204,14 +210,15 @@ export default function BookPage() {
                 style={{ width: `${((idx + 1) / chapters.length) * 100}%` }}
               />
             </div>
-            <div className="mt-4">{quizBtn}</div>
+            <div className="mt-4">{ch.quiz.length > 0 ? quizBtn : <p className="text-center text-[10px] text-zinc-300">本章笔记内附自测</p>}</div>
           </div>
           <p className="mt-3 text-center text-[10px] text-zinc-300">University Copilot</p>
         </aside>
       </div>
 
       {/* 移动端浮动测试按钮 */}
-      <div className="fixed bottom-5 right-4 xl:hidden">
+      {ch.quiz.length > 0 && (
+        <div className="fixed bottom-5 right-4 xl:hidden">
         <button
           onClick={() => setMode(mode === 'quiz' ? 'notes' : 'quiz')}
           className="flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-2.5 text-xs font-medium text-white shadow-lg transition-colors hover:bg-emerald-700"
@@ -219,7 +226,8 @@ export default function BookPage() {
           <ClipboardCheck className="h-4 w-4" />
           {mode === 'quiz' ? '返回笔记' : '本章测试'}
         </button>
-      </div>
+        </div>
+      )}
     </div>
   )
 }
