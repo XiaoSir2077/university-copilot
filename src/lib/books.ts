@@ -8,7 +8,8 @@ import type { Book, BookChapter } from '@/types'
 interface BookMeta {
   title: string
   emoji?: string
-  userId: string
+  /** @deprecated 书房内容已全员共享，此字段不再使用，仅为兼容旧 meta.json */
+  userId?: string
 }
 
 interface ChapterFrontmatter {
@@ -85,6 +86,8 @@ function loadBooks(): Book[] {
 
 export const BOOKS: Book[] = loadBooks()
 
-export function booksOfUser(userId: string): Book[] {
-  return BOOKS.filter((b) => b.userId === userId)
+export function booksOfUser(_userId?: string): Book[] {
+  // 家庭书房模型：内容层全员共享，不按用户过滤。
+  // 保留此函数名是为兼容既有调用点，后续清理。
+  return BOOKS
 }

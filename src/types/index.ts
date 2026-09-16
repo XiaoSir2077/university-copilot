@@ -93,8 +93,8 @@ export interface Book {
   id: string
   title: string
   emoji?: string
-  /** 归属用户（只给该用户展示） */
-  userId: string
+  /** @deprecated 书房内容已全员共享，此字段不再过滤展示，仅为兼容旧数据 */
+  userId?: string
   chapters: BookChapter[]
 }
 

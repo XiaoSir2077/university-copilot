@@ -505,7 +505,7 @@ function StudyTab({ readOnly }: { readOnly: boolean }) {
   const userId = useActiveUserId()
   const isDidi = userId === 'u-didi'
   const subjects = isDidi ? DIDI_SUBJECTS : SUBJECTS
-  const books = booksOfUser(userId ?? '')
+  const books = booksOfUser() // 家庭书房：内容全员共享
   // 深链接：…#study/<subjectId> 直达学科详情（如 …#study/math）
   const [openId, setOpenId] = useState<string | null>(() => {
     const m = window.location.hash.match(/#study\/(\w+)/)
