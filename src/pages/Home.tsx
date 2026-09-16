@@ -518,10 +518,12 @@ function StudyTab({ readOnly }: { readOnly: boolean }) {
 
   return (
     <div className="pt-4 flex flex-col gap-3">
-      <div className="flex items-center gap-2 rounded-2xl bg-white border border-zinc-100 p-3.5 shadow-sm text-xs text-zinc-500">
-        <BookOpenCheck className="h-4 w-4 text-violet-500" />
-        {readOnly ? '学习打卡情况（只读）' : '每完成一项打一次卡，进度会实时记录～'}
-      </div>
+      {subjects.length > 0 && (
+        <div className="flex items-center gap-2 rounded-2xl bg-white border border-zinc-100 p-3.5 shadow-sm text-xs text-zinc-500">
+          <BookOpenCheck className="h-4 w-4 text-violet-500" />
+          {readOnly ? '学习打卡情况（只读）' : '每完成一项打一次卡，进度会实时记录～'}
+        </div>
+      )}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {subjects.map((s) => (
           <SubjectCard key={s.id} s={s} onOpen={() => setOpenId(s.id)} />

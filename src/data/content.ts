@@ -176,37 +176,10 @@ export const SCHOOL_LINKS = [
 ]
 
 // ── 学习板块 ─────────────────────────────────────────────────────────────
-export const SUBJECTS: Subject[] = [
-  {
-    id: 'math',
-    name: '高等数学',
-    emoji: '📐',
-    color: 'from-sky-400 to-blue-600',
-    goal: '跟住校内进度，期末冲刺 90+',
-    tasks: [
-      { id: 'm1', title: '函数与极限 · 刷题 30 道', minutes: 60, tip: '重点：等价无穷小、两个重要极限' },
-      { id: 'm2', title: '导数与微分 · 刷题 30 道', minutes: 60, tip: '复合函数链式法则别跳步' },
-      { id: 'm3', title: '中值定理与导数应用', minutes: 45, tip: '罗尔 / 拉格朗日 / 泰勒要会互相转化' },
-      { id: 'm4', title: '不定积分 · 换元与分部', minutes: 60, tip: '每天 10 道保持手感' },
-      { id: 'm5', title: '定积分及应用', minutes: 45, tip: '注意对称性与几何意义' },
-      { id: 'm6', title: '微分方程入门', minutes: 40, tip: '一阶线性先求通解再代入' },
-    ],
-  },
-  {
-    id: 'toefl',
-    name: '托福',
-    emoji: '🌍',
-    color: 'from-violet-400 to-purple-600',
-    goal: '目标 100+，每天听力磨耳朵',
-    tasks: [
-      { id: 't1', title: '听力 · TPO 精听 1 套', minutes: 60, tip: '听不懂的句子逐句听写' },
-      { id: 't2', title: '阅读 · 长难句分析 10 句', minutes: 40, tip: '先抓主干再找修饰' },
-      { id: 't3', title: '口语 · 独立题 2 道录音', minutes: 30, tip: '说完回听，检查卡顿和语法' },
-      { id: 't4', title: '写作 · 综合写作 1 篇', minutes: 50, tip: '听力材料里的三个点要记全' },
-      { id: 't5', title: '词汇 · 学术词汇 100 个', minutes: 30, tip: '用词根词缀批量记忆' },
-    ],
-  },
-]
+// 家庭书房模型（2026-09-16）：打卡任务制已废弃（"我们不会这么干的"），
+// 学习首页只放共享教材/内容卡片。SUBJECTS 留空数组仅为兼容既有引用，
+// 弟弟的 DIDI_SUBJECTS 暂保留，待其本人反馈后再决定去留。
+export const SUBJECTS: Subject[] = []
 
 // ── 弟弟的学习板块（中南邓迪 · 机械设计制造及其自动化 · 全英文授课）──────────
 export const DIDI_SUBJECTS: Subject[] = [
