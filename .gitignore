@@ -33,3 +33,4 @@ npm-debug.log*
 shots/
 tmp/
 node_modules
+.vite/
