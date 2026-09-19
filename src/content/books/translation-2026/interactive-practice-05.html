@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>文化自信专题</title>
+<style>
+  /* ========== 基础样式 ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #FBF8F6;
+    color: #1F2937;
+    line-height: 1.75;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== 顶部栏 ========== */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+    color: white;
+    padding: 16px 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .header-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .header-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .timer-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .timer-btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .timer-btn:active { background: rgba(255, 255, 255, 0.4); }
+
+  .time-hint {
+    font-size: 13px;
+    opacity: 0.9;
+  }
+
+  /* ========== 主体容器 ========== */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px 100px;
+  }
+
+  /* ========== 模块卡片 ========== */
+  .module {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .module-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #E5E7EB;
+  }
+
+  .module-num {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #DC2626, #B91C1C);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .module-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .module-sub {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 2px;
+  }
+
+  /* ========== 选词填空 ========== */
+  .mcq-item {
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px dashed #E5E7EB;
+  }
+
+  .mcq-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .mcq-num {
+    font-size: 14px;
+    font-weight: 700;
+    color: #B91C1C;
+    margin-bottom: 8px;
+  }
+
+  .mcq-num .point {
+    font-size: 12px;
+    color: #9CA3AF;
+    font-weight: 500;
+    margin-left: 6px;
+  }
+
+  .mcq-stem {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 14px;
+    color: #1F2937;
+  }
+
+  .mcq-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .mcq-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #FBF8F6;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 15px;
+  }
+
+  .mcq-option:hover {
+    border-color: #DC2626;
+    background: #FEF2F2;
+  }
+
+  .mcq-option.selected {
+    border-color: #DC2626;
+    background: #FEF2F2;
+  }
+
+  .mcq-option.correct {
+    border-color: #10B981;
+    background: #D1FAE5;
+  }
+
+  .mcq-option.wrong {
+    border-color: #EF4444;
+    background: #FEE2E2;
+  }
+
+  .mcq-option.submitted {
+    cursor: default;
+  }
+
+  .option-label {
+    width: 28px;
+    height: 28px;
+    background: #E5E7EB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: #4B5563;
+    flex-shrink: 0;
+  }
+
+  .mcq-option.selected .option-label {
+    background: #DC2626;
+    color: white;
+  }
+
+  .mcq-option.correct .option-label {
+    background: #10B981;
+    color: white;
+  }
+
+  .mcq-option.wrong .option-label {
+    background: #EF4444;
+    color: white;
+  }
+
+  .option-text {
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .mcq-explanation {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #FFFBEB;
+    border-left: 3px solid #F59E0B;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: #78350F;
+    line-height: 1.7;
+    display: none;
+  }
+
+  .mcq-explanation.show {
+    display: block;
+  }
+
+  .mcq-explanation strong {
+    color: #991B1B;
+  }
+
+  /* ========== 按钮样式 ========== */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #DC2626, #B91C1C);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .submit-btn:disabled {
+    background: #9CA3AF;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .reveal-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: white;
+    color: #B91C1C;
+    border: 2px solid #DC2626;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.2s ease;
+  }
+
+  .reveal-btn:hover {
+    background: #FEF2F2;
+  }
+
+  /* ========== 完形填空 ========== */
+  .cloze-passage {
+    font-size: 16px;
+    line-height: 2;
+    color: #1F2937;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+
+  .cloze-blank {
+    display: inline-block;
+    width: 110px;
+    height: 32px;
+    margin: 0 4px;
+    padding: 0 8px;
+    border: 2px solid #D1D5DB;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    background: #FBF8F6;
+    transition: all 0.2s ease;
+  }
+
+  .cloze-blank:focus {
+    outline: none;
+    border-color: #DC2626;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+  }
+
+  .cloze-blank.correct {
+    border-color: #10B981;
+    background: #D1FAE5;
+    color: #065F46;
+    font-weight: 600;
+  }
+
+  .cloze-blank.wrong {
+    border-color: #EF4444;
+    background: #FEE2E2;
+    color: #991B1B;
+  }
+
+  /* 备选词库 */
+  .wordbank {
+    background: #FBF8F6;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .wordbank-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 10px;
+  }
+
+  .wordbank-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .word-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 999px;
+    font-size: 14px;
+    color: #374151;
+  }
+
+  .word-item .pos {
+    font-size: 11px;
+    color: #9CA3AF;
+    font-style: italic;
+  }
+
+  /* 完形答案解析 */
+  .cloze-answers {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .cloze-answers.show {
+    display: block;
+  }
+
+  .cloze-answer-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #E5E7EB;
+    font-size: 14px;
+  }
+
+  .cloze-answer-item:last-child {
+    border-bottom: none;
+  }
+
+  .ca-num {
+    width: 24px;
+    height: 24px;
+    background: #D1FAE5;
+    color: #065F46;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .ca-num.wrong {
+    background: #FEE2E2;
+    color: #991B1B;
+  }
+
+  .ca-content {
+    flex: 1;
+  }
+
+  .ca-answer {
+    font-weight: 600;
+    color: #065F46;
+  }
+
+  .ca-answer .user-wrong {
+    color: #991B1B;
+    text-decoration: line-through;
+    margin-right: 8px;
+  }
+
+  .ca-explanation {
+    color: #6B7280;
+    font-size: 13px;
+    margin-top: 2px;
+    line-height: 1.6;
+  }
+
+  /* ========== 翻译题 ========== */
+  .translation-source {
+    background: #FBF8F6;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.9;
+    color: #1F2937;
+  }
+
+  .translation-source p {
+    margin-bottom: 10px;
+  }
+
+  .translation-source p:last-child {
+    margin-bottom: 0;
+  }
+
+  .translation-textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 14px;
+    border: 2px solid #D1D5DB;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 1.8;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.2s ease;
+    background: white;
+  }
+
+  .translation-textarea:focus {
+    outline: none;
+    border-color: #DC2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+  }
+
+  .translation-textarea::placeholder {
+    color: #9CA3AF;
+  }
+
+  /* 参考译文 */
+  .reference-section {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .reference-section.show {
+    display: block;
+  }
+
+  .reference-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #B91C1C;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .reference-text {
+    background: #FEF2F2;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: #7F1D1D;
+    margin-bottom: 16px;
+  }
+
+  .reference-text p {
+    margin-bottom: 10px;
+  }
+
+  .reference-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 评分要点清单 */
+  .checklist-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 10px;
+  }
+
+  .checklist {
+    background: #FFFBEB;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    cursor: pointer;
+    border-bottom: 1px dashed #FDE68A;
+  }
+
+  .checklist-item:last-child {
+    border-bottom: none;
+  }
+
+  .checklist-item input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    accent-color: #DC2626;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .checklist-item label {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #78350F;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .checklist-item.checked label {
+    text-decoration: line-through;
+    color: #9CA3AF;
+  }
+
+  .self-eval-hint {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  /* ========== 结构化数据面板（给Agent读取） ========== */
+  .agent-panel {
+    margin-top: 24px;
+    padding: 20px;
+    background: #1F2937;
+    border-radius: 14px;
+    display: none;
+  }
+
+  .agent-panel.show {
+    display: block;
+  }
+
+  .agent-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #374151;
+  }
+
+  .agent-panel-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #FBBF24;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .agent-copy-btn {
+    padding: 6px 14px;
+    background: #374151;
+    color: #D1D5DB;
+    border: 1px solid #4B5563;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .agent-copy-btn:hover {
+    background: #4B5563;
+  }
+
+  .agent-data {
+    background: #111827;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #9CA3AF;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  /* ========== 底部得分栏 ========== */
+  .score-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #E5E7EB;
+    padding: 12px 16px;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+    z-index: 100;
+  }
+
+  .score-bar-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .score-info {
+    flex: 1;
+  }
+
+  .score-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .score-item {
+    font-size: 13px;
+    color: #6B7280;
+  }
+
+  .score-item strong {
+    color: #B91C1C;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .score-item .self {
+    color: #F59E0B;
+  }
+
+  .reset-btn {
+    padding: 10px 20px;
+    background: white;
+    color: #EF4444;
+    border: 2px solid #FCA5A5;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .reset-btn:hover {
+    background: #FEF2F2;
+  }
+
+  body { padding-bottom: 80px; }
+
+  /* ========== 响应式 ========== */
+  @media (max-width: 480px) {
+    body { font-size: 15px; background: #FBF8F6; }
+    .header { padding: 12px 16px; }
+    .header-title { font-size: 18px; }
+    .timer-box { font-size: 16px; padding: 5px 12px; }
+    .container { padding: 16px 12px 90px; }
+    .module { padding: 18px 14px; border-radius: 12px; }
+    .module-title { font-size: 16px; }
+    .mcq-stem { font-size: 15px; }
+    .mcq-option { font-size: 14px; padding: 10px 12px; }
+    .cloze-passage { font-size: 15px; line-height: 1.9; }
+    .cloze-blank { width: 90px; height: 30px; font-size: 13px; }
+    .translation-source { font-size: 15px; }
+    .translation-textarea { font-size: 15px; min-height: 180px; }
+    .score-row { gap: 10px; }
+    .score-item { font-size: 12px; }
+    .score-item strong { font-size: 15px; }
+    .reset-btn { padding: 8px 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== 顶部栏 ========== -->
+<div class="header">
+  <div class="header-inner">
+    <span class="header-tag">🏮 文化自信专题</span>
+    <div class="header-title">练习卷五 · 文化自信专题</div>
+    <div class="header-info">
+      <span class="time-hint">建议时长 100 分钟</span>
+      <div class="timer-box">
+        <span id="timerDisplay">100:00</span>
+        <button class="timer-btn" id="timerBtn" onclick="toggleTimer()">开始</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 主体内容 ========== -->
+<div class="container">
+
+  <!-- 模块一：选词填空 -->
+  <div class="module" id="module1">
+    <div class="module-header">
+      <div class="module-num">一</div>
+      <div>
+        <div class="module-title">选词填空</div>
+        <div class="module-sub">共 5 题，每题 2 分，共 10 分</div>
+      </div>
+    </div>
+
+    <div id="mcqContainer">
+      <!-- 第 1 题 -->
+      <div class="mcq-item" data-q="1">
+        <div class="mcq-num">第 1 题 <span class="point">（考点：文化术语补全）</span></div>
+        <div class="mcq-stem">The Chinese concept of "seeking truth from ______" has been a guiding principle for both governance and academic research for decades.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(1, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">practice</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(1, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">facts</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(1, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">reality</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(1, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">truth</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>"实事求是"的官方译法是 seeking truth from facts，这是固定文化术语。practice、reality、truth 都是字面直译的干扰项。
+        </div>
+      </div>
+
+      <!-- 第 2 题 -->
+      <div class="mcq-item" data-q="2">
+        <div class="mcq-num">第 2 题 <span class="point">（考点：动词+介词搭配）</span></div>
+        <div class="mcq-stem">Traditional Chinese culture has much to offer ______ the building of a harmonious society and the promotion of global cultural exchange.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(2, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">for</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(2, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">to</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(2, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">in</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(2, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">toward</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>offer to 是固定搭配，表示"为……做出贡献、对……有用"。offer sth. to sth. 表示为某事提供某物。
+        </div>
+      </div>
+
+      <!-- 第 3 题 -->
+      <div class="mcq-item" data-q="3">
+        <div class="mcq-num">第 3 题 <span class="point">（考点：形近词辨析）</span></div>
+        <div class="mcq-stem">The government has launched a series of projects to ______ and revitalize traditional crafts that are on the verge of extinction.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(3, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">preserve</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(3, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">reserve</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(3, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">deserve</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(3, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">observe</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>preserve 意为"保护、保存"，preserve traditional crafts 表示保护传统工艺，符合句意。reserve 是"预订；保留"，deserve 是"值得"，observe 是"观察；遵守"，均不符合。
+        </div>
+      </div>
+
+      <!-- 第 4 题 -->
+      <div class="mcq-item" data-q="4">
+        <div class="mcq-num">第 4 题 <span class="point">（考点：词性/词形判断）</span></div>
+        <div class="mcq-stem">The ______ popularity of hanfu (traditional Han clothing) among young people reflects a growing sense of cultural confidence.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(4, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">increase</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(4, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">increasing</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(4, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">increased</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(4, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">increasingly</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>空格修饰名词 popularity，需要填入形容词。increasing（adj. 日益增长的）表示正在增长的过程，符合语境。increase 是动词/名词，increased 是"已增长的"，increasingly 是副词，均不符合语法。
+        </div>
+      </div>
+
+      <!-- 第 5 题 -->
+      <div class="mcq-item" data-q="5">
+        <div class="mcq-num">第 5 题 <span class="point">（考点：文化术语补全）</span></div>
+        <div class="mcq-stem">The principle of "harmony but not ______" is a core concept in traditional Chinese thought that remains highly relevant today.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(5, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">sameness</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(5, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">uniformity</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(5, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">equality</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(5, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">similarity</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>"和而不同"的标准译法是 harmony but not uniformity，uniformity 表示"一致性、统一性"。sameness 意为"相同"，equality 意为"平等"，similarity 意为"相似"，均不是标准译法。
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="mcqSubmitBtn" onclick="submitMCQ()">提交判分</button>
+  </div>
+
+  <!-- 模块二：完形填空 -->
+  <div class="module" id="module2">
+    <div class="module-header">
+      <div class="module-num">二</div>
+      <div>
+        <div class="module-title">完形填空</div>
+        <div class="module-sub">共 10 题，每题 2 分，共 20 分 · 15 选 10，用适当形式</div>
+      </div>
+    </div>
+
+    <!-- 短文 -->
+    <div class="cloze-passage">
+      <strong style="color:#B91C1C">Cultural Confidence in the New Era</strong><br><br>
+      Cultural confidence is not merely about pride in ancient traditions; it is about drawing wisdom from the past to meet the challenges of the present. China's 5,000-year-old civilization has left behind a rich heritage of philosophy, art, literature, and social values. Today, this cultural legacy is being rediscovered and reinterpreted,
+      <input type="text" class="cloze-blank" id="cloze-1" placeholder="①">
+      new inspiration for modern society.<br><br>
+      Recent studies
+      <input type="text" class="cloze-blank" id="cloze-2" placeholder="②">
+      the impact of traditional culture on contemporary life show that young people are increasingly interested in their cultural roots.
+      <input type="text" class="cloze-blank" id="cloze-3" placeholder="③">
+      a deeper understanding of their own cultural identity, they are more likely to participate in cultural activities and support creative industries rooted in traditional aesthetics. These changes have produced
+      <input type="text" class="cloze-blank" id="cloze-4" placeholder="④">
+      results: cultural and creative industries have become a significant driving force in the national economy.<br><br>
+      One major challenge is the
+      <input type="text" class="cloze-blank" id="cloze-5" placeholder="⑤">
+      of effective communication methods for traditional culture in the digital age. While many young people show interest in traditional aesthetics, they often encounter these ideas through fragmented online content rather than systematic learning. To address this gap, cultural institutions have launched innovative programs,
+      <input type="text" class="cloze-blank" id="cloze-6" placeholder="⑥">
+      museums to develop digital exhibitions and creating immersive experiences that make heritage more accessible.<br><br>
+      Another important factor is public
+      <input type="text" class="cloze-blank" id="cloze-7" placeholder="⑦">
+      of the value of cultural soft power. For a long time, cultural development was often seen as secondary to economic growth. This perception is gradually changing, creating a more favorable environment
+      <input type="text" class="cloze-blank" id="cloze-8" placeholder="⑧">
+      which traditional culture can flourish in new forms.<br><br>
+      Cultural confidence is not about closing the door to the outside world; it is about standing firmly on one's own cultural ground while engaging with others. When a nation knows where it comes from and what it stands for, cultural exchange will no longer be a one-way flow
+      <input type="text" class="cloze-blank" id="cloze-9" placeholder="⑨">
+      a genuine dialogue that
+      <input type="text" class="cloze-blank" id="cloze-10" placeholder="⑩">
+      both sides.
+    </div>
+
+    <!-- 备选词库 -->
+    <div class="wordbank">
+      <div class="wordbank-title">📝 备选词（15 选 10，注意适当形式）</div>
+      <div class="wordbank-list">
+        <span class="word-item">provide <span class="pos">v.</span></span>
+        <span class="word-item">examine <span class="pos">v.</span></span>
+        <span class="word-item">gain <span class="pos">v.</span></span>
+        <span class="word-item">lack <span class="pos">n.</span></span>
+        <span class="word-item">encourage <span class="pos">v.</span></span>
+        <span class="word-item">aware <span class="pos">adj.</span></span>
+        <span class="word-item">in <span class="pos">prep.</span></span>
+        <span class="word-item">but <span class="pos">conj.</span></span>
+        <span class="word-item">enrich <span class="pos">v.</span></span>
+        <span class="word-item">impress <span class="pos">v.</span></span>
+        <span class="word-item">significant <span class="pos">adj.</span></span>
+        <span class="word-item">instead <span class="pos">adv.</span></span>
+        <span class="word-item">that <span class="pos">pron.</span></span>
+        <span class="word-item">with <span class="pos">prep.</span></span>
+        <span class="word-item">rapid <span class="pos">adj.</span></span>
+      </div>
+    </div>
+
+    <!-- 答案解析 -->
+    <div class="cloze-answers" id="clozeAnswers">
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-1">1</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-1">providing</div>
+          <div class="ca-explanation">现在分词作伴随状语：legacy is being rediscovered... providing... 主动关系。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-2">2</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-2">examining</div>
+          <div class="ca-explanation">现在分词作后置定语：studies examining... 修饰 studies，主动关系。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-3">3</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-3">With</div>
+          <div class="ca-explanation">介词 with 短语表条件/伴随：with a deeper understanding of...。注意首字母大写。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-4">4</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-4">impressive</div>
+          <div class="ca-explanation">形容词：修饰 results，表示令人印象深刻的成果。impress 变形为形容词。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-5">5</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-5">lack</div>
+          <div class="ca-explanation">名词：the lack of 表示"……的缺乏"。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-6">6</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-6">encouraging</div>
+          <div class="ca-explanation">现在分词作伴随状语：institutions have launched programs, encouraging... 主动关系。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-7">7</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-7">awareness</div>
+          <div class="ca-explanation">名词：public awareness 表示公众意识，aware 变形为名词 awareness。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-8">8</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-8">in</div>
+          <div class="ca-explanation">介词：in which 引导定语从句，相当于 culture can flourish in this environment。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-9">9</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-9">but</div>
+          <div class="ca-explanation">连词：not... but... 结构，表示"不是……而是……"。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-10">10</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-10">enriches</div>
+          <div class="ca-explanation">动词第三人称单数：that enriches both sides，先行词 dialogue 是单数，谓语加 s。</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="clozeSubmitBtn" onclick="submitCloze()">提交判分</button>
+  </div>
+
+  <!-- 模块三：英译汉 -->
+  <div class="module" id="module3">
+    <div class="module-header">
+      <div class="module-num">三</div>
+      <div>
+        <div class="module-title">英译汉</div>
+        <div class="module-sub">15 分 · 写完后展开参考译文自评</div>
+      </div>
+    </div>
+
+    <div class="translation-source" id="trans1Source">
+      <p>Cultural confidence is not about looking back at the past with nostalgia, but about building a bridge between ancient wisdom and modern life. For a long time, traditional Chinese culture was often presented as something static and distant, something to be admired in museums but disconnected from daily reality. This narrow understanding is now being challenged by a new generation of creators who are finding fresh and creative ways to bring tradition into the present.</p>
+      <p>The revival of interest in traditional culture recognizes that the past is not a burden but a source of strength. It means reinterpreting classical philosophy for contemporary readers, integrating traditional aesthetics into modern design, and promoting cultural education in schools and communities so that young people can grow up with a deep appreciation for their heritage. At the same time, it emphasizes the importance of openness and exchange, ensuring that cultural confidence does not lead to isolation but to greater mutual understanding with the world.</p>
+      <p>Traditional Chinese thought has much to offer the global community. Concepts such as "harmony but not uniformity," "the unity of knowledge and action," and "all people under heaven are one family" provide valuable perspectives for addressing today's global challenges. When cultural traditions are kept alive through creative reinterpretation, they do not just connect people to their history — they offer shared wisdom for building a better future for all.</p>
+    </div>
+
+    <textarea class="translation-textarea" id="trans1Input" placeholder="请在此处输入你的译文……"></textarea>
+
+    <button class="reveal-btn" onclick="revealTranslation(1)">我写完了，展开参考译文</button>
+
+    <div class="reference-section" id="trans1Ref">
+      <div class="reference-title">📖 参考译文</div>
+      <div class="reference-text" id="trans1Reference">
+        <p>文化自信并非要怀着乡愁回望过去，而是要在古老智慧与现代生活之间架起桥梁。长期以来，中华传统文化常常被呈现为一种静止而遥远的存在——一种只能在博物馆里瞻仰、却与日常生活脱节的东西。如今，这种狭隘的理解正受到新一代创作者的挑战，他们正以新颖而富有创意的方式将传统带入当下。</p>
+        <p>对传统文化兴趣的复苏表明，过去不是一种负担，而是力量的源泉。它意味着为当代读者重新解读古典哲学、将传统美学融入现代设计、在学校和社区推动文化教育，让年轻人在成长过程中对自己的文化遗产有深厚的认同感。同时，它强调开放与交流的重要性，确保文化自信不会导致封闭，而是带来与世界更深的相互理解。</p>
+        <p>中华传统思想可以为全球社会贡献良多。"和而不同""知行合一""天下为公"等理念为应对当今全球挑战提供了宝贵视角。当文化传统通过创造性转化而生生不息时，它们不仅仅是将人们与历史连接起来——它们还为建设一个更美好的共同未来提供了共享的智慧。</p>
+      </div>
+
+      <div class="checklist-title">✅ 评分要点自评（对照你的译文逐条打勾）</div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-1" onchange="toggleCheck(this)">
+          <label for="c1-1">"not about... but about..." 译为"并非……而是……"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-2" onchange="toggleCheck(this)">
+          <label for="c1-2">"cultural confidence" 译为"文化自信"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-3" onchange="toggleCheck(this)">
+          <label for="c1-3">三个文化术语（和而不同 / 知行合一 / 天下为公）翻译准确</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-4" onchange="toggleCheck(this)">
+          <label for="c1-4">破折号衔接句翻译自然流畅</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-5" onchange="toggleCheck(this)">
+          <label for="c1-5">"the unity of knowledge and action" 译为"知行合一"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-6" onchange="toggleCheck(this)">
+          <label for="c1-6">第二段排比结构保持中文节奏</label>
+        </div>
+      </div>
+      <div class="self-eval-hint">自评完成后，可在底部栏查看得分情况</div>
+    </div>
+  </div>
+
+  <!-- 模块四：汉译英 -->
+  <div class="module" id="module4">
+    <div class="module-header">
+      <div class="module-num">四</div>
+      <div>
+        <div class="module-title">汉译英</div>
+        <div class="module-sub">15 分 · 写完后展开参考译文自评</div>
+      </div>
+    </div>
+
+    <div class="translation-source" id="trans2Source">
+      <p>文化自信是一个国家、一个民族发展中更基本、更深沉、更持久的力量。中华优秀传统文化是中华民族的精神命脉，是涵养社会主义核心价值观的重要源泉，也是我们在世界文化激荡中站稳脚跟的坚实根基。</p>
+      <p>近年来，国潮兴起成为引人注目的文化现象。从汉服、国风音乐到文创产品，越来越多的年轻人爱上了传统文化，并以自己的方式传承和创新。故宫文创、河南卫视"唐宫夜宴"、三星堆考古直播等频频出圈，让传统文化从"高冷"变得"接地气"。</p>
+      <p>值得一提的是，文化走出去的步伐也在不断加快。孔子学院、中国电影节、春节庆典等文化活动在世界各地广受欢迎，向世界展示了中华文化的独特魅力。可以说，文化自信不仅增强了民族凝聚力，也为不同文明之间的交流互鉴搭建了桥梁。</p>
+    </div>
+
+    <textarea class="translation-textarea" id="trans2Input" placeholder="请在此处输入你的译文……"></textarea>
+
+    <button class="reveal-btn" onclick="revealTranslation(2)">我写完了，展开参考译文</button>
+
+    <div class="reference-section" id="trans2Ref">
+      <div class="reference-title">📖 参考译文</div>
+      <div class="reference-text" id="trans2Reference">
+        <p>Cultural confidence is a more fundamental, deeper, and more enduring force in the development of a country and a nation. China's fine traditional culture is the spiritual lifeline of the Chinese nation, an important source for cultivating core socialist values, and a solid foundation on which we can stand firm amid the surging tides of world cultures.</p>
+        <p>In recent years, the rise of the "China chic" has become a remarkable cultural phenomenon. From hanfu (traditional Han clothing) and guofeng music to cultural and creative products, a growing number of young people have fallen in love with traditional culture, carrying it forward and innovating in their own ways. The Palace Museum's cultural merchandise, Henan TV's "Banquet in the Tang Palace," and live broadcasts of Sanxingdui archaeological excavations have repeatedly broken into the mainstream, making traditional culture more accessible and relatable to the public.</p>
+        <p>It is worth mentioning that the pace of culture going global has also been accelerating. Cultural activities such as Confucius Institutes, Chinese film festivals, and Spring Festival celebrations are widely popular around the world, showcasing the unique charm of Chinese culture to the global audience. It can be said that cultural confidence has not only enhanced national cohesion but also built a bridge for exchanges and mutual learning among different civilizations.</p>
+      </div>
+
+      <div class="checklist-title">✅ 评分要点自评（对照你的译文逐条打勾）</div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-1" onchange="toggleCheck(this)">
+          <label for="c2-1">"文化自信" 译为 cultural confidence</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-2" onchange="toggleCheck(this)">
+          <label for="c2-2">"社会主义核心价值观" 译为 core socialist values</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-3" onchange="toggleCheck(this)">
+          <label for="c2-3">"国潮" 译为 China chic（或 guochao，需说明）</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-4" onchange="toggleCheck(this)">
+          <label for="c2-4">"和而不同" 译为 harmony but not uniformity</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-5" onchange="toggleCheck(this)">
+          <label for="c2-5">"知行合一" 译为 the unity of knowledge and action</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-6" onchange="toggleCheck(this)">
+          <label for="c2-6">"天下为公" 译为 the world is for all</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-7" onchange="toggleCheck(this)">
+          <label for="c2-7">not only... but also... 正确使用（没有漏掉 but）</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-8" onchange="toggleCheck(this)">
+          <label for="c2-8">时态一致性和主谓一致</label>
+        </div>
+      </div>
+      <div class="self-eval-hint">自评完成后，可在底部栏查看得分情况</div>
+    </div>
+  </div>
+
+  <!-- ===== 结构化数据面板（给Agent读取） ===== -->
+  <div class="agent-panel" id="agentPanel">
+    <div class="agent-panel-header">
+      <div class="agent-panel-title">🤖 结构化答题数据（供 Agent 深度批改）</div>
+      <button class="agent-copy-btn" onclick="copyAgentData()">复制</button>
+    </div>
+    <div class="agent-data" id="agentData"></div>
+  </div>
+
+</div>
+
+<!-- ========== 底部得分栏 ========== -->
+<div class="score-bar">
+  <div class="score-bar-inner">
+    <div class="score-info">
+      <div class="score-row">
+        <div class="score-item">选词 <strong id="mcqScore">0</strong>/10 分</div>
+        <div class="score-item">完形 <strong id="clozeScore">0</strong>/20 分</div>
+        <div class="score-item">英译汉 <strong class="self">自评中</strong></div>
+        <div class="score-item">汉译英 <strong class="self">自评中</strong></div>
+      </div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">🔄 重做一遍</button>
+  </div>
+</div>
+
+<script>
+  // ========== 参考答案数据 ==========
+  const mcqAnswers = {
+    1: { answer: 'B', explanation: '"实事求是"官方译法是 seeking truth from facts。' },
+    2: { answer: 'B', explanation: 'offer to 是固定搭配，表示"为……做出贡献"。' },
+    3: { answer: 'A', explanation: 'preserve 意为"保护、保存"，符合保护传统工艺的语境。' },
+    4: { answer: 'B', explanation: '修饰名词 popularity 需要形容词，increasing 表示日益增长的。' },
+    5: { answer: 'B', explanation: '"和而不同"标准译法是 harmony but not uniformity。' }
+  };
+
+  const clozeAnswers = [
+    { answer: 'providing', explanation: '现在分词作伴随状语：主动关系。' },
+    { answer: 'examining', explanation: '现在分词作后置定语：studies examining... 主动关系。' },
+    { answer: 'with', explanation: '介词 with 短语表条件/伴随。注意首字母大写。' },
+    { answer: 'impressive', explanation: '形容词：修饰 results，impress 变形为 impressive。' },
+    { answer: 'lack', explanation: '名词：the lack of 表示"……的缺乏"。' },
+    { answer: 'encouraging', explanation: '现在分词作伴随状语：主动关系。' },
+    { answer: 'awareness', explanation: '名词：public awareness，aware 变形为名词。' },
+    { answer: 'in', explanation: '介词：in which 引导定语从句。' },
+    { answer: 'but', explanation: '连词：not... but... 结构。' },
+    { answer: 'enriches', explanation: '动词第三人称单数：先行词 dialogue 是单数，谓语加 s。' }
+  ];
+
+  const translationData = {
+    c2e: {
+      source: '',
+      reference: '',
+      scoringPoints: [
+        '"not about... but about..." 译为"并非……而是……"',
+        '"cultural confidence" 译为"文化自信"',
+        '三个文化术语（和而不同 / 知行合一 / 天下为公）翻译准确',
+        '破折号衔接句翻译自然流畅',
+        '"the unity of knowledge and action" 译为"知行合一"',
+        '排比结构保持中文节奏'
+      ]
+    },
+    e2c: {
+      source: '',
+      reference: '',
+      scoringPoints: [
+        '"文化自信" 译为 cultural confidence',
+        '"社会主义核心价值观" 译为 core socialist values',
+        '"国潮" 译为 China chic',
+        '"和而不同" 译为 harmony but not uniformity',
+        '"知行合一" 译为 the unity of knowledge and action',
+        '"天下为公" 译为 the world is for all',
+        'not only... but also... 正确使用',
+        '时态一致性和主谓一致'
+      ]
+    }
+  };
+
+  // ========== 计时器功能 ==========
+  let timerSeconds = 100 * 60;
+  let timerInterval = null;
+  let timerRunning = false;
+
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  }
+
+  function updateTimerDisplay() {
+    document.getElementById('timerDisplay').textContent = formatTime(timerSeconds);
+  }
+
+  function toggleTimer() {
+    const btn = document.getElementById('timerBtn');
+    if (timerRunning) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      btn.textContent = '继续';
+    } else {
+      timerInterval = setInterval(function() {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          timerRunning = false;
+          document.getElementById('timerBtn').textContent = '时间到';
+          alert('⏰ 时间到！建议停止作答。');
+        }
+      }, 1000);
+      timerRunning = true;
+      btn.textContent = '暂停';
+    }
+  }
+
+  // ========== 选词填空 ==========
+  let mcqUserAnswers = {};
+  let mcqSubmitted = false;
+
+  function selectMCQ(qNum, val) {
+    if (mcqSubmitted) return;
+    mcqUserAnswers[qNum] = val;
+    const item = document.querySelector('.mcq-item[data-q="' + qNum + '"]');
+    const options = item.querySelectorAll('.mcq-option');
+    options.forEach(function(opt) {
+      opt.classList.remove('selected');
+      if (opt.dataset.val === val) opt.classList.add('selected');
+    });
+  }
+
+  function submitMCQ() {
+    if (mcqSubmitted) return;
+
+    let unanswered = [];
+    for (let i = 1; i <= 5; i++) {
+      if (!mcqUserAnswers[i]) unanswered.push(i);
+    }
+    if (unanswered.length > 0) {
+      if (!confirm('还有第 ' + unanswered.join('、') + ' 题未作答，确定要提交吗？')) return;
+    }
+
+    mcqSubmitted = true;
+    let correctCount = 0;
+
+    for (let i = 1; i <= 5; i++) {
+      const item = document.querySelector('.mcq-item[data-q="' + i + '"]');
+      const options = item.querySelectorAll('.mcq-option');
+      const explanation = item.querySelector('.mcq-explanation');
+      const userAns = mcqUserAnswers[i];
+      const correctAns = mcqAnswers[i].answer;
+
+      options.forEach(function(opt) {
+        opt.classList.add('submitted');
+        opt.style.cursor = 'default';
+        const val = opt.dataset.val;
+        if (val === correctAns) opt.classList.add('correct');
+        else if (val === userAns && userAns !== correctAns) opt.classList.add('wrong');
+      });
+
+      explanation.classList.add('show');
+      if (userAns === correctAns) correctCount++;
+    }
+
+    document.getElementById('mcqScore').textContent = correctCount * 2;
+    document.getElementById('mcqSubmitBtn').textContent = '已提交';
+    document.getElementById('mcqSubmitBtn').disabled = true;
+
+    updateAgentPanel();
+  }
+
+  // ========== 完形填空 ==========
+  let clozeSubmitted = false;
+
+  function submitCloze() {
+    if (clozeSubmitted) return;
+
+    let unanswered = [];
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      if (!input.value.trim()) unanswered.push(i);
+    }
+    if (unanswered.length > 0) {
+      if (!confirm('还有第 ' + unanswered.join('、') + ' 空未填，确定要提交吗？')) return;
+    }
+
+    clozeSubmitted = true;
+    let correctCount = 0;
+
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      const userAns = input.value.trim().toLowerCase();
+      const correctAns = clozeAnswers[i - 1].answer;
+      const isCorrect = userAns === correctAns.toLowerCase();
+
+      input.classList.add(isCorrect ? 'correct' : 'wrong');
+      input.disabled = true;
+
+      const caNum = document.getElementById('ca-num-' + i);
+      const caAnswer = document.getElementById('ca-answer-' + i);
+
+      if (isCorrect) {
+        correctCount++;
+      } else {
+        caNum.classList.add('wrong');
+        caAnswer.innerHTML = '<span class="user-wrong">' + (input.value.trim() || '未作答') + '</span> → ' + correctAns;
+      }
+    }
+
+    document.getElementById('clozeAnswers').classList.add('show');
+    document.getElementById('clozeScore').textContent = correctCount * 2;
+    document.getElementById('clozeSubmitBtn').textContent = '已提交';
+    document.getElementById('clozeSubmitBtn').disabled = true;
+
+    updateAgentPanel();
+  }
+
+  // ========== 翻译题 ==========
+  function revealTranslation(num) {
+    const textarea = document.getElementById('trans' + num + 'Input');
+    const refSection = document.getElementById('trans' + num + 'Ref');
+
+    if (refSection.classList.contains('show')) return;
+
+    if (!textarea.value.trim()) {
+      if (!confirm('你的译文还是空的，确定要直接看参考译文吗？')) return;
+    }
+
+    refSection.classList.add('show');
+    updateAgentPanel();
+
+    setTimeout(function() {
+      refSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function toggleCheck(checkbox) {
+    const item = checkbox.parentElement;
+    if (checkbox.checked) item.classList.add('checked');
+    else item.classList.remove('checked');
+  }
+
+  // ========== 结构化数据面板（给Agent） ==========
+  function updateAgentPanel() {
+    translationData.c2e.source = document.getElementById('trans1Source').innerText.trim();
+    translationData.c2e.reference = document.getElementById('trans1Reference').innerText.trim();
+    translationData.e2c.source = document.getElementById('trans2Source').innerText.trim();
+    translationData.e2c.reference = document.getElementById('trans2Reference').innerText.trim();
+
+    const data = {
+      paper: '练习卷五 · 文化自信专题',
+      topic: '文化自信与中华优秀传统文化',
+      totalTimeMinutes: 100,
+      elapsedTimeSeconds: 100 * 60 - timerSeconds,
+
+      mcq: {
+        total: 5,
+        scoreEach: 2,
+        userAnswers: mcqUserAnswers,
+        correctAnswers: {},
+        explanations: {}
+      },
+
+      cloze: {
+        total: 10,
+        scoreEach: 2,
+        wordBank: [
+          { word: 'provide', pos: 'v.' },
+          { word: 'examine', pos: 'v.' },
+          { word: 'gain', pos: 'v.' },
+          { word: 'lack', pos: 'n.' },
+          { word: 'encourage', pos: 'v.' },
+          { word: 'aware', pos: 'adj.' },
+          { word: 'in', pos: 'prep.' },
+          { word: 'but', pos: 'conj.' },
+          { word: 'enrich', pos: 'v.' },
+          { word: 'impress', pos: 'v.' },
+          { word: 'significant', pos: 'adj.' },
+          { word: 'instead', pos: 'adv.' },
+          { word: 'that', pos: 'pron.' },
+          { word: 'with', pos: 'prep.' },
+          { word: 'rapid', pos: 'adj.' }
+        ],
+        userAnswers: {},
+        correctAnswers: {},
+        explanations: {}
+      },
+
+      c2e: {
+        source: translationData.c2e.source,
+        userTranslation: document.getElementById('trans1Input').value,
+        referenceTranslation: translationData.c2e.reference,
+        scoringPoints: translationData.c2e.scoringPoints
+      },
+
+      e2c: {
+        source: translationData.e2c.source,
+        userTranslation: document.getElementById('trans2Input').value,
+        referenceTranslation: translationData.e2c.reference,
+        scoringPoints: translationData.e2c.scoringPoints
+      }
+    };
+
+    for (let i = 1; i <= 5; i++) {
+      data.mcq.correctAnswers[i] = mcqAnswers[i].answer;
+      data.mcq.explanations[i] = mcqAnswers[i].explanation;
+    }
+
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      data.cloze.userAnswers[i] = input.value.trim();
+      data.cloze.correctAnswers[i] = clozeAnswers[i - 1].answer;
+      data.cloze.explanations[i] = clozeAnswers[i - 1].explanation;
+    }
+
+    const panel = document.getElementById('agentPanel');
+    panel.classList.add('show');
+    document.getElementById('agentData').textContent = JSON.stringify(data, null, 2);
+  }
+
+  function copyAgentData() {
+    const text = document.getElementById('agentData').textContent;
+    navigator.clipboard.writeText(text).then(function() {
+      const btn = document.querySelector('.agent-copy-btn');
+      const original = btn.textContent;
+      btn.textContent = '已复制 ✓';
+      setTimeout(function() { btn.textContent = original; }, 1500);
+    }).catch(function() {
+      alert('复制失败，请手动复制');
+    });
+  }
+
+  // ========== 重做一遍 ==========
+  function resetAll() {
+    if (!confirm('确定要重做一遍吗？所有作答和判分状态都会被清空。')) return;
+
+    clearInterval(timerInterval);
+    timerSeconds = 100 * 60;
+    timerRunning = false;
+    updateTimerDisplay();
+    document.getElementById('timerBtn').textContent = '开始';
+
+    mcqSubmitted = false;
+    mcqUserAnswers = {};
+    document.querySelectorAll('.mcq-item').forEach(function(item) {
+      item.querySelectorAll('.mcq-option').forEach(function(opt) {
+        opt.classList.remove('selected', 'correct', 'wrong', 'submitted');
+        opt.style.cursor = 'pointer';
+      });
+      item.querySelector('.mcq-explanation').classList.remove('show');
+    });
+    document.getElementById('mcqScore').textContent = '0';
+    const mcqBtn = document.getElementById('mcqSubmitBtn');
+    mcqBtn.textContent = '提交判分';
+    mcqBtn.disabled = false;
+
+    clozeSubmitted = false;
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      input.value = '';
+      input.classList.remove('correct', 'wrong');
+      input.disabled = false;
+      const caNum = document.getElementById('ca-num-' + i);
+      const caAnswer = document.getElementById('ca-answer-' + i);
+      caNum.classList.remove('wrong');
+      caAnswer.innerHTML = clozeAnswers[i - 1].answer;
+    }
+    document.getElementById('clozeAnswers').classList.remove('show');
+    document.getElementById('clozeScore').textContent = '0';
+    const clozeBtn = document.getElementById('clozeSubmitBtn');
+    clozeBtn.textContent = '提交判分';
+    clozeBtn.disabled = false;
+
+    document.getElementById('trans1Input').value = '';
+    document.getElementById('trans2Input').value = '';
+    document.getElementById('trans1Ref').classList.remove('show');
+    document.getElementById('trans2Ref').classList.remove('show');
+
+    document.querySelectorAll('.checklist-item input').forEach(function(cb) {
+      cb.checked = false;
+      cb.parentElement.classList.remove('checked');
+    });
+
+    document.getElementById('agentPanel').classList.remove('show');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  updateTimerDisplay();
+</script>
+
+</body>
+</html>

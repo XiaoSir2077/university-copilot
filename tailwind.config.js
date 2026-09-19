@@ -2,6 +2,15 @@
 module.exports = {
   darkMode: ["class"],
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  // 书籍卡片配色来自 meta.json 的 tone 字段（JSON 不在 content 扫描范围），
+  // 新增学科配色时需把对应的渐变类名同步到这里。
+  safelist: [
+    'from-sky-500', 'to-blue-700',
+    'from-violet-500', 'to-indigo-700',
+    'from-amber-500', 'to-orange-600',
+    'from-rose-500', 'to-fuchsia-700',
+    'from-emerald-500', 'to-teal-700',
+  ],
   theme: {
     extend: {
       colors: {

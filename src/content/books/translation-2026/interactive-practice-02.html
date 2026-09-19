@@ -1,0 +1,1584 @@
+---
+{"no":"03","title":"生态文明专题","order":3}
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>生态文明专题</title>
+<style>
+  /* ========== 基础样式 ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #F7F8FA;
+    color: #1F2937;
+    line-height: 1.75;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== 顶部栏 ========== */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
+    color: white;
+    padding: 16px 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .header-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .header-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .timer-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .timer-btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .timer-btn:active { background: rgba(255, 255, 255, 0.4); }
+
+  .time-hint {
+    font-size: 13px;
+    opacity: 0.9;
+  }
+
+  /* ========== 主体容器 ========== */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px 100px;
+  }
+
+  /* ========== 模块卡片 ========== */
+  .module {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .module-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #E5E7EB;
+  }
+
+  .module-num {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #0EA5E9, #0284C7);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .module-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .module-sub {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 2px;
+  }
+
+  /* ========== 选词填空 ========== */
+  .mcq-item {
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px dashed #E5E7EB;
+  }
+
+  .mcq-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .mcq-num {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0284C7;
+    margin-bottom: 8px;
+  }
+
+  .mcq-num .point {
+    font-size: 12px;
+    color: #9CA3AF;
+    font-weight: 500;
+    margin-left: 6px;
+  }
+
+  .mcq-stem {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 14px;
+    color: #1F2937;
+  }
+
+  .mcq-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .mcq-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #F9FAFB;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 15px;
+  }
+
+  .mcq-option:hover {
+    border-color: #0EA5E9;
+    background: #F0F9FF;
+  }
+
+  .mcq-option.selected {
+    border-color: #0EA5E9;
+    background: #F0F9FF;
+  }
+
+  .mcq-option.correct {
+    border-color: #10B981;
+    background: #D1FAE5;
+  }
+
+  .mcq-option.wrong {
+    border-color: #EF4444;
+    background: #FEE2E2;
+  }
+
+  .mcq-option.submitted {
+    cursor: default;
+  }
+
+  .option-label {
+    width: 28px;
+    height: 28px;
+    background: #E5E7EB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: #4B5563;
+    flex-shrink: 0;
+  }
+
+  .mcq-option.selected .option-label {
+    background: #0EA5E9;
+    color: white;
+  }
+
+  .mcq-option.correct .option-label {
+    background: #10B981;
+    color: white;
+  }
+
+  .mcq-option.wrong .option-label {
+    background: #EF4444;
+    color: white;
+  }
+
+  .option-text {
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .mcq-explanation {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #FFFBEB;
+    border-left: 3px solid #F59E0B;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: #78350F;
+    line-height: 1.7;
+    display: none;
+  }
+
+  .mcq-explanation.show {
+    display: block;
+  }
+
+  .mcq-explanation strong {
+    color: #0369A1;
+  }
+
+  /* ========== 按钮样式 ========== */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #0EA5E9, #0284C7);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .submit-btn:disabled {
+    background: #9CA3AF;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .reveal-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: white;
+    color: #0284C7;
+    border: 2px solid #0EA5E9;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.2s ease;
+  }
+
+  .reveal-btn:hover {
+    background: #F0F9FF;
+  }
+
+  /* ========== 完形填空 ========== */
+  .cloze-passage {
+    font-size: 16px;
+    line-height: 2;
+    color: #1F2937;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+
+  .cloze-blank {
+    display: inline-block;
+    width: 110px;
+    height: 32px;
+    margin: 0 4px;
+    padding: 0 8px;
+    border: 2px solid #D1D5DB;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    background: #F9FAFB;
+    transition: all 0.2s ease;
+  }
+
+  .cloze-blank:focus {
+    outline: none;
+    border-color: #0EA5E9;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+  }
+
+  .cloze-blank.correct {
+    border-color: #10B981;
+    background: #D1FAE5;
+    color: #065F46;
+    font-weight: 600;
+  }
+
+  .cloze-blank.wrong {
+    border-color: #EF4444;
+    background: #FEE2E2;
+    color: #991B1B;
+  }
+
+  /* 备选词库 */
+  .wordbank {
+    background: #F9FAFB;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .wordbank-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 10px;
+  }
+
+  .wordbank-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .word-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 999px;
+    font-size: 14px;
+    color: #374151;
+  }
+
+  .word-item .pos {
+    font-size: 11px;
+    color: #9CA3AF;
+    font-style: italic;
+  }
+
+  /* 完形答案解析 */
+  .cloze-answers {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .cloze-answers.show {
+    display: block;
+  }
+
+  .cloze-answer-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #E5E7EB;
+    font-size: 14px;
+  }
+
+  .cloze-answer-item:last-child {
+    border-bottom: none;
+  }
+
+  .ca-num {
+    width: 24px;
+    height: 24px;
+    background: #D1FAE5;
+    color: #065F46;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .ca-num.wrong {
+    background: #FEE2E2;
+    color: #991B1B;
+  }
+
+  .ca-content {
+    flex: 1;
+  }
+
+  .ca-answer {
+    font-weight: 600;
+    color: #065F46;
+  }
+
+  .ca-answer .user-wrong {
+    color: #991B1B;
+    text-decoration: line-through;
+    margin-right: 8px;
+  }
+
+  .ca-explanation {
+    color: #6B7280;
+    font-size: 13px;
+    margin-top: 2px;
+    line-height: 1.6;
+  }
+
+  /* ========== 翻译题 ========== */
+  .translation-source {
+    background: #F9FAFB;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.9;
+    color: #1F2937;
+  }
+
+  .translation-source p {
+    margin-bottom: 10px;
+  }
+
+  .translation-source p:last-child {
+    margin-bottom: 0;
+  }
+
+  .translation-textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 14px;
+    border: 2px solid #D1D5DB;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 1.8;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.2s ease;
+    background: white;
+  }
+
+  .translation-textarea:focus {
+    outline: none;
+    border-color: #0EA5E9;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+  }
+
+  .translation-textarea::placeholder {
+    color: #9CA3AF;
+  }
+
+  /* 参考译文 */
+  .reference-section {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .reference-section.show {
+    display: block;
+  }
+
+  .reference-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0284C7;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .reference-text {
+    background: #F0F9FF;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: #0C4A6E;
+    margin-bottom: 16px;
+  }
+
+  .reference-text p {
+    margin-bottom: 10px;
+  }
+
+  .reference-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 评分要点清单 */
+  .checklist-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 10px;
+  }
+
+  .checklist {
+    background: #FFFBEB;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    cursor: pointer;
+    border-bottom: 1px dashed #FDE68A;
+  }
+
+  .checklist-item:last-child {
+    border-bottom: none;
+  }
+
+  .checklist-item input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    accent-color: #0EA5E9;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .checklist-item label {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #78350F;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .checklist-item.checked label {
+    text-decoration: line-through;
+    color: #9CA3AF;
+  }
+
+  .self-eval-hint {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  /* ========== 结构化数据面板（给Agent读取） ========== */
+  .agent-panel {
+    margin-top: 24px;
+    padding: 20px;
+    background: #1F2937;
+    border-radius: 14px;
+    display: none;
+  }
+
+  .agent-panel.show {
+    display: block;
+  }
+
+  .agent-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #374151;
+  }
+
+  .agent-panel-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #FBBF24;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .agent-copy-btn {
+    padding: 6px 14px;
+    background: #374151;
+    color: #D1D5DB;
+    border: 1px solid #4B5563;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .agent-copy-btn:hover {
+    background: #4B5563;
+  }
+
+  .agent-data {
+    background: #111827;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #9CA3AF;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  /* ========== 底部得分栏 ========== */
+  .score-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #E5E7EB;
+    padding: 12px 16px;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+    z-index: 100;
+  }
+
+  .score-bar-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .score-info {
+    flex: 1;
+  }
+
+  .score-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .score-item {
+    font-size: 13px;
+    color: #6B7280;
+  }
+
+  .score-item strong {
+    color: #0284C7;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .score-item .self {
+    color: #F59E0B;
+  }
+
+  .reset-btn {
+    padding: 10px 20px;
+    background: white;
+    color: #EF4444;
+    border: 2px solid #FCA5A5;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .reset-btn:hover {
+    background: #FEF2F2;
+  }
+
+  body { padding-bottom: 80px; }
+
+  /* ========== 响应式 ========== */
+  @media (max-width: 480px) {
+    body { font-size: 15px; }
+    .header { padding: 12px 16px; }
+    .header-title { font-size: 18px; }
+    .timer-box { font-size: 16px; padding: 5px 12px; }
+    .container { padding: 16px 12px 90px; }
+    .module { padding: 18px 14px; border-radius: 12px; }
+    .module-title { font-size: 16px; }
+    .mcq-stem { font-size: 15px; }
+    .mcq-option { font-size: 14px; padding: 10px 12px; }
+    .cloze-passage { font-size: 15px; line-height: 1.9; }
+    .cloze-blank { width: 90px; height: 30px; font-size: 13px; }
+    .translation-source { font-size: 15px; }
+    .translation-textarea { font-size: 15px; min-height: 180px; }
+    .score-row { gap: 10px; }
+    .score-item { font-size: 12px; }
+    .score-item strong { font-size: 15px; }
+    .reset-btn { padding: 8px 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== 顶部栏 ========== -->
+<div class="header">
+  <div class="header-inner">
+    <span class="header-tag">🌿 生态文明专题</span>
+    <div class="header-title">练习卷二 · 生态文明专题</div>
+    <div class="header-info">
+      <span class="time-hint">建议时长 100 分钟</span>
+      <div class="timer-box">
+        <span id="timerDisplay">100:00</span>
+        <button class="timer-btn" id="timerBtn" onclick="toggleTimer()">开始</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 主体内容 ========== -->
+<div class="container">
+
+  <!-- 模块一：选词填空 -->
+  <div class="module" id="module1">
+    <div class="module-header">
+      <div class="module-num">一</div>
+      <div>
+        <div class="module-title">选词填空</div>
+        <div class="module-sub">共 5 题，每题 2 分，共 10 分</div>
+      </div>
+    </div>
+
+    <div id="mcqContainer">
+      <!-- 第 1 题 -->
+      <div class="mcq-item" data-q="1">
+        <div class="mcq-num">第 1 题 <span class="point">（考点：动词+介词搭配）</span></div>
+        <div class="mcq-stem">China is committed ______ the goal of peak carbon emissions before 2030 and carbon neutrality before 2060.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(1, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">to</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(1, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">with</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(1, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">for</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(1, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">of</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>be committed to 是固定搭配，表示"致力于、承诺"，to 是介词，后接名词或动名词。
+        </div>
+      </div>
+
+      <!-- 第 2 题 -->
+      <div class="mcq-item" data-q="2">
+        <div class="mcq-num">第 2 题 <span class="point">（考点：形近词辨析）</span></div>
+        <div class="mcq-stem">The rapid growth of renewable energy has significantly ______ the country's energy structure in recent years.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(2, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">assumed</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(2, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">consumed</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(2, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">resumed</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(2, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">transformed</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>transform 意为"改变、转变"，transform the energy structure 表示改变能源结构，符合句意。assume 是"假设；承担"，consume 是"消费"，resume 是"恢复"，均不符合语境。
+        </div>
+      </div>
+
+      <!-- 第 3 题 -->
+      <div class="mcq-item" data-q="3">
+        <div class="mcq-num">第 3 题 <span class="point">（考点：时政术语补全）</span></div>
+        <div class="mcq-stem">The concept of "______ civilization" has been written into the Constitution of the People's Republic of China.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(3, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">environmental</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(3, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">ecological</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(3, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">green</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(3, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">natural</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>"生态文明"的官方译法是 ecological civilization，这是固定时政术语。environmental 是"环境的"，green 是"绿色的"，natural 是"自然的"，均不是标准译法。
+        </div>
+      </div>
+
+      <!-- 第 4 题 -->
+      <div class="mcq-item" data-q="4">
+        <div class="mcq-num">第 4 题 <span class="point">（考点：词性/词形判断）</span></div>
+        <div class="mcq-stem">The ______ growth of electric vehicles has led to a noticeable drop in urban air pollution levels.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(4, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">accelerate</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(4, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">acceleration</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(4, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">accelerated</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(4, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">accelerating</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>空格修饰名词 growth，需要填入形容词。accelerated（adj. 加速的）符合语法和语义。accelerate 是动词，acceleration 是名词，accelerating 是现在分词作形容词时通常表主动正在进行的动作，此处用 accelerated 更合适，表"已加速的增长"。
+        </div>
+      </div>
+
+      <!-- 第 5 题 -->
+      <div class="mcq-item" data-q="5">
+        <div class="mcq-num">第 5 题 <span class="point">（考点：短语动词）</span></div>
+        <div class="mcq-stem">Many traditional factories have had to ______ with stricter environmental regulations or face closure.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(5, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">come up</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(5, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">put up</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(5, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">keep up</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(5, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">make up</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>keep up with 是固定短语动词，表示"跟上、不落后于"，符合句意（跟上更严格的环保法规）。come up with 意为"想出、提出"；put up with 意为"忍受"；make up with 意为"与……和解"，均不符合。
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="mcqSubmitBtn" onclick="submitMCQ()">提交判分</button>
+  </div>
+
+  <!-- 模块二：完形填空 -->
+  <div class="module" id="module2">
+    <div class="module-header">
+      <div class="module-num">二</div>
+      <div>
+        <div class="module-title">完形填空</div>
+        <div class="module-sub">共 10 题，每题 2 分，共 20 分 · 15 选 10，用适当形式</div>
+      </div>
+    </div>
+
+    <!-- 短文 -->
+    <div class="cloze-passage">
+      <strong style="color:#0284C7">Ecological Civilization and Green Development</strong><br><br>
+      China's pursuit of ecological civilization represents a fundamental shift in development philosophy. For many years, rapid economic growth often came at the expense of the environment, with air pollution, water contamination, and soil degradation becoming increasingly pressing issues. Today, however, the country is redefining progress by placing environmental protection at the core of its national strategy.<br><br>
+      Recent policies <input type="text" class="cloze-blank" id="cloze-1" placeholder="①">
+      at promoting green development show that China is moving away from the old model of "pollute first, clean up later."
+      <input type="text" class="cloze-blank" id="cloze-2" placeholder="②">
+      a low-carbon economy has become a national priority, with substantial investments flowing into solar, wind, and hydropower projects. These efforts have produced
+      <input type="text" class="cloze-blank" id="cloze-3" placeholder="③">
+      results: China is now the world's largest producer of renewable energy.<br><br>
+      One key challenge is the
+      <input type="text" class="cloze-blank" id="cloze-4" placeholder="④">
+      of green technology in rural and less developed regions. While coastal cities have embraced clean energy, many inland areas still
+      <input type="text" class="cloze-blank" id="cloze-5" placeholder="⑤">
+      heavily on coal for electricity and heating. To bridge this gap, the government has launched special programs,
+      <input type="text" class="cloze-blank" id="cloze-6" placeholder="⑥">
+      local enterprises to adopt eco-friendly practices and providing financial support for green transition.<br><br>
+      Another important factor is public
+      <input type="text" class="cloze-blank" id="cloze-7" placeholder="⑦">
+      of environmental protection. As living standards improve, people are no longer satisfied with just economic growth; they demand cleaner air, safer drinking water, and healthier food. This growing awareness has created a strong social foundation
+      <input type="text" class="cloze-blank" id="cloze-8" placeholder="⑧">
+      which green policies can be effectively implemented.<br><br>
+      The ultimate goal is to build a beautiful China where humans coexist harmoniously with nature. This requires not only technological innovation and policy support but also a change in lifestyle and consumption patterns. When every citizen understands that ecological protection is
+      <input type="text" class="cloze-blank" id="cloze-9" placeholder="⑨">
+      to their own well-being, sustainable development will no longer be a distant vision
+      <input type="text" class="cloze-blank" id="cloze-10" placeholder="⑩">
+      a daily reality shared by all.
+    </div>
+
+    <!-- 备选词库 -->
+    <div class="wordbank">
+      <div class="wordbank-title">📝 备选词（15 选 10，注意适当形式）</div>
+      <div class="wordbank-list">
+        <span class="word-item">aim <span class="pos">v.</span></span>
+        <span class="word-item">build <span class="pos">v.</span></span>
+        <span class="word-item">impress <span class="pos">v.</span></span>
+        <span class="word-item">lack <span class="pos">n.</span></span>
+        <span class="word-item">rely <span class="pos">v.</span></span>
+        <span class="word-item">encourage <span class="pos">v.</span></span>
+        <span class="word-item">remark <span class="pos">n./v.</span></span>
+        <span class="word-item">aware <span class="pos">adj.</span></span>
+        <span class="word-item">on <span class="pos">prep.</span></span>
+        <span class="word-item">vital <span class="pos">adj.</span></span>
+        <span class="word-item">but <span class="pos">conj.</span></span>
+        <span class="word-item">develop <span class="pos">v.</span></span>
+        <span class="word-item">significant <span class="pos">adj.</span></span>
+        <span class="word-item">instead <span class="pos">adv.</span></span>
+        <span class="word-item">that <span class="pos">pron.</span></span>
+      </div>
+    </div>
+
+    <!-- 答案解析 -->
+    <div class="cloze-answers" id="clozeAnswers">
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-1">1</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-1">aimed</div>
+          <div class="ca-explanation">过去分词作后置定语：policies aimed at... 修饰 policies，被动关系用过去分词。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-2">2</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-2">Building</div>
+          <div class="ca-explanation">动名词作主语：句首需名词性成分，building a low-carbon economy 作主语。注意首字母大写。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-3">3</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-3">remarkable</div>
+          <div class="ca-explanation">形容词：修饰 results，表示显著成果。remark 变形为形容词 remarkable。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-4">4</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-4">lack</div>
+          <div class="ca-explanation">名词：the lack of 表示"……的缺乏"。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-5">5</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-5">rely</div>
+          <div class="ca-explanation">动词原形：rely on 固定搭配，表示依赖。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-6">6</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-6">encouraging</div>
+          <div class="ca-explanation">现在分词作伴随状语：government launches programs, encouraging... 主动关系。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-7">7</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-7">awareness</div>
+          <div class="ca-explanation">名词：public awareness 表示公众意识，aware 变形为名词 awareness。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-8">8</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-8">on</div>
+          <div class="ca-explanation">介词：on which 引导定语从句，相当于 green policies can be implemented on this foundation。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-9">9</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-9">vital</div>
+          <div class="ca-explanation">形容词：be vital to 表示"对……至关重要"。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-10">10</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-10">but</div>
+          <div class="ca-explanation">连词：not... but... 结构，表示"不是……而是……"。</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="clozeSubmitBtn" onclick="submitCloze()">提交判分</button>
+  </div>
+
+  <!-- 模块三：英译汉 -->
+  <div class="module" id="module3">
+    <div class="module-header">
+      <div class="module-num">三</div>
+      <div>
+        <div class="module-title">英译汉</div>
+        <div class="module-sub">15 分 · 写完后展开参考译文自评</div>
+      </div>
+    </div>
+
+    <div class="translation-source" id="trans1Source">
+      <p>Ecological civilization is not about sacrificing economic growth for environmental protection, but about finding a balanced path where nature and development reinforce each other. For decades, many developing countries faced a dilemma: rapid industrialization often led to severe pollution and resource depletion, while strict environmental rules were seen as a barrier to poverty alleviation. This false dichotomy between the economy and the environment has now been challenged by a new approach.</p>
+      <p>The Chinese concept of ecological civilization recognizes that protecting the environment is itself a form of productive investment. It means promoting green industries, circular economy models, and low-carbon technologies so that economic growth can continue without exceeding ecological limits. At the same time, it emphasizes the preservation of biodiversity and natural landscapes, ensuring that future generations will inherit a planet that is not only richer but also cleaner and more beautiful.</p>
+      <p>International cooperation is essential in this endeavor. Climate change, ocean pollution, and species extinction are global challenges that no single country can solve alone. The Belt and Road Initiative, with its emphasis on green development, has provided a platform for countries to share clean energy technologies, jointly protect transboundary ecosystems, and work together toward a sustainable future for all.</p>
+    </div>
+
+    <textarea class="translation-textarea" id="trans1Input" placeholder="请在此处输入你的译文……"></textarea>
+
+    <button class="reveal-btn" onclick="revealTranslation(1)">我写完了，展开参考译文</button>
+
+    <div class="reference-section" id="trans1Ref">
+      <div class="reference-title">📖 参考译文</div>
+      <div class="reference-text" id="trans1Reference">
+        <p>生态文明并非要为了环境保护而牺牲经济增长，而是要找到一条自然与发展相互促进的平衡之路。几十年来，许多发展中国家面临一个两难困境：快速工业化往往导致严重污染和资源枯竭，而严格的环保法规又被视为减贫的障碍。这种经济与环境之间的虚假二元对立，如今正受到一种新思路的挑战。</p>
+        <p>中国的生态文明理念认识到，保护环境本身就是一种生产性投资。它意味着推动绿色产业、循环经济模式和低碳技术，使经济增长能够在不突破生态极限的前提下持续进行。同时，它强调保护生物多样性和自然景观，确保子孙后代继承的不仅是一个更富裕的星球，也是一个更清洁、更美丽的星球。</p>
+        <p>国际合作在这一事业中至关重要。气候变化、海洋污染和物种灭绝是全球性挑战，没有哪个国家能够独自解决。"一带一路"倡议以绿色发展为重点，为各国分享清洁能源技术、共同保护跨境生态系统、携手迈向人类可持续未来提供了平台。</p>
+      </div>
+
+      <div class="checklist-title">✅ 评分要点自评（对照你的译文逐条打勾）</div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-1" onchange="toggleCheck(this)">
+          <label for="c1-1">"not about... but about..." 译为"并非……而是……"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-2" onchange="toggleCheck(this)">
+          <label for="c1-2">"false dichotomy between A and B" 准确译为"A与B之间的虚假二元对立"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-3" onchange="toggleCheck(this)">
+          <label for="c1-3">"a form of productive investment" 译为"一种生产性投资"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-4" onchange="toggleCheck(this)">
+          <label for="c1-4">第三段排比结构（分享技术、保护生态、携手未来）保持中文节奏</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-5" onchange="toggleCheck(this)">
+          <label for="c1-5">"Belt and Road Initiative" 译为"一带一路"倡议</label>
+        </div>
+      </div>
+      <div class="self-eval-hint">自评完成后，可在底部栏查看得分情况</div>
+    </div>
+  </div>
+
+  <!-- 模块四：汉译英 -->
+  <div class="module" id="module4">
+    <div class="module-header">
+      <div class="module-num">四</div>
+      <div>
+        <div class="module-title">汉译英</div>
+        <div class="module-sub">15 分 · 写完后展开参考译文自评</div>
+      </div>
+    </div>
+
+    <div class="translation-source" id="trans2Source">
+      <p>中国高度重视生态文明建设，将其纳入国家发展总体布局。近年来，中国在生态环境保护方面取得了举世瞩目的成就：单位GDP能耗持续下降，清洁能源比重不断提高，森林覆盖率稳步增长，空气质量明显改善。</p>
+      <p>绿水青山就是金山银山的理念已经深入人心。各地积极探索生态产品价值实现机制，推动生态旅游、林下经济等绿色产业发展，让良好的生态环境成为人民美好生活的增长点。与此同时，中国积极参与全球环境治理，为应对气候变化作出了重要贡献。</p>
+      <p>值得一提的是，碳达峰碳中和目标的提出，展现了中国应对气候变化的坚定决心。中国承诺力争2030年前实现碳达峰、2060年前实现碳中和，这不仅是中国可持续发展的内在要求，也是构建人类命运共同体的责任担当。</p>
+    </div>
+
+    <textarea class="translation-textarea" id="trans2Input" placeholder="请在此处输入你的译文……"></textarea>
+
+    <button class="reveal-btn" onclick="revealTranslation(2)">我写完了，展开参考译文</button>
+
+    <div class="reference-section" id="trans2Ref">
+      <div class="reference-title">📖 参考译文</div>
+      <div class="reference-text" id="trans2Reference">
+        <p>China attaches great importance to ecological civilization development and has incorporated it into the overall national development plan. In recent years, China has made remarkable achievements in ecological and environmental protection: energy consumption per unit of GDP has continued to decline, the proportion of clean energy has kept increasing, forest coverage has grown steadily, and air quality has improved significantly.</p>
+        <p>The concept that lucid waters and lush mountains are invaluable assets has taken deep root among the people. Local authorities have actively explored mechanisms for realizing the value of ecological products and promoted the development of green industries such as eco-tourism and under-forest economy, turning a sound ecological environment into a growth point for people's better lives. Meanwhile, China has actively participated in global environmental governance and made important contributions to addressing climate change.</p>
+        <p>It is worth mentioning that the proposal of the peak carbon emissions and carbon neutrality goals demonstrates China's firm determination in tackling climate change. China has pledged to strive to peak carbon dioxide emissions before 2030 and achieve carbon neutrality before 2060. This is not only an inherent requirement for China's sustainable development but also a sense of responsibility for building a community with a shared future for mankind.</p>
+      </div>
+
+      <div class="checklist-title">✅ 评分要点自评（对照你的译文逐条打勾）</div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-1" onchange="toggleCheck(this)">
+          <label for="c2-1">"生态文明" 译为 ecological civilization</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-2" onchange="toggleCheck(this)">
+          <label for="c2-2">"绿水青山就是金山银山" 使用官方译法 lucid waters and lush mountains are invaluable assets</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-3" onchange="toggleCheck(this)">
+          <label for="c2-3">"碳达峰、碳中和" 译为 peak carbon emissions and carbon neutrality</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-4" onchange="toggleCheck(this)">
+          <label for="c2-4">"人类命运共同体" 译为 a community with a shared future for mankind</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-5" onchange="toggleCheck(this)">
+          <label for="c2-5">时态一致性（现在完成时）和主谓一致</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-6" onchange="toggleCheck(this)">
+          <label for="c2-6">"不仅……也……" 译为 not only... but also... 时没有漏掉 but</label>
+        </div>
+      </div>
+      <div class="self-eval-hint">自评完成后，可在底部栏查看得分情况</div>
+    </div>
+  </div>
+
+  <!-- ===== 结构化数据面板（给Agent读取） ===== -->
+  <div class="agent-panel" id="agentPanel">
+    <div class="agent-panel-header">
+      <div class="agent-panel-title">🤖 结构化答题数据（供 Agent 深度批改）</div>
+      <button class="agent-copy-btn" onclick="copyAgentData()">复制</button>
+    </div>
+    <div class="agent-data" id="agentData"></div>
+  </div>
+
+</div>
+
+<!-- ========== 底部得分栏 ========== -->
+<div class="score-bar">
+  <div class="score-bar-inner">
+    <div class="score-info">
+      <div class="score-row">
+        <div class="score-item">选词 <strong id="mcqScore">0</strong>/10 分</div>
+        <div class="score-item">完形 <strong id="clozeScore">0</strong>/20 分</div>
+        <div class="score-item">英译汉 <strong class="self">自评中</strong></div>
+        <div class="score-item">汉译英 <strong class="self">自评中</strong></div>
+      </div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">🔄 重做一遍</button>
+  </div>
+</div>
+
+<script>
+  // ========== 参考答案数据 ==========
+  const mcqAnswers = {
+    1: { answer: 'A', explanation: 'be committed to 是固定搭配，表示"致力于、承诺"，to 是介词。' },
+    2: { answer: 'D', explanation: 'transform 意为"改变、转变"，transform the energy structure 符合句意。' },
+    3: { answer: 'B', explanation: '"生态文明"官方译法是 ecological civilization。' },
+    4: { answer: 'C', explanation: '修饰名词 growth 需要形容词，accelerated（adj. 加速的）符合。' },
+    5: { answer: 'C', explanation: 'keep up with 表示"跟上、不落后于"，符合句意。' }
+  };
+
+  const clozeAnswers = [
+    { answer: 'aimed', explanation: '过去分词作后置定语：policies aimed at... 修饰 policies，被动关系。' },
+    { answer: 'building', explanation: '动名词作主语：句首需名词性成分，注意首字母大写。' },
+    { answer: 'remarkable', explanation: '形容词：修饰 results，表示显著成果。remark 变形为 remarkable。' },
+    { answer: 'lack', explanation: '名词：the lack of 表示"……的缺乏"。' },
+    { answer: 'rely', explanation: '动词原形：rely on 固定搭配，表示依赖。' },
+    { answer: 'encouraging', explanation: '现在分词作伴随状语：主动关系。' },
+    { answer: 'awareness', explanation: '名词：public awareness 表示公众意识，aware 变形为名词。' },
+    { answer: 'on', explanation: '介词：on which 引导定语从句。' },
+    { answer: 'vital', explanation: '形容词：be vital to 表示"对……至关重要"。' },
+    { answer: 'but', explanation: '连词：not... but... 结构，表示"不是……而是……"。' }
+  ];
+
+  const translationData = {
+    c2e: {
+      source: '',
+      reference: '',
+      scoringPoints: [
+        '"not about... but about..." 译为"并非……而是……"',
+        '"false dichotomy between A and B" 准确译为"A与B之间的虚假二元对立"',
+        '"a form of productive investment" 译为"一种生产性投资"',
+        '第三段排比结构保持中文节奏',
+        '"Belt and Road Initiative" 译为"一带一路"倡议'
+      ]
+    },
+    e2c: {
+      source: '',
+      reference: '',
+      scoringPoints: [
+        '"生态文明" 译为 ecological civilization',
+        '"绿水青山就是金山银山" 使用官方译法 lucid waters and lush mountains are invaluable assets',
+        '"碳达峰、碳中和" 译为 peak carbon emissions and carbon neutrality',
+        '"人类命运共同体" 译为 a community with a shared future for mankind',
+        '时态一致性（现在完成时）和主谓一致',
+        '"不仅……也……" 译为 not only... but also... 时没有漏掉 but'
+      ]
+    }
+  };
+
+  // ========== 计时器功能 ==========
+  let timerSeconds = 100 * 60;
+  let timerInterval = null;
+  let timerRunning = false;
+
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  }
+
+  function updateTimerDisplay() {
+    document.getElementById('timerDisplay').textContent = formatTime(timerSeconds);
+  }
+
+  function toggleTimer() {
+    const btn = document.getElementById('timerBtn');
+    if (timerRunning) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      btn.textContent = '继续';
+    } else {
+      timerInterval = setInterval(function() {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          timerRunning = false;
+          document.getElementById('timerBtn').textContent = '时间到';
+          alert('⏰ 时间到！建议停止作答。');
+        }
+      }, 1000);
+      timerRunning = true;
+      btn.textContent = '暂停';
+    }
+  }
+
+  // ========== 选词填空 ==========
+  let mcqUserAnswers = {};
+  let mcqSubmitted = false;
+
+  function selectMCQ(qNum, val) {
+    if (mcqSubmitted) return;
+    mcqUserAnswers[qNum] = val;
+    const item = document.querySelector('.mcq-item[data-q="' + qNum + '"]');
+    const options = item.querySelectorAll('.mcq-option');
+    options.forEach(function(opt) {
+      opt.classList.remove('selected');
+      if (opt.dataset.val === val) opt.classList.add('selected');
+    });
+  }
+
+  function submitMCQ() {
+    if (mcqSubmitted) return;
+
+    let unanswered = [];
+    for (let i = 1; i <= 5; i++) {
+      if (!mcqUserAnswers[i]) unanswered.push(i);
+    }
+    if (unanswered.length > 0) {
+      if (!confirm('还有第 ' + unanswered.join('、') + ' 题未作答，确定要提交吗？')) return;
+    }
+
+    mcqSubmitted = true;
+    let correctCount = 0;
+
+    for (let i = 1; i <= 5; i++) {
+      const item = document.querySelector('.mcq-item[data-q="' + i + '"]');
+      const options = item.querySelectorAll('.mcq-option');
+      const explanation = item.querySelector('.mcq-explanation');
+      const userAns = mcqUserAnswers[i];
+      const correctAns = mcqAnswers[i].answer;
+
+      options.forEach(function(opt) {
+        opt.classList.add('submitted');
+        opt.style.cursor = 'default';
+        const val = opt.dataset.val;
+        if (val === correctAns) opt.classList.add('correct');
+        else if (val === userAns && userAns !== correctAns) opt.classList.add('wrong');
+      });
+
+      explanation.classList.add('show');
+      if (userAns === correctAns) correctCount++;
+    }
+
+    document.getElementById('mcqScore').textContent = correctCount * 2;
+    document.getElementById('mcqSubmitBtn').textContent = '已提交';
+    document.getElementById('mcqSubmitBtn').disabled = true;
+
+    updateAgentPanel();
+  }
+
+  // ========== 完形填空 ==========
+  let clozeSubmitted = false;
+
+  function submitCloze() {
+    if (clozeSubmitted) return;
+
+    let unanswered = [];
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      if (!input.value.trim()) unanswered.push(i);
+    }
+    if (unanswered.length > 0) {
+      if (!confirm('还有第 ' + unanswered.join('、') + ' 空未填，确定要提交吗？')) return;
+    }
+
+    clozeSubmitted = true;
+    let correctCount = 0;
+
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      const userAns = input.value.trim().toLowerCase();
+      const correctAns = clozeAnswers[i - 1].answer;
+      const isCorrect = userAns === correctAns.toLowerCase();
+
+      input.classList.add(isCorrect ? 'correct' : 'wrong');
+      input.disabled = true;
+
+      const caNum = document.getElementById('ca-num-' + i);
+      const caAnswer = document.getElementById('ca-answer-' + i);
+
+      if (isCorrect) {
+        correctCount++;
+      } else {
+        caNum.classList.add('wrong');
+        caAnswer.innerHTML = '<span class="user-wrong">' + (input.value.trim() || '未作答') + '</span> → ' + correctAns;
+      }
+    }
+
+    document.getElementById('clozeAnswers').classList.add('show');
+    document.getElementById('clozeScore').textContent = correctCount * 2;
+    document.getElementById('clozeSubmitBtn').textContent = '已提交';
+    document.getElementById('clozeSubmitBtn').disabled = true;
+
+    updateAgentPanel();
+  }
+
+  // ========== 翻译题 ==========
+  function revealTranslation(num) {
+    const textarea = document.getElementById('trans' + num + 'Input');
+    const refSection = document.getElementById('trans' + num + 'Ref');
+
+    if (refSection.classList.contains('show')) return;
+
+    if (!textarea.value.trim()) {
+      if (!confirm('你的译文还是空的，确定要直接看参考译文吗？')) return;
+    }
+
+    refSection.classList.add('show');
+    updateAgentPanel();
+
+    setTimeout(function() {
+      refSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function toggleCheck(checkbox) {
+    const item = checkbox.parentElement;
+    if (checkbox.checked) item.classList.add('checked');
+    else item.classList.remove('checked');
+  }
+
+  // ========== 结构化数据面板（给Agent） ==========
+  function updateAgentPanel() {
+    // 收集翻译原文和参考译文
+    translationData.c2e.source = document.getElementById('trans1Source').innerText.trim();
+    translationData.c2e.reference = document.getElementById('trans1Reference').innerText.trim();
+    translationData.e2c.source = document.getElementById('trans2Source').innerText.trim();
+    translationData.e2c.reference = document.getElementById('trans2Reference').innerText.trim();
+
+    const data = {
+      // 基本信息
+      paper: '练习卷二 · 生态文明专题',
+      topic: '生态文明',
+      totalTimeMinutes: 100,
+      elapsedTimeSeconds: 100 * 60 - timerSeconds,
+
+      // 选词填空
+      mcq: {
+        total: 5,
+        scoreEach: 2,
+        userAnswers: mcqUserAnswers,
+        correctAnswers: {},
+        explanations: {}
+      },
+
+      // 完形填空
+      cloze: {
+        total: 10,
+        scoreEach: 2,
+        wordBank: [
+          { word: 'aim', pos: 'v.' },
+          { word: 'build', pos: 'v.' },
+          { word: 'impress', pos: 'v.' },
+          { word: 'lack', pos: 'n.' },
+          { word: 'rely', pos: 'v.' },
+          { word: 'encourage', pos: 'v.' },
+          { word: 'remark', pos: 'n./v.' },
+          { word: 'aware', pos: 'adj.' },
+          { word: 'on', pos: 'prep.' },
+          { word: 'vital', pos: 'adj.' },
+          { word: 'but', pos: 'conj.' },
+          { word: 'develop', pos: 'v.' },
+          { word: 'significant', pos: 'adj.' },
+          { word: 'instead', pos: 'adv.' },
+          { word: 'that', pos: 'pron.' }
+        ],
+        userAnswers: {},
+        correctAnswers: {},
+        explanations: {}
+      },
+
+      // 英译汉
+      c2e: {
+        source: translationData.c2e.source,
+        userTranslation: document.getElementById('trans1Input').value,
+        referenceTranslation: translationData.c2e.reference,
+        scoringPoints: translationData.c2e.scoringPoints
+      },
+
+      // 汉译英
+      e2c: {
+        source: translationData.e2c.source,
+        userTranslation: document.getElementById('trans2Input').value,
+        referenceTranslation: translationData.e2c.reference,
+        scoringPoints: translationData.e2c.scoringPoints
+      }
+    };
+
+    // 填入选词答案
+    for (let i = 1; i <= 5; i++) {
+      data.mcq.correctAnswers[i] = mcqAnswers[i].answer;
+      data.mcq.explanations[i] = mcqAnswers[i].explanation;
+    }
+
+    // 填入完形答案
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      data.cloze.userAnswers[i] = input.value.trim();
+      data.cloze.correctAnswers[i] = clozeAnswers[i - 1].answer;
+      data.cloze.explanations[i] = clozeAnswers[i - 1].explanation;
+    }
+
+    // 展示
+    const panel = document.getElementById('agentPanel');
+    panel.classList.add('show');
+    document.getElementById('agentData').textContent = JSON.stringify(data, null, 2);
+  }
+
+  function copyAgentData() {
+    const text = document.getElementById('agentData').textContent;
+    navigator.clipboard.writeText(text).then(function() {
+      const btn = document.querySelector('.agent-copy-btn');
+      const original = btn.textContent;
+      btn.textContent = '已复制 ✓';
+      setTimeout(function() { btn.textContent = original; }, 1500);
+    }).catch(function() {
+      alert('复制失败，请手动复制');
+    });
+  }
+
+  // ========== 重做一遍 ==========
+  function resetAll() {
+    if (!confirm('确定要重做一遍吗？所有作答和判分状态都会被清空。')) return;
+
+    // 重置计时器
+    clearInterval(timerInterval);
+    timerSeconds = 100 * 60;
+    timerRunning = false;
+    updateTimerDisplay();
+    document.getElementById('timerBtn').textContent = '开始';
+
+    // 重置选词填空
+    mcqSubmitted = false;
+    mcqUserAnswers = {};
+    document.querySelectorAll('.mcq-item').forEach(function(item) {
+      item.querySelectorAll('.mcq-option').forEach(function(opt) {
+        opt.classList.remove('selected', 'correct', 'wrong', 'submitted');
+        opt.style.cursor = 'pointer';
+      });
+      item.querySelector('.mcq-explanation').classList.remove('show');
+    });
+    document.getElementById('mcqScore').textContent = '0';
+    const mcqBtn = document.getElementById('mcqSubmitBtn');
+    mcqBtn.textContent = '提交判分';
+    mcqBtn.disabled = false;
+
+    // 重置完形填空
+    clozeSubmitted = false;
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      input.value = '';
+      input.classList.remove('correct', 'wrong');
+      input.disabled = false;
+      const caNum = document.getElementById('ca-num-' + i);
+      const caAnswer = document.getElementById('ca-answer-' + i);
+      caNum.classList.remove('wrong');
+      caAnswer.innerHTML = clozeAnswers[i - 1].answer;
+    }
+    document.getElementById('clozeAnswers').classList.remove('show');
+    document.getElementById('clozeScore').textContent = '0';
+    const clozeBtn = document.getElementById('clozeSubmitBtn');
+    clozeBtn.textContent = '提交判分';
+    clozeBtn.disabled = false;
+
+    // 重置翻译题
+    document.getElementById('trans1Input').value = '';
+    document.getElementById('trans2Input').value = '';
+    document.getElementById('trans1Ref').classList.remove('show');
+    document.getElementById('trans2Ref').classList.remove('show');
+
+    // 重置评分要点勾选
+    document.querySelectorAll('.checklist-item input').forEach(function(cb) {
+      cb.checked = false;
+      cb.parentElement.classList.remove('checked');
+    });
+
+    // 隐藏Agent数据面板
+    document.getElementById('agentPanel').classList.remove('show');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // 初始化
+  updateTimerDisplay();
+</script>
+
+</body>
+</html>

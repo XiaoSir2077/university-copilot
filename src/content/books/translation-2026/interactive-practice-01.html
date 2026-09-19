@@ -1,0 +1,1577 @@
+---
+{"no":"02","title":"乡村振兴专题","order":2}
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>乡村振兴专题</title>
+<style>
+  /* ========== 基础样式 ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #F7F8FA;
+    color: #1F2937;
+    line-height: 1.75;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== 顶部栏 ========== */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: white;
+    padding: 16px 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .header-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .header-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .timer-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .timer-btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .timer-btn:active { background: rgba(255, 255, 255, 0.4); }
+
+  .time-hint {
+    font-size: 13px;
+    opacity: 0.9;
+  }
+
+  /* ========== 主体容器 ========== */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px 100px;
+  }
+
+  /* ========== 模块卡片 ========== */
+  .module {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .module-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #E5E7EB;
+  }
+
+  .module-num {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #10B981, #059669);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .module-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .module-sub {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 2px;
+  }
+
+  /* ========== 选词填空 ========== */
+  .mcq-item {
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px dashed #E5E7EB;
+  }
+
+  .mcq-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .mcq-num {
+    font-size: 14px;
+    font-weight: 700;
+    color: #059669;
+    margin-bottom: 8px;
+  }
+
+  .mcq-num .point {
+    font-size: 12px;
+    color: #9CA3AF;
+    font-weight: 500;
+    margin-left: 6px;
+  }
+
+  .mcq-stem {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 14px;
+    color: #1F2937;
+  }
+
+  .mcq-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .mcq-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #F9FAFB;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 15px;
+  }
+
+  .mcq-option:hover {
+    border-color: #10B981;
+    background: #ECFDF5;
+  }
+
+  .mcq-option.selected {
+    border-color: #10B981;
+    background: #ECFDF5;
+  }
+
+  .mcq-option.correct {
+    border-color: #10B981;
+    background: #D1FAE5;
+  }
+
+  .mcq-option.wrong {
+    border-color: #EF4444;
+    background: #FEE2E2;
+  }
+
+  .mcq-option.submitted {
+    cursor: default;
+  }
+
+  .option-label {
+    width: 28px;
+    height: 28px;
+    background: #E5E7EB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: #4B5563;
+    flex-shrink: 0;
+  }
+
+  .mcq-option.selected .option-label {
+    background: #10B981;
+    color: white;
+  }
+
+  .mcq-option.correct .option-label {
+    background: #10B981;
+    color: white;
+  }
+
+  .mcq-option.wrong .option-label {
+    background: #EF4444;
+    color: white;
+  }
+
+  .option-text {
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .mcq-explanation {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #FFFBEB;
+    border-left: 3px solid #F59E0B;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: #78350F;
+    line-height: 1.7;
+    display: none;
+  }
+
+  .mcq-explanation.show {
+    display: block;
+  }
+
+  .mcq-explanation strong {
+    color: #065F46;
+  }
+
+  /* ========== 按钮样式 ========== */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #10B981, #059669);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .submit-btn:disabled {
+    background: #9CA3AF;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .reveal-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: white;
+    color: #059669;
+    border: 2px solid #10B981;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.2s ease;
+  }
+
+  .reveal-btn:hover {
+    background: #ECFDF5;
+  }
+
+  /* ========== 完形填空 ========== */
+  .cloze-passage {
+    font-size: 16px;
+    line-height: 2;
+    color: #1F2937;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+
+  .cloze-blank {
+    display: inline-block;
+    width: 110px;
+    height: 32px;
+    margin: 0 4px;
+    padding: 0 8px;
+    border: 2px solid #D1D5DB;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    background: #F9FAFB;
+    transition: all 0.2s ease;
+  }
+
+  .cloze-blank:focus {
+    outline: none;
+    border-color: #10B981;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  }
+
+  .cloze-blank.correct {
+    border-color: #10B981;
+    background: #D1FAE5;
+    color: #065F46;
+    font-weight: 600;
+  }
+
+  .cloze-blank.wrong {
+    border-color: #EF4444;
+    background: #FEE2E2;
+    color: #991B1B;
+  }
+
+  /* 备选词库 */
+  .wordbank {
+    background: #F9FAFB;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .wordbank-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 10px;
+  }
+
+  .wordbank-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .word-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 999px;
+    font-size: 14px;
+    color: #374151;
+  }
+
+  .word-item .pos {
+    font-size: 11px;
+    color: #9CA3AF;
+    font-style: italic;
+  }
+
+  /* 完形答案解析 */
+  .cloze-answers {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .cloze-answers.show {
+    display: block;
+  }
+
+  .cloze-answer-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #E5E7EB;
+    font-size: 14px;
+  }
+
+  .cloze-answer-item:last-child {
+    border-bottom: none;
+  }
+
+  .ca-num {
+    width: 24px;
+    height: 24px;
+    background: #D1FAE5;
+    color: #065F46;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .ca-num.wrong {
+    background: #FEE2E2;
+    color: #991B1B;
+  }
+
+  .ca-content {
+    flex: 1;
+  }
+
+  .ca-answer {
+    font-weight: 600;
+    color: #065F46;
+  }
+
+  .ca-answer .user-wrong {
+    color: #991B1B;
+    text-decoration: line-through;
+    margin-right: 8px;
+  }
+
+  .ca-explanation {
+    color: #6B7280;
+    font-size: 13px;
+    margin-top: 2px;
+    line-height: 1.6;
+  }
+
+  /* ========== 翻译题 ========== */
+  .translation-source {
+    background: #F9FAFB;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.9;
+    color: #1F2937;
+  }
+
+  .translation-source p {
+    margin-bottom: 10px;
+  }
+
+  .translation-source p:last-child {
+    margin-bottom: 0;
+  }
+
+  .translation-textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 14px;
+    border: 2px solid #D1D5DB;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 1.8;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.2s ease;
+    background: white;
+  }
+
+  .translation-textarea:focus {
+    outline: none;
+    border-color: #10B981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  }
+
+  .translation-textarea::placeholder {
+    color: #9CA3AF;
+  }
+
+  /* 参考译文 */
+  .reference-section {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .reference-section.show {
+    display: block;
+  }
+
+  .reference-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #059669;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .reference-text {
+    background: #ECFDF5;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: #065F46;
+    margin-bottom: 16px;
+  }
+
+  .reference-text p {
+    margin-bottom: 10px;
+  }
+
+  .reference-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 评分要点清单 */
+  .checklist-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 10px;
+  }
+
+  .checklist {
+    background: #FFFBEB;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    cursor: pointer;
+    border-bottom: 1px dashed #FDE68A;
+  }
+
+  .checklist-item:last-child {
+    border-bottom: none;
+  }
+
+  .checklist-item input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    accent-color: #10B981;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .checklist-item label {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #78350F;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .checklist-item.checked label {
+    text-decoration: line-through;
+    color: #9CA3AF;
+  }
+
+  .self-eval-hint {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  /* ========== 结构化数据面板（给Agent读取） ========== */
+  .agent-panel {
+    margin-top: 24px;
+    padding: 20px;
+    background: #1F2937;
+    border-radius: 14px;
+    display: none;
+  }
+
+  .agent-panel.show {
+    display: block;
+  }
+
+  .agent-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #374151;
+  }
+
+  .agent-panel-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #FBBF24;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .agent-copy-btn {
+    padding: 6px 14px;
+    background: #374151;
+    color: #D1D5DB;
+    border: 1px solid #4B5563;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .agent-copy-btn:hover {
+    background: #4B5563;
+  }
+
+  .agent-data {
+    background: #111827;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #9CA3AF;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .agent-data .key { color: #FBBF24; }
+  .agent-data .string { color: #6EE7B7; }
+  .agent-data .number { color: #60A5FA; }
+  .agent-data .comment { color: #6B7280; font-style: italic; }
+
+  /* ========== 底部得分栏 ========== */
+  .score-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #E5E7EB;
+    padding: 12px 16px;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+    z-index: 100;
+  }
+
+  .score-bar-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .score-info {
+    flex: 1;
+  }
+
+  .score-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .score-item {
+    font-size: 13px;
+    color: #6B7280;
+  }
+
+  .score-item strong {
+    color: #059669;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .score-item .self {
+    color: #F59E0B;
+  }
+
+  .reset-btn {
+    padding: 10px 20px;
+    background: white;
+    color: #EF4444;
+    border: 2px solid #FCA5A5;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .reset-btn:hover {
+    background: #FEF2F2;
+  }
+
+  body { padding-bottom: 80px; }
+
+  /* ========== 响应式 ========== */
+  @media (max-width: 480px) {
+    body { font-size: 15px; }
+    .header { padding: 12px 16px; }
+    .header-title { font-size: 18px; }
+    .timer-box { font-size: 16px; padding: 5px 12px; }
+    .container { padding: 16px 12px 90px; }
+    .module { padding: 18px 14px; border-radius: 12px; }
+    .module-title { font-size: 16px; }
+    .mcq-stem { font-size: 15px; }
+    .mcq-option { font-size: 14px; padding: 10px 12px; }
+    .cloze-passage { font-size: 15px; line-height: 1.9; }
+    .cloze-blank { width: 90px; height: 30px; font-size: 13px; }
+    .translation-source { font-size: 15px; }
+    .translation-textarea { font-size: 15px; min-height: 180px; }
+    .score-row { gap: 10px; }
+    .score-item { font-size: 12px; }
+    .score-item strong { font-size: 15px; }
+    .reset-btn { padding: 8px 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== 顶部栏 ========== -->
+<div class="header">
+  <div class="header-inner">
+    <span class="header-tag">🌾 乡村振兴专题</span>
+    <div class="header-title">练习卷一 · 乡村振兴专题</div>
+    <div class="header-info">
+      <span class="time-hint">建议时长 100 分钟</span>
+      <div class="timer-box">
+        <span id="timerDisplay">100:00</span>
+        <button class="timer-btn" id="timerBtn" onclick="toggleTimer()">开始</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 主体内容 ========== -->
+<div class="container">
+
+  <!-- 模块一：选词填空 -->
+  <div class="module" id="module1">
+    <div class="module-header">
+      <div class="module-num">一</div>
+      <div>
+        <div class="module-title">选词填空</div>
+        <div class="module-sub">共 5 题，每题 2 分，共 10 分</div>
+      </div>
+    </div>
+
+    <div id="mcqContainer">
+      <!-- 第 1 题 -->
+      <div class="mcq-item" data-q="1">
+        <div class="mcq-num">第 1 题 <span class="point">（考点：动词+介词搭配）</span></div>
+        <div class="mcq-stem">All local governments must ______ the national strategy of rural revitalization and prioritize agricultural development.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(1, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">comply with</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(1, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">abide in</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(1, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">adhere on</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(1, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">conform for</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>comply with 是固定搭配，表示"遵守、服从"。abide 后接 by（abide by），adhere 后接 to（adhere to），conform 后接 to（conform to）。本题只有 A 选项搭配正确。
+        </div>
+      </div>
+
+      <!-- 第 2 题 -->
+      <div class="mcq-item" data-q="2">
+        <div class="mcq-num">第 2 题 <span class="point">（考点：形近词辨析）</span></div>
+        <div class="mcq-stem">The remarkable progress in poverty reduction is often ______ to the targeted policies implemented over the past decade.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(2, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">contributed</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(2, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">distributed</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(2, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">attributed</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(2, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">substituted</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>attribute sth. to sth. 表示"把……归因于"，本句用被动语态 be attributed to，意为"（进步）归因于政策"。contribute to 是"促成、贡献"，主语通常是原因；distribute 是"分配"；substitute 是"替代"，均不符合句意。
+        </div>
+      </div>
+
+      <!-- 第 3 题 -->
+      <div class="mcq-item" data-q="3">
+        <div class="mcq-num">第 3 题 <span class="point">（考点：时政术语补全）</span></div>
+        <div class="mcq-stem">The vision of "a community with a ______ future for mankind" has been written into many international documents.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(3, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">common</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(3, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">shared</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(3, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">mutual</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(3, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">joint</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>"人类命运共同体"的官方译法是 a community with a shared future for mankind，这是固定时政术语。common 意为"共同的、普遍的"，mutual 意为"相互的"，joint 意为"联合的"，均不是标准译法。
+        </div>
+      </div>
+
+      <!-- 第 4 题 -->
+      <div class="mcq-item" data-q="4">
+        <div class="mcq-num">第 4 题 <span class="point">（考点：词性/词形判断）</span></div>
+        <div class="mcq-stem">The ______ use of digital technologies has transformed traditional farming into smart agriculture.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(4, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">widely</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(4, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">widen</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(4, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">widespread</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(4, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">width</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>空格修饰名词 use，需要填入形容词。widespread（adj. 广泛的）符合语法和语义。widely 是副词，widen 是动词，width 是名词，均不能修饰 use。
+        </div>
+      </div>
+
+      <!-- 第 5 题 -->
+      <div class="mcq-item" data-q="5">
+        <div class="mcq-num">第 5 题 <span class="point">（考点：短语动词）</span></div>
+        <div class="mcq-stem">Improved infrastructure and e-commerce platforms ______ for over 30 percent of the increase in rural incomes last year.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(5, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">accounted</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(5, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">called</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(5, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">brought</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(5, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">made</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>account for 是固定短语动词，表示"（在数量、比例上）占"，符合句意（占农村收入增长的 30% 以上）。call for 意为"要求、需要"；bring for 不构成固定短语；make for 意为"走向、导致"，均不符合。
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="mcqSubmitBtn" onclick="submitMCQ()">提交判分</button>
+  </div>
+
+  <!-- 模块二：完形填空 -->
+  <div class="module" id="module2">
+    <div class="module-header">
+      <div class="module-num">二</div>
+      <div>
+        <div class="module-title">完形填空</div>
+        <div class="module-sub">共 10 题，每题 2 分，共 20 分 · 15 选 10，用适当形式</div>
+      </div>
+    </div>
+
+    <!-- 短文 -->
+    <div class="cloze-passage">
+      <strong style="color:#059669">Rural Revitalization and Cultural Heritage</strong><br><br>
+      The campaign for rural revitalization is not merely about economic growth; it is also about preserving the cultural identity of countless villages. As young people migrate to cities, many traditional crafts and folk customs face the risk of disappearing. However, experience suggests that the best protection is not a fence around old buildings, but a sustainable purpose that keeps traditions alive in daily life.<br><br>
+      Recent studies <input type="text" class="cloze-blank" id="cloze-1" placeholder="①">
+      the relationship between cultural heritage preservation and rural development show that villages with strong cultural programs attract more tourists and retain more young residents.
+      <input type="text" class="cloze-blank" id="cloze-2" placeholder="②">
+      cultural resources can create new economic opportunities while strengthening local identity. For example, traditional handcrafts can be developed into cultural products, and old houses can be transformed into guesthouses without losing their original charm.<br><br>
+      One major challenge is the <input type="text" class="cloze-blank" id="cloze-3" placeholder="③">
+      of skilled craftspeople. Many elderly artisans have invaluable techniques, but there are not enough young people willing to learn. To address this, some local governments have launched training programs,
+      <input type="text" class="cloze-blank" id="cloze-4" placeholder="④">
+      young villagers to master traditional skills and become cultural inheritors. These efforts have produced
+      <input type="text" class="cloze-blank" id="cloze-5" placeholder="⑤">
+      results in several pilot areas.<br><br>
+      Another factor is the <input type="text" class="cloze-blank" id="cloze-6" placeholder="⑥">
+      of financial support. While many projects start with great enthusiasm, they often struggle to secure long-term funding. Sustainable rural development must therefore
+      <input type="text" class="cloze-blank" id="cloze-7" placeholder="⑦">
+      on a diversified funding model that combines government investment, private capital, and community resources.<br><br>
+      The ultimate goal is to create villages where people do not merely
+      <input type="text" class="cloze-blank" id="cloze-8" placeholder="⑧">
+      for better urban lives, but choose to stay because they see a bright future at home. This requires not only material improvements but also a renewed sense of pride and belonging. When rural culture thrives, the countryside becomes a place
+      <input type="text" class="cloze-blank" id="cloze-9" placeholder="⑨">
+      young people are eager to return to and
+      <input type="text" class="cloze-blank" id="cloze-10" placeholder="⑩">
+      urban residents are curious about.
+    </div>
+
+    <!-- 备选词库 -->
+    <div class="wordbank">
+      <div class="wordbank-title">📝 备选词（15 选 10，注意适当形式）</div>
+      <div class="wordbank-list">
+        <span class="word-item">examine <span class="pos">v.</span></span>
+        <span class="word-item">explore <span class="pos">v.</span></span>
+        <span class="word-item">preserve <span class="pos">v.</span></span>
+        <span class="word-item">shortage <span class="pos">n.</span></span>
+        <span class="word-item">encourage <span class="pos">v.</span></span>
+        <span class="word-item">positive <span class="pos">adj.</span></span>
+        <span class="word-item">lack <span class="pos">n./v.</span></span>
+        <span class="word-item">depend <span class="pos">v.</span></span>
+        <span class="word-item">yearn <span class="pos">v.</span></span>
+        <span class="word-item">which <span class="pos">pron.</span></span>
+        <span class="word-item">that <span class="pos">pron.</span></span>
+        <span class="word-item">tradition <span class="pos">n.</span></span>
+        <span class="word-item">successful <span class="pos">adj.</span></span>
+        <span class="word-item">deeply <span class="pos">adv.</span></span>
+        <span class="word-item">carefully <span class="pos">adv.</span></span>
+      </div>
+    </div>
+
+    <!-- 答案解析 -->
+    <div class="cloze-answers" id="clozeAnswers">
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-1">1</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-1">examining</div>
+          <div class="ca-explanation">分词作后置定语：Studies examining... 修饰 studies，主动关系用现在分词。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-2">2</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-2">Preserving</div>
+          <div class="ca-explanation">动名词作主语：句首需名词性成分，preserving cultural resources 作主语。注意首字母大写。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-3">3</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-3">shortage</div>
+          <div class="ca-explanation">名词：the shortage of 表示"……的短缺"。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-4">4</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-4">encouraging</div>
+          <div class="ca-explanation">现在分词作伴随状语：governments launch programs, encouraging... 主动关系。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-5">5</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-5">positive</div>
+          <div class="ca-explanation">形容词：修饰 results，表示积极成果。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-6">6</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-6">lack</div>
+          <div class="ca-explanation">名词：the lack of financial support 表示资金支持的缺乏。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-7">7</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-7">depend</div>
+          <div class="ca-explanation">动词原形：must 后接动词原形；depend on 固定搭配。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-8">8</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-8">yearn</div>
+          <div class="ca-explanation">动词原形：do not yearn for 表示不渴望。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-9">9</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-9">which</div>
+          <div class="ca-explanation">定语从句：指代 place，作介词 to 的宾语。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-10">10</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-10">that</div>
+          <div class="ca-explanation">定语从句：指代 place，在从句中作 about 的宾语。</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="clozeSubmitBtn" onclick="submitCloze()">提交判分</button>
+  </div>
+
+  <!-- 模块三：英译汉 -->
+  <div class="module" id="module3">
+    <div class="module-header">
+      <div class="module-num">三</div>
+      <div>
+        <div class="module-title">英译汉</div>
+        <div class="module-sub">15 分 · 写完后展开参考译文自评</div>
+      </div>
+    </div>
+
+    <div class="translation-source" id="trans1Source">
+      <p>Rural revitalization is not about transplanting urban models into the countryside, but about unlocking the intrinsic value of rural communities. For decades, development policies often treated villages as backward spaces waiting to be modernized, overlooking the fact that many rural areas possess unique ecological, cultural, and social assets.</p>
+      <p>The new approach recognizes that sustainable rural development must be people-centered. It means improving infrastructure, public services, and digital connectivity so that rural residents can enjoy a quality of life comparable to that in cities. At the same time, it emphasizes the preservation of traditional villages, local dialects, and handicraft skills, ensuring that modernization does not come at the cost of cultural extinction.</p>
+      <p>A sense of identity and belonging is crucial in this process. When young people feel connected to their hometowns, they are more likely to return after graduation and contribute their knowledge and energy. In this way, rural revitalization becomes a two-way journey: the countryside gains new vitality, while young people find meaningful opportunities closer to home.</p>
+    </div>
+
+    <textarea class="translation-textarea" id="trans1Input" placeholder="请在此处输入你的译文……"></textarea>
+
+    <button class="reveal-btn" onclick="revealTranslation(1)">我写完了，展开参考译文</button>
+
+    <div class="reference-section" id="trans1Ref">
+      <div class="reference-title">📖 参考译文</div>
+      <div class="reference-text" id="trans1Reference">
+        <p>乡村振兴并非把城市模式移植到农村，而是要释放乡村社区的内在价值。几十年来，发展政策常常把村庄视为等待现代化的落后空间，忽视了许多农村地区拥有独特的生态、文化和社会资源这一事实。</p>
+        <p>新思路认识到，可持续的农村发展必须以人为本。这意味着改善基础设施、公共服务和数字连接，让农村居民能够享受与城市相当的生活品质。同时，它强调保护传统村落、地方方言和手工艺技能，确保现代化不以文化消亡为代价。</p>
+        <p>认同感和归属感在这一过程中至关重要。当年轻人感到与家乡有联结时，他们更可能在毕业后返乡，贡献自己的知识和精力。这样一来，乡村振兴便成为一场双向旅程：农村获得新的活力，年轻人也在离家更近的地方找到有意义的机会。</p>
+      </div>
+
+      <div class="checklist-title">✅ 评分要点自评（对照你的译文逐条打勾）</div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-1" onchange="toggleCheck(this)">
+          <label for="c1-1">"not about... but about..." 译为"并非……而是……"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-2" onchange="toggleCheck(this)">
+          <label for="c1-2">"a sense of identity and belonging" 准确回译为"认同感和归属感"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-3" onchange="toggleCheck(this)">
+          <label for="c1-3">"coming at the cost of" 译为"以……为代价"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-4" onchange="toggleCheck(this)">
+          <label for="c1-4">第二段排比结构"improving infrastructure, public services, and digital connectivity"保持中文节奏</label>
+        </div>
+      </div>
+      <div class="self-eval-hint">自评完成后，可在底部栏查看得分情况</div>
+    </div>
+  </div>
+
+  <!-- 模块四：汉译英 -->
+  <div class="module" id="module4">
+    <div class="module-header">
+      <div class="module-num">四</div>
+      <div>
+        <div class="module-title">汉译英</div>
+        <div class="module-sub">15 分 · 写完后展开参考译文自评</div>
+      </div>
+    </div>
+
+    <div class="translation-source" id="trans2Source">
+      <p>近年来，中国大力推进乡村振兴战略，农业农村现代化取得显著成效。数据显示，农村居民人均可支配收入持续增长，乡村基础设施明显改善，教育、医疗等公共服务水平不断提升。</p>
+      <p>乡村振兴的关键在于产业兴旺。各地因地制宜发展特色农业、乡村旅游和农村电商，为农民创造了更多就业机会。与此同时，生态保护也被放在重要位置，绿水青山就是金山银山的理念深入人心。</p>
+      <p>值得注意的是，人才振兴是乡村振兴的重要支撑。越来越多的大学生和返乡青年投身乡村建设，他们用新知识、新技术为农村发展注入活力。可以说，乡村振兴不仅改变了农村面貌，也为年轻人提供了实现梦想的广阔舞台。</p>
+    </div>
+
+    <textarea class="translation-textarea" id="trans2Input" placeholder="请在此处输入你的译文……"></textarea>
+
+    <button class="reveal-btn" onclick="revealTranslation(2)">我写完了，展开参考译文</button>
+
+    <div class="reference-section" id="trans2Ref">
+      <div class="reference-title">📖 参考译文</div>
+      <div class="reference-text" id="trans2Reference">
+        <p>In recent years, China has vigorously advanced the rural revitalization strategy, achieving remarkable progress in agricultural and rural modernization. Data show that rural residents' per capita disposable income has continued to grow, rural infrastructure has been significantly improved, and the quality of public services such as education and medical care has been steadily enhanced.</p>
+        <p>The key to rural revitalization lies in thriving industries. Localities have developed characteristic agriculture, rural tourism, and e-commerce according to local conditions, creating more employment opportunities for farmers. Meanwhile, ecological protection has also been given high priority, and the concept that lucid waters and lush mountains are invaluable assets has taken deep root among the people.</p>
+        <p>It is worth mentioning that talent revitalization is an important pillar of rural revitalization. An increasing number of university graduates and returning young people have devoted themselves to rural construction, injecting vitality into rural development with new knowledge and technologies. It can be said that rural revitalization has not only transformed the countryside but also provided young people with a broad stage to realize their dreams.</p>
+      </div>
+
+      <div class="checklist-title">✅ 评分要点自评（对照你的译文逐条打勾）</div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-1" onchange="toggleCheck(this)">
+          <label for="c2-1">"乡村振兴战略" 译为 rural revitalization strategy</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-2" onchange="toggleCheck(this)">
+          <label for="c2-2">"绿水青山就是金山银山" 使用官方译法 lucid waters and lush mountains are invaluable assets</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-3" onchange="toggleCheck(this)">
+          <label for="c2-3">"因地制宜" 译为 according to local conditions</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-4" onchange="toggleCheck(this)">
+          <label for="c2-4">时态一致性（现在完成时）和主谓一致</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-5" onchange="toggleCheck(this)">
+          <label for="c2-5">"不仅……也……" 译为 not only... but also... 时没有漏掉 but</label>
+        </div>
+      </div>
+      <div class="self-eval-hint">自评完成后，可在底部栏查看得分情况</div>
+    </div>
+  </div>
+
+  <!-- ===== 结构化数据面板（给Agent读取） ===== -->
+  <div class="agent-panel" id="agentPanel">
+    <div class="agent-panel-header">
+      <div class="agent-panel-title">🤖 结构化答题数据（供 Agent 深度批改）</div>
+      <button class="agent-copy-btn" onclick="copyAgentData()">复制</button>
+    </div>
+    <div class="agent-data" id="agentData"></div>
+  </div>
+
+</div>
+
+<!-- ========== 底部得分栏 ========== -->
+<div class="score-bar">
+  <div class="score-bar-inner">
+    <div class="score-info">
+      <div class="score-row">
+        <div class="score-item">选词 <strong id="mcqScore">0</strong>/10 分</div>
+        <div class="score-item">完形 <strong id="clozeScore">0</strong>/20 分</div>
+        <div class="score-item">英译汉 <strong class="self">自评中</strong></div>
+        <div class="score-item">汉译英 <strong class="self">自评中</strong></div>
+      </div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">🔄 重做一遍</button>
+  </div>
+</div>
+
+<script>
+  // ========== 参考答案数据 ==========
+  const mcqAnswers = {
+    1: { answer: 'A', explanation: 'comply with 是固定搭配，表示"遵守、服从"。abide 后接 by，adhere 后接 to，conform 后接 to。' },
+    2: { answer: 'C', explanation: 'attribute sth. to sth. 表示"把……归因于"，本句用被动语态 be attributed to。' },
+    3: { answer: 'B', explanation: '"人类命运共同体"官方译法是 a community with a shared future for mankind。' },
+    4: { answer: 'C', explanation: '修饰名词 use 需要形容词，widespread（adj. 广泛的）符合语法和语义。' },
+    5: { answer: 'A', explanation: 'account for 是固定短语动词，表示"（在数量、比例上）占"。' }
+  };
+
+  const clozeAnswers = [
+    { answer: 'examining', explanation: '分词作后置定语：Studies examining... 修饰 studies，主动关系用现在分词。' },
+    { answer: 'preserving', explanation: '动名词作主语：句首需名词性成分，preserving cultural resources 作主语。' },
+    { answer: 'shortage', explanation: '名词：the shortage of 表示"……的短缺"。' },
+    { answer: 'encouraging', explanation: '现在分词作伴随状语：governments launch programs, encouraging... 主动关系。' },
+    { answer: 'positive', explanation: '形容词：修饰 results，表示积极成果。' },
+    { answer: 'lack', explanation: '名词：the lack of financial support 表示资金支持的缺乏。' },
+    { answer: 'depend', explanation: '动词原形：must 后接动词原形；depend on 固定搭配。' },
+    { answer: 'yearn', explanation: '动词原形：do not yearn for 表示不渴望。' },
+    { answer: 'which', explanation: '定语从句：指代 place，作介词 to 的宾语。' },
+    { answer: 'that', explanation: '定语从句：指代 place，在从句中作 about 的宾语。' }
+  ];
+
+  const translationData = {
+    c2e: {
+      source: '',
+      reference: '',
+      scoringPoints: [
+        '"not about... but about..." 译为"并非……而是……"',
+        '"a sense of identity and belonging" 准确回译为"认同感和归属感"',
+        '"coming at the cost of" 译为"以……为代价"',
+        '第二段排比结构保持中文节奏'
+      ]
+    },
+    e2c: {
+      source: '',
+      reference: '',
+      scoringPoints: [
+        '"乡村振兴战略" 译为 rural revitalization strategy',
+        '"绿水青山就是金山银山" 使用官方译法 lucid waters and lush mountains are invaluable assets',
+        '"因地制宜" 译为 according to local conditions',
+        '时态一致性（现在完成时）和主谓一致',
+        '"不仅……也……" 译为 not only... but also... 时没有漏掉 but'
+      ]
+    }
+  };
+
+  // ========== 计时器功能 ==========
+  let timerSeconds = 100 * 60;
+  let timerInterval = null;
+  let timerRunning = false;
+
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  }
+
+  function updateTimerDisplay() {
+    document.getElementById('timerDisplay').textContent = formatTime(timerSeconds);
+  }
+
+  function toggleTimer() {
+    const btn = document.getElementById('timerBtn');
+    if (timerRunning) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      btn.textContent = '继续';
+    } else {
+      timerInterval = setInterval(function() {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          timerRunning = false;
+          document.getElementById('timerBtn').textContent = '时间到';
+          alert('⏰ 时间到！建议停止作答。');
+        }
+      }, 1000);
+      timerRunning = true;
+      btn.textContent = '暂停';
+    }
+  }
+
+  // ========== 选词填空 ==========
+  let mcqUserAnswers = {};
+  let mcqSubmitted = false;
+
+  function selectMCQ(qNum, val) {
+    if (mcqSubmitted) return;
+    mcqUserAnswers[qNum] = val;
+    const item = document.querySelector('.mcq-item[data-q="' + qNum + '"]');
+    const options = item.querySelectorAll('.mcq-option');
+    options.forEach(function(opt) {
+      opt.classList.remove('selected');
+      if (opt.dataset.val === val) opt.classList.add('selected');
+    });
+  }
+
+  function submitMCQ() {
+    if (mcqSubmitted) return;
+
+    let unanswered = [];
+    for (let i = 1; i <= 5; i++) {
+      if (!mcqUserAnswers[i]) unanswered.push(i);
+    }
+    if (unanswered.length > 0) {
+      if (!confirm('还有第 ' + unanswered.join('、') + ' 题未作答，确定要提交吗？')) return;
+    }
+
+    mcqSubmitted = true;
+    let correctCount = 0;
+
+    for (let i = 1; i <= 5; i++) {
+      const item = document.querySelector('.mcq-item[data-q="' + i + '"]');
+      const options = item.querySelectorAll('.mcq-option');
+      const explanation = item.querySelector('.mcq-explanation');
+      const userAns = mcqUserAnswers[i];
+      const correctAns = mcqAnswers[i].answer;
+
+      options.forEach(function(opt) {
+        opt.classList.add('submitted');
+        opt.style.cursor = 'default';
+        const val = opt.dataset.val;
+        if (val === correctAns) opt.classList.add('correct');
+        else if (val === userAns && userAns !== correctAns) opt.classList.add('wrong');
+      });
+
+      explanation.classList.add('show');
+      if (userAns === correctAns) correctCount++;
+    }
+
+    document.getElementById('mcqScore').textContent = correctCount * 2;
+    document.getElementById('mcqSubmitBtn').textContent = '已提交';
+    document.getElementById('mcqSubmitBtn').disabled = true;
+
+    updateAgentPanel();
+  }
+
+  // ========== 完形填空 ==========
+  let clozeSubmitted = false;
+
+  function submitCloze() {
+    if (clozeSubmitted) return;
+
+    let unanswered = [];
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      if (!input.value.trim()) unanswered.push(i);
+    }
+    if (unanswered.length > 0) {
+      if (!confirm('还有第 ' + unanswered.join('、') + ' 空未填，确定要提交吗？')) return;
+    }
+
+    clozeSubmitted = true;
+    let correctCount = 0;
+
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      const userAns = input.value.trim().toLowerCase();
+      const correctAns = clozeAnswers[i - 1].answer;
+      const isCorrect = userAns === correctAns.toLowerCase();
+
+      input.classList.add(isCorrect ? 'correct' : 'wrong');
+      input.disabled = true;
+
+      const caNum = document.getElementById('ca-num-' + i);
+      const caAnswer = document.getElementById('ca-answer-' + i);
+
+      if (isCorrect) {
+        correctCount++;
+      } else {
+        caNum.classList.add('wrong');
+        caAnswer.innerHTML = '<span class="user-wrong">' + (input.value.trim() || '未作答') + '</span> → ' + correctAns;
+      }
+    }
+
+    document.getElementById('clozeAnswers').classList.add('show');
+    document.getElementById('clozeScore').textContent = correctCount * 2;
+    document.getElementById('clozeSubmitBtn').textContent = '已提交';
+    document.getElementById('clozeSubmitBtn').disabled = true;
+
+    updateAgentPanel();
+  }
+
+  // ========== 翻译题 ==========
+  function revealTranslation(num) {
+    const textarea = document.getElementById('trans' + num + 'Input');
+    const refSection = document.getElementById('trans' + num + 'Ref');
+
+    if (refSection.classList.contains('show')) return;
+
+    if (!textarea.value.trim()) {
+      if (!confirm('你的译文还是空的，确定要直接看参考译文吗？')) return;
+    }
+
+    refSection.classList.add('show');
+    updateAgentPanel();
+
+    setTimeout(function() {
+      refSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function toggleCheck(checkbox) {
+    const item = checkbox.parentElement;
+    if (checkbox.checked) item.classList.add('checked');
+    else item.classList.remove('checked');
+  }
+
+  // ========== 结构化数据面板（给Agent） ==========
+  function updateAgentPanel() {
+    // 收集翻译原文和参考译文
+    translationData.c2e.source = document.getElementById('trans1Source').innerText.trim();
+    translationData.c2e.reference = document.getElementById('trans1Reference').innerText.trim();
+    translationData.e2c.source = document.getElementById('trans2Source').innerText.trim();
+    translationData.e2c.reference = document.getElementById('trans2Reference').innerText.trim();
+
+    const data = {
+      // 基本信息
+      paper: '练习卷一 · 乡村振兴专题',
+      topic: '乡村振兴',
+      totalTimeMinutes: 100,
+      elapsedTimeSeconds: 100 * 60 - timerSeconds,
+
+      // 选词填空
+      mcq: {
+        total: 5,
+        scoreEach: 2,
+        userAnswers: mcqUserAnswers,
+        correctAnswers: {},
+        explanations: {}
+      },
+
+      // 完形填空
+      cloze: {
+        total: 10,
+        scoreEach: 2,
+        wordBank: [
+          { word: 'examine', pos: 'v.' },
+          { word: 'explore', pos: 'v.' },
+          { word: 'preserve', pos: 'v.' },
+          { word: 'shortage', pos: 'n.' },
+          { word: 'encourage', pos: 'v.' },
+          { word: 'positive', pos: 'adj.' },
+          { word: 'lack', pos: 'n./v.' },
+          { word: 'depend', pos: 'v.' },
+          { word: 'yearn', pos: 'v.' },
+          { word: 'which', pos: 'pron.' },
+          { word: 'that', pos: 'pron.' },
+          { word: 'tradition', pos: 'n.' },
+          { word: 'successful', pos: 'adj.' },
+          { word: 'deeply', pos: 'adv.' },
+          { word: 'carefully', pos: 'adv.' }
+        ],
+        userAnswers: {},
+        correctAnswers: {},
+        explanations: {}
+      },
+
+      // 英译汉
+      c2e: {
+        source: translationData.c2e.source,
+        userTranslation: document.getElementById('trans1Input').value,
+        referenceTranslation: translationData.c2e.reference,
+        scoringPoints: translationData.c2e.scoringPoints
+      },
+
+      // 汉译英
+      e2c: {
+        source: translationData.e2c.source,
+        userTranslation: document.getElementById('trans2Input').value,
+        referenceTranslation: translationData.e2c.reference,
+        scoringPoints: translationData.e2c.scoringPoints
+      }
+    };
+
+    // 填入选词答案
+    for (let i = 1; i <= 5; i++) {
+      data.mcq.correctAnswers[i] = mcqAnswers[i].answer;
+      data.mcq.explanations[i] = mcqAnswers[i].explanation;
+    }
+
+    // 填入完形答案
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      data.cloze.userAnswers[i] = input.value.trim();
+      data.cloze.correctAnswers[i] = clozeAnswers[i - 1].answer;
+      data.cloze.explanations[i] = clozeAnswers[i - 1].explanation;
+    }
+
+    // 展示
+    const panel = document.getElementById('agentPanel');
+    panel.classList.add('show');
+    document.getElementById('agentData').textContent = JSON.stringify(data, null, 2);
+  }
+
+  function copyAgentData() {
+    const text = document.getElementById('agentData').textContent;
+    navigator.clipboard.writeText(text).then(function() {
+      const btn = document.querySelector('.agent-copy-btn');
+      const original = btn.textContent;
+      btn.textContent = '已复制 ✓';
+      setTimeout(function() { btn.textContent = original; }, 1500);
+    }).catch(function() {
+      alert('复制失败，请手动复制');
+    });
+  }
+
+  // ========== 重做一遍 ==========
+  function resetAll() {
+    if (!confirm('确定要重做一遍吗？所有作答和判分状态都会被清空。')) return;
+
+    // 重置计时器
+    clearInterval(timerInterval);
+    timerSeconds = 100 * 60;
+    timerRunning = false;
+    updateTimerDisplay();
+    document.getElementById('timerBtn').textContent = '开始';
+
+    // 重置选词填空
+    mcqSubmitted = false;
+    mcqUserAnswers = {};
+    document.querySelectorAll('.mcq-item').forEach(function(item) {
+      item.querySelectorAll('.mcq-option').forEach(function(opt) {
+        opt.classList.remove('selected', 'correct', 'wrong', 'submitted');
+        opt.style.cursor = 'pointer';
+      });
+      item.querySelector('.mcq-explanation').classList.remove('show');
+    });
+    document.getElementById('mcqScore').textContent = '0';
+    const mcqBtn = document.getElementById('mcqSubmitBtn');
+    mcqBtn.textContent = '提交判分';
+    mcqBtn.disabled = false;
+
+    // 重置完形填空
+    clozeSubmitted = false;
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      input.value = '';
+      input.classList.remove('correct', 'wrong');
+      input.disabled = false;
+      const caNum = document.getElementById('ca-num-' + i);
+      const caAnswer = document.getElementById('ca-answer-' + i);
+      caNum.classList.remove('wrong');
+      caAnswer.innerHTML = clozeAnswers[i - 1].answer;
+    }
+    document.getElementById('clozeAnswers').classList.remove('show');
+    document.getElementById('clozeScore').textContent = '0';
+    const clozeBtn = document.getElementById('clozeSubmitBtn');
+    clozeBtn.textContent = '提交判分';
+    clozeBtn.disabled = false;
+
+    // 重置翻译题
+    document.getElementById('trans1Input').value = '';
+    document.getElementById('trans2Input').value = '';
+    document.getElementById('trans1Ref').classList.remove('show');
+    document.getElementById('trans2Ref').classList.remove('show');
+
+    // 重置评分要点勾选
+    document.querySelectorAll('.checklist-item input').forEach(function(cb) {
+      cb.checked = false;
+      cb.parentElement.classList.remove('checked');
+    });
+
+    // 隐藏Agent数据面板
+    document.getElementById('agentPanel').classList.remove('show');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // 初始化
+  updateTimerDisplay();
+</script>
+
+</body>
+</html>

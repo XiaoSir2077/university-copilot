@@ -43,12 +43,12 @@ const SEED_USERS: (Omit<UserAccount, 'passHash'> & { password: string })[] = [
   { id: 'u-meimei', username: 'meimei', password: 'meimei123', name: '妹妹', role: 'kid' },
   { id: 'u-didi', username: 'didi', password: 'didi123', name: '弟弟', role: 'kid' },
   {
+    // 舅妈专用账号：已从弟弟的只读面板切出，登录后进入 /aunt 专属面板
     id: 'u-jiujiu',
     username: 'jiujiu',
     password: 'jiujiu123',
-    name: '舅舅舅妈',
+    name: '舅妈',
     role: 'viewer',
-    viewTarget: 'u-didi',
   },
 ]
 
@@ -232,12 +232,25 @@ function seedDB(): FamilyDB {
 let db: FamilyDB | null = null
 const listeners = new Set<() => void>()
 
+/** 老版本数据就地升级；返回是否发生过变更 */
+function migrateDB(d: FamilyDB): boolean {
+  // 舅妈账号切分：旧数据里显示名是「舅舅舅妈」且 viewTarget 指向弟弟
+  const jiu = d.users.find((x) => x.id === 'u-jiujiu')
+  if (jiu && (jiu.name !== '舅妈' || jiu.viewTarget)) {
+    jiu.name = '舅妈'
+    delete jiu.viewTarget
+    return true
+  }
+  return false
+}
+
 function loadDB(): FamilyDB {
   if (db) return db
   try {
     const raw = localStorage.getItem(DB_KEY)
     if (raw) {
       db = JSON.parse(raw) as FamilyDB
+      if (migrateDB(db)) saveDB()
       return db
     }
     // 迁移：旧版妹妹单机数据 → 妹妹账号

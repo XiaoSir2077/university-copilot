@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>中国式现代化</title>
+<style>
+  /* ========== 基础样式 ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #FEF2F2;
+    color: #1F2937;
+    line-height: 1.75;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== 顶部栏 ========== */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, #B91C1C 0%, #7F1D1D 50%, #451A03 100%);
+    color: white;
+    padding: 16px 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .header-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #FBBF24, #F59E0B);
+    color: #78350F;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+
+  .header-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+
+  .header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .timer-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .timer-btn {
+    background: rgba(251, 191, 36, 0.9);
+    border: none;
+    color: #78350F;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .timer-btn:active { background: #FBBF24; }
+
+  .time-hint {
+    font-size: 13px;
+    opacity: 0.9;
+  }
+
+  /* ========== 最终卷开场卡片 ========== */
+  .final-banner {
+    background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 2px solid #F59E0B;
+  }
+
+  .final-banner-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #78350F;
+    margin-bottom: 8px;
+  }
+
+  .final-banner-sub {
+    font-size: 14px;
+    color: #92400E;
+    line-height: 1.7;
+  }
+
+  .final-banner-tips {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .final-banner-tip {
+    font-size: 13px;
+    color: #78350F;
+    font-weight: 600;
+  }
+
+  /* ========== 主体容器 ========== */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px 100px;
+  }
+
+  /* ========== 模块卡片 ========== */
+  .module {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #FECACA;
+  }
+
+  .module-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #FECACA;
+  }
+
+  .module-num {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #B91C1C, #7F1D1D);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .module-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .module-sub {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 2px;
+  }
+
+  /* ========== 选词填空 ========== */
+  .mcq-item {
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px dashed #FECACA;
+  }
+
+  .mcq-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .mcq-num {
+    font-size: 14px;
+    font-weight: 700;
+    color: #B91C1C;
+    margin-bottom: 8px;
+  }
+
+  .mcq-num .point {
+    font-size: 12px;
+    color: #9CA3AF;
+    font-weight: 500;
+    margin-left: 6px;
+  }
+
+  .mcq-stem {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 14px;
+    color: #1F2937;
+  }
+
+  .mcq-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .mcq-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #FEF2F2;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 15px;
+  }
+
+  .mcq-option:hover {
+    border-color: #B91C1C;
+    background: #FEE2E2;
+  }
+
+  .mcq-option.selected {
+    border-color: #B91C1C;
+    background: #FEE2E2;
+  }
+
+  .mcq-option.correct {
+    border-color: #10B981;
+    background: #D1FAE5;
+  }
+
+  .mcq-option.wrong {
+    border-color: #EF4444;
+    background: #FEE2E2;
+  }
+
+  .mcq-option.submitted {
+    cursor: default;
+  }
+
+  .option-label {
+    width: 28px;
+    height: 28px;
+    background: #E5E7EB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: #4B5563;
+    flex-shrink: 0;
+  }
+
+  .mcq-option.selected .option-label {
+    background: #B91C1C;
+    color: white;
+  }
+
+  .mcq-option.correct .option-label {
+    background: #10B981;
+    color: white;
+  }
+
+  .mcq-option.wrong .option-label {
+    background: #EF4444;
+    color: white;
+  }
+
+  .option-text {
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .mcq-explanation {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #FFFBEB;
+    border-left: 3px solid #F59E0B;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: #78350F;
+    line-height: 1.7;
+    display: none;
+  }
+
+  .mcq-explanation.show {
+    display: block;
+  }
+
+  .mcq-explanation strong {
+    color: #991B1B;
+  }
+
+  /* ========== 按钮样式 ========== */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #B91C1C, #7F1D1D);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.2s ease;
+    letter-spacing: 1px;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(185, 28, 28, 0.3);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .submit-btn:disabled {
+    background: #9CA3AF;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .reveal-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: white;
+    color: #7F1D1D;
+    border: 2px solid #B91C1C;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.2s ease;
+  }
+
+  .reveal-btn:hover {
+    background: #FEE2E2;
+  }
+
+  /* ========== 完形填空 ========== */
+  .cloze-passage {
+    font-size: 16px;
+    line-height: 2;
+    color: #1F2937;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+
+  .cloze-blank {
+    display: inline-block;
+    width: 110px;
+    height: 32px;
+    margin: 0 4px;
+    padding: 0 8px;
+    border: 2px solid #D1D5DB;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    background: #FEF2F2;
+    transition: all 0.2s ease;
+  }
+
+  .cloze-blank:focus {
+    outline: none;
+    border-color: #B91C1C;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.15);
+  }
+
+  .cloze-blank.correct {
+    border-color: #10B981;
+    background: #D1FAE5;
+    color: #065F46;
+    font-weight: 600;
+  }
+
+  .cloze-blank.wrong {
+    border-color: #EF4444;
+    background: #FEE2E2;
+    color: #991B1B;
+  }
+
+  /* 备选词库 */
+  .wordbank {
+    background: #FEF2F2;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .wordbank-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 10px;
+  }
+
+  .wordbank-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .word-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 999px;
+    font-size: 14px;
+    color: #374151;
+  }
+
+  .word-item .pos {
+    font-size: 11px;
+    color: #9CA3AF;
+    font-style: italic;
+  }
+
+  /* 完形答案解析 */
+  .cloze-answers {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .cloze-answers.show {
+    display: block;
+  }
+
+  .cloze-answer-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #E5E7EB;
+    font-size: 14px;
+  }
+
+  .cloze-answer-item:last-child {
+    border-bottom: none;
+  }
+
+  .ca-num {
+    width: 24px;
+    height: 24px;
+    background: #D1FAE5;
+    color: #065F46;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .ca-num.wrong {
+    background: #FEE2E2;
+    color: #991B1B;
+  }
+
+  .ca-content {
+    flex: 1;
+  }
+
+  .ca-answer {
+    font-weight: 600;
+    color: #065F46;
+  }
+
+  .ca-answer .user-wrong {
+    color: #991B1B;
+    text-decoration: line-through;
+    margin-right: 8px;
+  }
+
+  .ca-explanation {
+    color: #6B7280;
+    font-size: 13px;
+    margin-top: 2px;
+    line-height: 1.6;
+  }
+
+  /* ========== 翻译题 ========== */
+  .translation-source {
+    background: #FEF2F2;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.9;
+    color: #1F2937;
+  }
+
+  .translation-source p {
+    margin-bottom: 10px;
+  }
+
+  .translation-source p:last-child {
+    margin-bottom: 0;
+  }
+
+  .translation-textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 14px;
+    border: 2px solid #D1D5DB;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 1.8;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.2s ease;
+    background: white;
+  }
+
+  .translation-textarea:focus {
+    outline: none;
+    border-color: #B91C1C;
+    box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.15);
+  }
+
+  .translation-textarea::placeholder {
+    color: #9CA3AF;
+  }
+
+  /* 参考译文 */
+  .reference-section {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .reference-section.show {
+    display: block;
+  }
+
+  .reference-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #7F1D1D;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .reference-text {
+    background: #FEE2E2;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: #7F1D1D;
+    margin-bottom: 16px;
+  }
+
+  .reference-text p {
+    margin-bottom: 10px;
+  }
+
+  .reference-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 评分要点清单 */
+  .checklist-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 10px;
+  }
+
+  .checklist {
+    background: #FFFBEB;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    cursor: pointer;
+    border-bottom: 1px dashed #FDE68A;
+  }
+
+  .checklist-item:last-child {
+    border-bottom: none;
+  }
+
+  .checklist-item input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    accent-color: #B91C1C;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .checklist-item label {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #78350F;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .checklist-item.checked label {
+    text-decoration: line-through;
+    color: #9CA3AF;
+  }
+
+  .self-eval-hint {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  /* ========== 结构化数据面板（给Agent读取） ========== */
+  .agent-panel {
+    margin-top: 24px;
+    padding: 20px;
+    background: #1F2937;
+    border-radius: 14px;
+    display: none;
+  }
+
+  .agent-panel.show {
+    display: block;
+  }
+
+  .agent-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #374151;
+  }
+
+  .agent-panel-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #FBBF24;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .agent-copy-btn {
+    padding: 6px 14px;
+    background: #374151;
+    color: #D1D5DB;
+    border: 1px solid #4B5563;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .agent-copy-btn:hover {
+    background: #4B5563;
+  }
+
+  .agent-data {
+    background: #111827;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #9CA3AF;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  /* ========== 底部得分栏 ========== */
+  .score-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 2px solid #B91C1C;
+    padding: 12px 16px;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+  }
+
+  .score-bar-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .score-info {
+    flex: 1;
+  }
+
+  .score-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .score-item {
+    font-size: 13px;
+    color: #6B7280;
+  }
+
+  .score-item strong {
+    color: #B91C1C;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .score-item .self {
+    color: #F59E0B;
+  }
+
+  .reset-btn {
+    padding: 10px 20px;
+    background: white;
+    color: #EF4444;
+    border: 2px solid #FCA5A5;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .reset-btn:hover {
+    background: #FEF2F2;
+  }
+
+  body { padding-bottom: 80px; }
+
+  /* ========== 响应式 ========== */
+  @media (max-width: 480px) {
+    body { font-size: 15px; background: #FEF2F2; }
+    .header { padding: 12px 16px; }
+    .header-title { font-size: 19px; }
+    .timer-box { font-size: 16px; padding: 5px 12px; }
+    .container { padding: 16px 12px 90px; }
+    .module { padding: 18px 14px; border-radius: 12px; }
+    .module-title { font-size: 16px; }
+    .final-banner { padding: 16px; }
+    .final-banner-title { font-size: 18px; }
+    .final-banner-sub { font-size: 13px; }
+    .mcq-stem { font-size: 15px; }
+    .mcq-option { font-size: 14px; padding: 10px 12px; }
+    .cloze-passage { font-size: 15px; line-height: 1.9; }
+    .cloze-blank { width: 90px; height: 30px; font-size: 13px; }
+    .translation-source { font-size: 15px; }
+    .translation-textarea { font-size: 15px; min-height: 180px; }
+    .score-row { gap: 10px; }
+    .score-item { font-size: 12px; }
+    .score-item strong { font-size: 15px; }
+    .reset-btn { padding: 8px 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== 顶部栏 ========== -->
+<div class="header">
+  <div class="header-inner">
+    <span class="header-tag">🏆 最终卷 · FINAL</span>
+    <div class="header-title">最终卷 · 中国式现代化</div>
+    <div class="header-info">
+      <span class="time-hint">建议时长 100 分钟 · 加油！</span>
+      <div class="timer-box">
+        <span id="timerDisplay">100:00</span>
+        <button class="timer-btn" id="timerBtn" onclick="toggleTimer()">开始</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 主体内容 ========== -->
+<div class="container">
+
+  <!-- 最终卷开场卡片 -->
+  <div class="final-banner">
+    <div class="final-banner-title">🎯 最终模拟考卷</div>
+    <div class="final-banner-sub">
+      本题为综合模拟卷，主题覆盖经济、文化、社会、生态等多领域。<br>
+      请认真审题，合理分配时间，祝你取得好成绩！
+    </div>
+    <div class="final-banner-tips">
+      <span class="final-banner-tip">📝 客观题 30 分</span>
+      <span class="final-banner-tip">✍️ 翻译题 30 分</span>
+      <span class="final-banner-tip">⏱ 总时长 100 分钟</span>
+    </div>
+  </div>
+
+  <!-- 模块一：选词填空 -->
+  <div class="module" id="module1">
+    <div class="module-header">
+      <div class="module-num">一</div>
+      <div>
+        <div class="module-title">选词填空</div>
+        <div class="module-sub">共 5 题，每题 2 分，共 10 分</div>
+      </div>
+    </div>
+
+    <div id="mcqContainer">
+      <!-- 第 1 题 -->
+      <div class="mcq-item" data-q="1">
+        <div class="mcq-num">第 1 题 <span class="point">（考点：时政术语理解）</span></div>
+        <div class="mcq-stem">"Chinese-style modernization" refers to the modernization pursued under the leadership of the Communist Party of China, which ______ both elements of commonality and distinct Chinese characteristics.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(1, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">integrates</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(1, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">interacts</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(1, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">interprets</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(1, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">intervenes</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>integrate 意为"融合、结合"，integrates both commonality and Chinese characteristics 表示融合了共性和中国特色，符合句意。interact 是"互动"，interpret 是"解释"，intervene 是"干预"，均不符合。
+        </div>
+      </div>
+
+      <!-- 第 2 题 -->
+      <div class="mcq-item" data-q="2">
+        <div class="mcq-num">第 2 题 <span class="point">（考点：动词+介词搭配）</span></div>
+        <div class="mcq-stem">Chinese-style modernization has much to offer ______ the cause of global human progress and the building of a better world.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(2, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">for</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(2, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">to</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(2, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">in</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(2, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">toward</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>offer to 是固定搭配，表示"为……做贡献、对……有用"。offer much to the cause 表示为这一事业贡献良多。
+        </div>
+      </div>
+
+      <!-- 第 3 题 -->
+      <div class="mcq-item" data-q="3">
+        <div class="mcq-num">第 3 题 <span class="point">（考点：形近词辨析）</span></div>
+        <div class="mcq-stem">The Chinese path to modernization demonstrates that each nation can ______ its own development model based on its specific national conditions and cultural traditions.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(3, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">forge</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(3, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">forget</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(3, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">form</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(3, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">force</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>forge 意为"锻造、打造"，forge its own development model 表示打造自己的发展模式，比 form（形成）更具力度和主动性，符合语境。forget 是"忘记"，force 是"强迫"，均不符合。
+        </div>
+      </div>
+
+      <!-- 第 4 题 -->
+      <div class="mcq-item" data-q="4">
+        <div class="mcq-num">第 4 题 <span class="point">（考点：词性/词形判断）</span></div>
+        <div class="mcq-stem">The ______ process of common prosperity is an essential feature of Chinese-style modernization and distinguishes it from Western modernization.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(4, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">pursue</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(4, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">pursuit</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(4, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">pursued</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(4, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">pursuing</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>空格前有定冠词 the，后有介词 of，需要填入名词。pursuit（n. 追求）the pursuit of common prosperity 表示"共同富裕的追求过程"，符合语法和语义。pursue 是动词，pursued 是过去分词，pursuing 是动名词但作定语时不如 pursuit 正式。
+        </div>
+      </div>
+
+      <!-- 第 5 题 -->
+      <div class="mcq-item" data-q="5">
+        <div class="mcq-num">第 5 题 <span class="point">（考点：短语动词）</span></div>
+        <div class="mcq-stem">As China continues to ______ forward on the path of modernization, it remains committed to peaceful development and win-win cooperation with other countries.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(5, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">march</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(5, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">walk</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(5, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">step</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(5, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">move</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>march forward 是固定表达，表示"阔步前进、奋勇前进"，常用于正式时政语境，带有坚定有力的意味。walk forward 太平淡，step forward 是"向前迈步"，move forward 是"前进"但力度不如 march。
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="mcqSubmitBtn" onclick="submitMCQ()">提交判分</button>
+  </div>
+
+  <!-- 模块二：完形填空 -->
+  <div class="module" id="module2">
+    <div class="module-header">
+      <div class="module-num">二</div>
+      <div>
+        <div class="module-title">完形填空</div>
+        <div class="module-sub">共 10 题，每题 2 分，共 20 分 · 15 选 10，用适当形式</div>
+      </div>
+    </div>
+
+    <!-- 短文 -->
+    <div class="cloze-passage">
+      <strong style="color:#7F1D1D">Chinese-Style Modernization: A Path of Its Own</strong><br><br>
+      Modernization has long been seen as a universal process that all societies must follow, often modeled closely on Western experiences. However, China's remarkable development over the past decades has shown that there is more than one path to modernization. Chinese-style modernization represents a distinct approach that combines universal trends with national realities,
+      <input type="text" class="cloze-blank" id="cloze-1" placeholder="①">
+      new possibilities for developing countries seeking their own paths forward.<br><br>
+      Recent studies
+      <input type="text" class="cloze-blank" id="cloze-2" placeholder="②">
+      the key features of Chinese-style modernization highlight five defining characteristics: a huge population, common prosperity for all, material and cultural-ethical advancement, harmony between humanity and nature, and peaceful development.
+      <input type="text" class="cloze-blank" id="cloze-3" placeholder="③">
+      on its own historical conditions and cultural heritage, China has managed to achieve in just a few decades what took Western countries centuries to accomplish. These achievements have produced
+      <input type="text" class="cloze-blank" id="cloze-4" placeholder="④">
+      results: hundreds of millions have been lifted out of poverty, and the country has become the world's second largest economy.<br><br>
+      One major challenge is the
+      <input type="text" class="cloze-blank" id="cloze-5" placeholder="⑤">
+      of balanced development across different regions and among different groups. While coastal cities have experienced rapid growth and modernization, inland and rural areas still face significant gaps in living standards and public services. To address this imbalance, the government has introduced a series of coordinated development strategies,
+      <input type="text" class="cloze-blank" id="cloze-6" placeholder="⑥">
+      investment in less developed regions and implementing targeted poverty alleviation programs.<br><br>
+      Another important factor is public
+      <input type="text" class="cloze-blank" id="cloze-7" placeholder="⑦">
+      of the importance of both material progress and cultural-ethical advancement. In the early stages of reform and opening up, the emphasis was largely on economic growth. Today, there is a growing recognition that modernization must include cultural confidence and spiritual enrichment, creating a more balanced society
+      <input type="text" class="cloze-blank" id="cloze-8" placeholder="⑧">
+      which people can thrive in both material and cultural terms.<br><br>
+      Chinese-style modernization is not a rejection of Western experiences but a creative adaptation based on China's own realities. When a country can learn from others while staying true to itself, modernization will no longer be a single-track race
+      <input type="text" class="cloze-blank" id="cloze-9" placeholder="⑨">
+      a diverse global journey that
+      <input type="text" class="cloze-blank" id="cloze-10" placeholder="⑩">
+      all nations.
+    </div>
+
+    <!-- 备选词库 -->
+    <div class="wordbank">
+      <div class="wordbank-title">📝 备选词（15 选 10，注意适当形式）</div>
+      <div class="wordbank-list">
+        <span class="word-item">create <span class="pos">v.</span></span>
+        <span class="word-item">examine <span class="pos">v.</span></span>
+        <span class="word-item">draw <span class="pos">v.</span></span>
+        <span class="word-item">lack <span class="pos">n.</span></span>
+        <span class="word-item">increase <span class="pos">v.</span></span>
+        <span class="word-item">aware <span class="pos">adj.</span></span>
+        <span class="word-item">in <span class="pos">prep.</span></span>
+        <span class="word-item">but <span class="pos">conj.</span></span>
+        <span class="word-item">enrich <span class="pos">v.</span></span>
+        <span class="word-item">impress <span class="pos">v.</span></span>
+        <span class="word-item">significant <span class="pos">adj.</span></span>
+        <span class="word-item">with <span class="pos">prep.</span></span>
+        <span class="word-item">instead <span class="pos">adv.</span></span>
+        <span class="word-item">that <span class="pos">pron.</span></span>
+        <span class="word-item">through <span class="pos">prep.</span></span>
+      </div>
+    </div>
+
+    <!-- 答案解析 -->
+    <div class="cloze-answers" id="clozeAnswers">
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-1">1</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-1">creating</div>
+          <div class="ca-explanation">现在分词作结果状语：modernization represents... creating new possibilities，主动关系。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-2">2</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-2">examining</div>
+          <div class="ca-explanation">现在分词作后置定语：studies examining... 修饰 studies，主动关系。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-3">3</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-3">Drawing</div>
+          <div class="ca-explanation">现在分词短语作原因状语：draw on 表示"借鉴、利用"。句首，主动关系，注意首字母大写。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-4">4</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-4">impressive</div>
+          <div class="ca-explanation">形容词：修饰 results，表示令人印象深刻的成果。impress 变形为形容词。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-5">5</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-5">lack</div>
+          <div class="ca-explanation">名词：the lack of 表示"……的缺乏"。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-6">6</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-6">increasing</div>
+          <div class="ca-explanation">现在分词作伴随状语：government has introduced strategies, increasing investment... 主动关系。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-7">7</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-7">awareness</div>
+          <div class="ca-explanation">名词：public awareness 表示公众意识，aware 变形为名词 awareness。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-8">8</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-8">in</div>
+          <div class="ca-explanation">介词：in which 引导定语从句，相当于 people can thrive in this society。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-9">9</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-9">but</div>
+          <div class="ca-explanation">连词：not... but... 结构，表示"不是……而是……"。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-10">10</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-10">enriches</div>
+          <div class="ca-explanation">动词第三人称单数：that enriches all nations，先行词 journey 是单数，谓语加 s。</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="clozeSubmitBtn" onclick="submitCloze()">提交判分</button>
+  </div>
+
+  <!-- 模块三：英译汉 -->
+  <div class="module" id="module3">
+    <div class="module-header">
+      <div class="module-num">三</div>
+      <div>
+        <div class="module-title">英译汉</div>
+        <div class="module-sub">15 分 · 写完后展开参考译文自评</div>
+      </div>
+    </div>
+
+    <div class="translation-source" id="trans1Source">
+      <p>Chinese-style modernization is not about copying Western models wholesale, but about finding a path that suits China's own conditions while learning from the experiences of others. For a long time, modernization was often equated with Westernization, and countries that deviated from the Western path were seen as backward or abnormal. This narrow understanding is now being challenged by China's success, which demonstrates that there are multiple pathways to modernization, each shaped by a nation's unique history, culture, and social conditions.</p>
+      <p>The Chinese model of modernization recognizes that development must be people-centered and inclusive. It means pursuing economic growth while ensuring social equity, promoting material progress while advancing cultural-ethical progress, and pursuing industrialization while protecting the ecological environment. At the same time, it emphasizes the importance of peaceful development, ensuring that China's rise does not come at the expense of other countries but contributes to the common prosperity of all nations.</p>
+      <p>The significance of Chinese-style modernization extends far beyond China's borders. It offers a new choice for developing countries that wish to modernize while preserving their independence and cultural identity. When every nation is free to choose its own path to development, modernization will not just benefit a privileged few — it will become a shared global endeavor that brings progress and prosperity to all of humanity.</p>
+    </div>
+
+    <textarea class="translation-textarea" id="trans1Input" placeholder="请在此处输入你的译文……"></textarea>
+
+    <button class="reveal-btn" onclick="revealTranslation(1)">我写完了，展开参考译文</button>
+
+    <div class="reference-section" id="trans1Ref">
+      <div class="reference-title">📖 参考译文</div>
+      <div class="reference-text" id="trans1Reference">
+        <p>中国式现代化并非要全盘照搬西方模式，而是要在借鉴他国经验的同时，走出一条符合自身国情的道路。长期以来，现代化常常被等同于西方化，偏离西方道路的国家则被视为落后或反常。如今，这种狭隘的认识正被中国的成功所挑战——中国的成功表明，通往现代化的道路不止一条，每条道路都由一个国家独特的历史、文化和社会条件所塑造。</p>
+        <p>中国的现代化模式认识到，发展必须坚持以人民为中心，具有包容性。它意味着在追求经济增长的同时确保社会公平，在推动物质文明进步的同时促进精神文明建设，在推进工业化的同时保护生态环境。同时，它强调和平发展的重要性，确保中国的崛起不以牺牲他国利益为代价，而是为各国的共同繁荣作出贡献。</p>
+        <p>中国式现代化的意义远远超出中国国界。它为那些希望在保持独立和文化认同的同时实现现代化的发展中国家提供了新的选择。当每个国家都能自由选择自己的发展道路时，现代化将不再只是少数特权者的红利——它将成为一项全人类共享的伟大事业，为所有人带来进步与繁荣。</p>
+      </div>
+
+      <div class="checklist-title">✅ 评分要点自评（对照你的译文逐条打勾）</div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-1" onchange="toggleCheck(this)">
+          <label for="c1-1">"not about... but about..." 译为"并非……而是……"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-2" onchange="toggleCheck(this)">
+          <label for="c1-2">"Chinese-style modernization" 译为"中国式现代化"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-3" onchange="toggleCheck(this)">
+          <label for="c1-3">破折号衔接句翻译自然流畅</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-4" onchange="toggleCheck(this)">
+          <label for="c1-4">"people-centered" 译为"以人民为中心的"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-5" onchange="toggleCheck(this)">
+          <label for="c1-5">"common prosperity" 译为"共同富裕"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-6" onchange="toggleCheck(this)">
+          <label for="c1-6">第二段排比结构保持中文节奏和对仗</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-7" onchange="toggleCheck(this)">
+          <label for="c1-7">末段递进句"不仅仅是……而是……"表达准确</label>
+        </div>
+      </div>
+      <div class="self-eval-hint">自评完成后，可在底部栏查看得分情况</div>
+    </div>
+  </div>
+
+  <!-- 模块四：汉译英 -->
+  <div class="module" id="module4">
+    <div class="module-header">
+      <div class="module-num">四</div>
+      <div>
+        <div class="module-title">汉译英</div>
+        <div class="module-sub">15 分 · 写完后展开参考译文自评</div>
+      </div>
+    </div>
+
+    <div class="translation-source" id="trans2Source">
+      <p>中国式现代化是中国共产党领导的社会主义现代化，既有各国现代化的共同特征，更有基于自己国情的中国特色。它是人口规模巨大的现代化，是全体人民共同富裕的现代化，是物质文明和精神文明相协调的现代化，是人与自然和谐共生的现代化，是走和平发展道路的现代化。</p>
+      <p>中国式现代化破解了人类社会发展的诸多难题，摒弃了西方以资本为中心的现代化、两极分化的现代化、物质主义膨胀的现代化、对外扩张掠夺的现代化老路，拓展了发展中国家走向现代化的途径，为人类对更好社会制度的探索提供了中国方案。</p>
+      <p>值得一提的是，中国式现代化深深植根于中华优秀传统文化，体现科学社会主义的先进本质，同时借鉴吸收一切人类优秀文明成果。可以说，中国式现代化不仅为中华民族伟大复兴开辟了广阔前景，也为人类和平与发展崇高事业作出了新的更大贡献。</p>
+    </div>
+
+    <textarea class="translation-textarea" id="trans2Input" placeholder="请在此处输入你的译文……"></textarea>
+
+    <button class="reveal-btn" onclick="revealTranslation(2)">我写完了，展开参考译文</button>
+
+    <div class="reference-section" id="trans2Ref">
+      <div class="reference-title">📖 参考译文</div>
+      <div class="reference-text" id="trans2Reference">
+        <p>Chinese-style modernization is socialist modernization led by the Communist Party of China. It has both the common features of modernization in all countries and, more importantly, distinct Chinese characteristics based on its own national conditions. It is the modernization of a huge population, the modernization of common prosperity for all, the modernization of coordinated material and cultural-ethical advancement, the modernization of harmony between humanity and nature, and the modernization of peaceful development.</p>
+        <p>Chinese-style modernization has solved many difficult problems in the development of human society. It has rejected the old Western path of capital-centered modernization, modernization with extreme polarization, modernization marked by rampant materialism, and modernization through external expansion and plunder. It has expanded the pathways for developing countries to achieve modernization and provided a Chinese solution for humanity's exploration of better social systems.</p>
+        <p>It is worth mentioning that Chinese-style modernization is deeply rooted in China's fine traditional culture, embodies the advanced essence of scientific socialism, and at the same time draws upon and absorbs all the outstanding achievements of human civilization. It can be said that Chinese-style modernization has not only opened up broad prospects for the great rejuvenation of the Chinese nation but also made new and greater contributions to the noble cause of human peace and development.</p>
+      </div>
+
+      <div class="checklist-title">✅ 评分要点自评（对照你的译文逐条打勾）</div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-1" onchange="toggleCheck(this)">
+          <label for="c2-1">"中国式现代化" 译为 Chinese-style modernization</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-2" onchange="toggleCheck(this)">
+          <label for="c2-2">"共同富裕" 译为 common prosperity</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-3" onchange="toggleCheck(this)">
+          <label for="c2-3">"物质文明和精神文明" 译为 material and cultural-ethical advancement</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-4" onchange="toggleCheck(this)">
+          <label for="c2-4">"人与自然和谐共生" 译为 harmony between humanity and nature</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-5" onchange="toggleCheck(this)">
+          <label for="c2-5">"中华民族伟大复兴" 译为 the great rejuvenation of the Chinese nation</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-6" onchange="toggleCheck(this)">
+          <label for="c2-6">五个"是……的现代化"排比结构保持英文平行</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-7" onchange="toggleCheck(this)">
+          <label for="c2-7">not only... but also... 正确使用（没有漏掉 but）</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-8" onchange="toggleCheck(this)">
+          <label for="c2-8">时态一致性和主谓一致</label>
+        </div>
+      </div>
+      <div class="self-eval-hint">自评完成后，可在底部栏查看得分情况</div>
+    </div>
+  </div>
+
+  <!-- ===== 结构化数据面板（给Agent读取） ===== -->
+  <div class="agent-panel" id="agentPanel">
+    <div class="agent-panel-header">
+      <div class="agent-panel-title">🤖 结构化答题数据（供 Agent 深度批改）</div>
+      <button class="agent-copy-btn" onclick="copyAgentData()">复制</button>
+    </div>
+    <div class="agent-data" id="agentData"></div>
+  </div>
+
+</div>
+
+<!-- ========== 底部得分栏 ========== -->
+<div class="score-bar">
+  <div class="score-bar-inner">
+    <div class="score-info">
+      <div class="score-row">
+        <div class="score-item">选词 <strong id="mcqScore">0</strong>/10 分</div>
+        <div class="score-item">完形 <strong id="clozeScore">0</strong>/20 分</div>
+        <div class="score-item">英译汉 <strong class="self">自评中</strong></div>
+        <div class="score-item">汉译英 <strong class="self">自评中</strong></div>
+      </div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">🔄 重做一遍</button>
+  </div>
+</div>
+
+<script>
+  // ========== 参考答案数据 ==========
+  const mcqAnswers = {
+    1: { answer: 'A', explanation: 'integrate 意为"融合、结合"，融合共性和中国特色，符合句意。' },
+    2: { answer: 'B', explanation: 'offer to 是固定搭配，表示"为……做贡献"。' },
+    3: { answer: 'A', explanation: 'forge 意为"锻造、打造"，forge its own model 表示打造自己的模式。' },
+    4: { answer: 'B', explanation: 'the + 名词 + of 结构，pursuit 是名词，表示"追求"。' },
+    5: { answer: 'A', explanation: 'march forward 表示"阔步前进"，常用于正式时政语境。' }
+  };
+
+  const clozeAnswers = [
+    { answer: 'creating', explanation: '现在分词作结果状语：主动关系。' },
+    { answer: 'examining', explanation: '现在分词作后置定语：studies examining... 主动关系。' },
+    { answer: 'drawing', explanation: '现在分词作原因状语：draw on 表示"借鉴"。句首大写。' },
+    { answer: 'impressive', explanation: '形容词：修饰 results，impress 变形为 impressive。' },
+    { answer: 'lack', explanation: '名词：the lack of 表示"……的缺乏"。' },
+    { answer: 'increasing', explanation: '现在分词作伴随状语：主动关系。' },
+    { answer: 'awareness', explanation: '名词：public awareness，aware 变形为名词。' },
+    { answer: 'in', explanation: '介词：in which 引导定语从句。' },
+    { answer: 'but', explanation: '连词：not... but... 结构。' },
+    { answer: 'enriches', explanation: '动词第三人称单数：先行词 journey 是单数，谓语加 s。' }
+  ];
+
+  const translationData = {
+    c2e: {
+      source: '',
+      reference: '',
+      scoringPoints: [
+        '"not about... but about..." 译为"并非……而是……"',
+        '"Chinese-style modernization" 译为"中国式现代化"',
+        '破折号衔接句翻译自然流畅',
+        '"people-centered" 译为"以人民为中心的"',
+        '"common prosperity" 译为"共同富裕"',
+        '第二段排比结构保持中文节奏和对仗',
+        '末段递进句表达准确'
+      ]
+    },
+    e2c: {
+      source: '',
+      reference: '',
+      scoringPoints: [
+        '"中国式现代化" 译为 Chinese-style modernization',
+        '"共同富裕" 译为 common prosperity',
+        '"物质文明和精神文明" 译为 material and cultural-ethical advancement',
+        '"人与自然和谐共生" 译为 harmony between humanity and nature',
+        '"中华民族伟大复兴" 译为 the great rejuvenation of the Chinese nation',
+        '五个排比结构保持英文平行',
+        'not only... but also... 正确使用',
+        '时态一致性和主谓一致'
+      ]
+    }
+  };
+
+  // ========== 计时器功能 ==========
+  let timerSeconds = 100 * 60;
+  let timerInterval = null;
+  let timerRunning = false;
+
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  }
+
+  function updateTimerDisplay() {
+    document.getElementById('timerDisplay').textContent = formatTime(timerSeconds);
+  }
+
+  function toggleTimer() {
+    const btn = document.getElementById('timerBtn');
+    if (timerRunning) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      btn.textContent = '继续';
+    } else {
+      timerInterval = setInterval(function() {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          timerRunning = false;
+          document.getElementById('timerBtn').textContent = '时间到';
+          alert('⏰ 时间到！请停止作答。');
+        }
+      }, 1000);
+      timerRunning = true;
+      btn.textContent = '暂停';
+    }
+  }
+
+  // ========== 选词填空 ==========
+  let mcqUserAnswers = {};
+  let mcqSubmitted = false;
+
+  function selectMCQ(qNum, val) {
+    if (mcqSubmitted) return;
+    mcqUserAnswers[qNum] = val;
+    const item = document.querySelector('.mcq-item[data-q="' + qNum + '"]');
+    const options = item.querySelectorAll('.mcq-option');
+    options.forEach(function(opt) {
+      opt.classList.remove('selected');
+      if (opt.dataset.val === val) opt.classList.add('selected');
+    });
+  }
+
+  function submitMCQ() {
+    if (mcqSubmitted) return;
+
+    let unanswered = [];
+    for (let i = 1; i <= 5; i++) {
+      if (!mcqUserAnswers[i]) unanswered.push(i);
+    }
+    if (unanswered.length > 0) {
+      if (!confirm('还有第 ' + unanswered.join('、') + ' 题未作答，确定要提交吗？')) return;
+    }
+
+    mcqSubmitted = true;
+    let correctCount = 0;
+
+    for (let i = 1; i <= 5; i++) {
+      const item = document.querySelector('.mcq-item[data-q="' + i + '"]');
+      const options = item.querySelectorAll('.mcq-option');
+      const explanation = item.querySelector('.mcq-explanation');
+      const userAns = mcqUserAnswers[i];
+      const correctAns = mcqAnswers[i].answer;
+
+      options.forEach(function(opt) {
+        opt.classList.add('submitted');
+        opt.style.cursor = 'default';
+        const val = opt.dataset.val;
+        if (val === correctAns) opt.classList.add('correct');
+        else if (val === userAns && userAns !== correctAns) opt.classList.add('wrong');
+      });
+
+      explanation.classList.add('show');
+      if (userAns === correctAns) correctCount++;
+    }
+
+    document.getElementById('mcqScore').textContent = correctCount * 2;
+    document.getElementById('mcqSubmitBtn').textContent = '已提交';
+    document.getElementById('mcqSubmitBtn').disabled = true;
+
+    updateAgentPanel();
+  }
+
+  // ========== 完形填空 ==========
+  let clozeSubmitted = false;
+
+  function submitCloze() {
+    if (clozeSubmitted) return;
+
+    let unanswered = [];
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      if (!input.value.trim()) unanswered.push(i);
+    }
+    if (unanswered.length > 0) {
+      if (!confirm('还有第 ' + unanswered.join('、') + ' 空未填，确定要提交吗？')) return;
+    }
+
+    clozeSubmitted = true;
+    let correctCount = 0;
+
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      const userAns = input.value.trim().toLowerCase();
+      const correctAns = clozeAnswers[i - 1].answer;
+      const isCorrect = userAns === correctAns.toLowerCase();
+
+      input.classList.add(isCorrect ? 'correct' : 'wrong');
+      input.disabled = true;
+
+      const caNum = document.getElementById('ca-num-' + i);
+      const caAnswer = document.getElementById('ca-answer-' + i);
+
+      if (isCorrect) {
+        correctCount++;
+      } else {
+        caNum.classList.add('wrong');
+        caAnswer.innerHTML = '<span class="user-wrong">' + (input.value.trim() || '未作答') + '</span> → ' + correctAns;
+      }
+    }
+
+    document.getElementById('clozeAnswers').classList.add('show');
+    document.getElementById('clozeScore').textContent = correctCount * 2;
+    document.getElementById('clozeSubmitBtn').textContent = '已提交';
+    document.getElementById('clozeSubmitBtn').disabled = true;
+
+    updateAgentPanel();
+  }
+
+  // ========== 翻译题 ==========
+  function revealTranslation(num) {
+    const textarea = document.getElementById('trans' + num + 'Input');
+    const refSection = document.getElementById('trans' + num + 'Ref');
+
+    if (refSection.classList.contains('show')) return;
+
+    if (!textarea.value.trim()) {
+      if (!confirm('你的译文还是空的，确定要直接看参考译文吗？')) return;
+    }
+
+    refSection.classList.add('show');
+    updateAgentPanel();
+
+    setTimeout(function() {
+      refSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function toggleCheck(checkbox) {
+    const item = checkbox.parentElement;
+    if (checkbox.checked) item.classList.add('checked');
+    else item.classList.remove('checked');
+  }
+
+  // ========== 结构化数据面板（给Agent） ==========
+  function updateAgentPanel() {
+    translationData.c2e.source = document.getElementById('trans1Source').innerText.trim();
+    translationData.c2e.reference = document.getElementById('trans1Reference').innerText.trim();
+    translationData.e2c.source = document.getElementById('trans2Source').innerText.trim();
+    translationData.e2c.reference = document.getElementById('trans2Reference').innerText.trim();
+
+    const data = {
+      paper: '最终卷 · 中国式现代化',
+      topic: '中国式现代化',
+      paperType: 'final',
+      totalTimeMinutes: 100,
+      elapsedTimeSeconds: 100 * 60 - timerSeconds,
+
+      mcq: {
+        total: 5,
+        scoreEach: 2,
+        userAnswers: mcqUserAnswers,
+        correctAnswers: {},
+        explanations: {}
+      },
+
+      cloze: {
+        total: 10,
+        scoreEach: 2,
+        wordBank: [
+          { word: 'create', pos: 'v.' },
+          { word: 'examine', pos: 'v.' },
+          { word: 'draw', pos: 'v.' },
+          { word: 'lack', pos: 'n.' },
+          { word: 'increase', pos: 'v.' },
+          { word: 'aware', pos: 'adj.' },
+          { word: 'in', pos: 'prep.' },
+          { word: 'but', pos: 'conj.' },
+          { word: 'enrich', pos: 'v.' },
+          { word: 'impress', pos: 'v.' },
+          { word: 'significant', pos: 'adj.' },
+          { word: 'with', pos: 'prep.' },
+          { word: 'instead', pos: 'adv.' },
+          { word: 'that', pos: 'pron.' },
+          { word: 'through', pos: 'prep.' }
+        ],
+        userAnswers: {},
+        correctAnswers: {},
+        explanations: {}
+      },
+
+      c2e: {
+        source: translationData.c2e.source,
+        userTranslation: document.getElementById('trans1Input').value,
+        referenceTranslation: translationData.c2e.reference,
+        scoringPoints: translationData.c2e.scoringPoints
+      },
+
+      e2c: {
+        source: translationData.e2c.source,
+        userTranslation: document.getElementById('trans2Input').value,
+        referenceTranslation: translationData.e2c.reference,
+        scoringPoints: translationData.e2c.scoringPoints
+      }
+    };
+
+    for (let i = 1; i <= 5; i++) {
+      data.mcq.correctAnswers[i] = mcqAnswers[i].answer;
+      data.mcq.explanations[i] = mcqAnswers[i].explanation;
+    }
+
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      data.cloze.userAnswers[i] = input.value.trim();
+      data.cloze.correctAnswers[i] = clozeAnswers[i - 1].answer;
+      data.cloze.explanations[i] = clozeAnswers[i - 1].explanation;
+    }
+
+    const panel = document.getElementById('agentPanel');
+    panel.classList.add('show');
+    document.getElementById('agentData').textContent = JSON.stringify(data, null, 2);
+  }
+
+  function copyAgentData() {
+    const text = document.getElementById('agentData').textContent;
+    navigator.clipboard.writeText(text).then(function() {
+      const btn = document.querySelector('.agent-copy-btn');
+      const original = btn.textContent;
+      btn.textContent = '已复制 ✓';
+      setTimeout(function() { btn.textContent = original; }, 1500);
+    }).catch(function() {
+      alert('复制失败，请手动复制');
+    });
+  }
+
+  // ========== 重做一遍 ==========
+  function resetAll() {
+    if (!confirm('确定要重做一遍吗？所有作答和判分状态都会被清空。')) return;
+
+    clearInterval(timerInterval);
+    timerSeconds = 100 * 60;
+    timerRunning = false;
+    updateTimerDisplay();
+    document.getElementById('timerBtn').textContent = '开始';
+
+    mcqSubmitted = false;
+    mcqUserAnswers = {};
+    document.querySelectorAll('.mcq-item').forEach(function(item) {
+      item.querySelectorAll('.mcq-option').forEach(function(opt) {
+        opt.classList.remove('selected', 'correct', 'wrong', 'submitted');
+        opt.style.cursor = 'pointer';
+      });
+      item.querySelector('.mcq-explanation').classList.remove('show');
+    });
+    document.getElementById('mcqScore').textContent = '0';
+    const mcqBtn = document.getElementById('mcqSubmitBtn');
+    mcqBtn.textContent = '提交判分';
+    mcqBtn.disabled = false;
+
+    clozeSubmitted = false;
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      input.value = '';
+      input.classList.remove('correct', 'wrong');
+      input.disabled = false;
+      const caNum = document.getElementById('ca-num-' + i);
+      const caAnswer = document.getElementById('ca-answer-' + i);
+      caNum.classList.remove('wrong');
+      caAnswer.innerHTML = clozeAnswers[i - 1].answer;
+    }
+    document.getElementById('clozeAnswers').classList.remove('show');
+    document.getElementById('clozeScore').textContent = '0';
+    const clozeBtn = document.getElementById('clozeSubmitBtn');
+    clozeBtn.textContent = '提交判分';
+    clozeBtn.disabled = false;
+
+    document.getElementById('trans1Input').value = '';
+    document.getElementById('trans2Input').value = '';
+    document.getElementById('trans1Ref').classList.remove('show');
+    document.getElementById('trans2Ref').classList.remove('show');
+
+    document.querySelectorAll('.checklist-item input').forEach(function(cb) {
+      cb.checked = false;
+      cb.parentElement.classList.remove('checked');
+    });
+
+    document.getElementById('agentPanel').classList.remove('show');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  updateTimerDisplay();
+</script>
+
+</body>
+</html>

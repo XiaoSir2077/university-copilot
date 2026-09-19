@@ -95,6 +95,12 @@ export interface Book {
   emoji?: string
   /** @deprecated 书房内容已全员共享，此字段不再过滤展示，仅为兼容旧数据 */
   userId?: string
+  /** 可见用户 id 白名单；缺省 = 家庭全员共享 */
+  audience?: string[]
+  /** 舅妈面板分区：work=工作，growth=学习成长；缺省不进舅妈面板 */
+  space?: 'work' | 'growth'
+  /** 卡片渐变配色（Tailwind 类，如 "from-sky-500 to-blue-700"）；缺省用默认绿色 */
+  tone?: string
   chapters: BookChapter[]
 }
 

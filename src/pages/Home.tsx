@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import {
   ArrowLeft,
@@ -32,6 +32,11 @@ import { monthOf, relevance } from '@/agent/relevance'
 import FloatingChat from '@/components/FloatingChat'
 import { cn } from '@/lib/utils'
 import type { NewsItem, SisterProfile, Subject } from '@/types'
+
+// 整页打开 #study/#relevant/#official 深链接时，HashRouter 的通配路由会在
+// Home 挂载前把这些非路由 hash 重定向为 #/，故在模块求值阶段（早于重定向提交）
+// 快照初始 hash，供 Tabs defaultValue 决定首次激活的板块。
+const INITIAL_TAB_HASH = window.location.hash
 
 function greeting() {
   const h = new Date().getHours()
@@ -396,23 +401,29 @@ function SubjectCard({ s, onOpen }: { s: Subject; onOpen: () => void }) {
   )
 }
 
+/** 书籍卡片缺省配色：meta.json 未配置 tone 时使用 */
+const DEFAULT_BOOK_TONE = 'from-emerald-500 to-teal-700'
+
 function BookCard({
   id,
   title,
   emoji,
   chapters,
+  tone,
 }: {
   id: string
   title: string
   emoji?: string
   chapters: number
+  /** 渐变配色类名，来自 meta.json 的 tone 字段 */
+  tone?: string
 }) {
   return (
     <Link
       to={`/book/${id}`}
       className="relative overflow-hidden rounded-2xl p-4 text-left text-white shadow-md transition hover:shadow-lg"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-700" />
+      <div className={cn('absolute inset-0 bg-gradient-to-br', tone ?? DEFAULT_BOOK_TONE)} />
       <div className="relative">
         <div className="flex items-start justify-between">
           <span className="text-2xl">{emoji ?? '📖'}</span>
@@ -505,10 +516,10 @@ function StudyTab({ readOnly }: { readOnly: boolean }) {
   const userId = useActiveUserId()
   const isDidi = userId === 'u-didi'
   const subjects = isDidi ? DIDI_SUBJECTS : SUBJECTS
-  const books = booksOfUser() // 家庭书房：内容全员共享
+  const books = booksOfUser(userId) // audience 白名单过滤（缺省=全员共享）
   // 深链接：…#study/<subjectId> 直达学科详情（如 …#study/math）
   const [openId, setOpenId] = useState<string | null>(() => {
-    const m = window.location.hash.match(/#study\/(\w+)/)
+    const m = INITIAL_TAB_HASH.match(/#study\/(\w+)/)
     return m && subjects.some((s) => s.id === m[1]) ? m[1] : null
   })
   const open = useMemo(() => subjects.find((s) => s.id === openId), [subjects, openId])
@@ -529,12 +540,14 @@ function StudyTab({ readOnly }: { readOnly: boolean }) {
           <SubjectCard key={s.id} s={s} onOpen={() => setOpenId(s.id)} />
         ))}
         {books.map((b) => (
-          <BookCard key={b.id} id={b.id} title={b.title} emoji={b.emoji} chapters={b.chapters.length} />
+          <BookCard key={b.id} id={b.id} title={b.title} emoji={b.emoji} chapters={b.chapters.length} tone={b.tone} />
         ))}
       </div>
-      <p className="text-center text-[11px] text-zinc-400">
-        更多学科和教材正在路上；教材点进去就是「原文笔记 + 本章测试」
-      </p>
+      {subjects.length > 0 && (
+        <p className="text-center text-[11px] text-zinc-400">
+          更多学科和教材正在路上；教材点进去就是「原文笔记 + 本章测试」
+        </p>
+      )}
     </div>
   )
 }
@@ -547,6 +560,18 @@ export default function Home() {
   const readOnly = role === 'viewer'
   const isDidi = useActiveUserId() === 'u-didi'
   const active = board.requests.filter((r) => r.status === 'pending' || r.status === 'in_progress').length
+
+  // 通配路由重定向会把深链接 hash 规范化为 #/，挂载后静默写回，保持 URL 与当前板块一致
+  // （replaceState 不触发 hashchange，不会再次进入路由匹配）。
+  useEffect(() => {
+    const h = INITIAL_TAB_HASH
+    if (
+      (h.startsWith('#relevant') || h.startsWith('#official') || h.startsWith('#study')) &&
+      h !== window.location.hash
+    ) {
+      history.replaceState(null, '', h)
+    }
+  }, [])
 
   return (
     <div className="min-h-dvh bg-zinc-50 pb-28">
@@ -595,23 +620,23 @@ export default function Home() {
 
         <Tabs
           defaultValue={
-            window.location.hash.includes('#study')
-              ? 'study'
-              : window.location.hash.includes('#relevant')
-                ? 'relevant'
-                : 'official'
+            INITIAL_TAB_HASH.includes('#relevant')
+              ? 'relevant'
+              : INITIAL_TAB_HASH.includes('#official')
+                ? 'official'
+                : 'study'
           }
           onValueChange={(v) => history.replaceState(null, '', `#${v}`)}
         >
           <TabsList className="grid w-full max-w-lg grid-cols-3 rounded-full bg-zinc-200/60 p-1">
-            <TabsTrigger value="official" className="rounded-full text-sm">
-              🏫 {isDidi ? '中南官方' : '东师官方'}
+            <TabsTrigger value="study" className="rounded-full text-sm">
+              📚 学习
             </TabsTrigger>
             <TabsTrigger value="relevant" className="rounded-full text-sm">
               🎯 与我有关
             </TabsTrigger>
-            <TabsTrigger value="study" className="rounded-full text-sm">
-              📚 学习
+            <TabsTrigger value="official" className="rounded-full text-sm">
+              🏫 {isDidi ? '中南官方' : '东师官方'}
             </TabsTrigger>
           </TabsList>
           <TabsContent value="official">

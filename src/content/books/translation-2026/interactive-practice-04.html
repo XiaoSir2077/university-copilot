@@ -1,0 +1,1595 @@
+---
+{"no":"05","title":"银发经济专题","order":5}
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>银发经济专题</title>
+<style>
+  /* ========== 基础样式 ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #FFFBF5;
+    color: #1F2937;
+    line-height: 1.75;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== 顶部栏 ========== */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+    color: white;
+    padding: 16px 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .header-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .header-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .timer-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .timer-btn {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .timer-btn:active { background: rgba(255, 255, 255, 0.4); }
+
+  .time-hint {
+    font-size: 13px;
+    opacity: 0.9;
+  }
+
+  /* ========== 主体容器 ========== */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px 100px;
+  }
+
+  /* ========== 模块卡片 ========== */
+  .module {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .module-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #E5E7EB;
+  }
+
+  .module-num {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #F97316, #EA580C);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .module-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .module-sub {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 2px;
+  }
+
+  /* ========== 选词填空 ========== */
+  .mcq-item {
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px dashed #E5E7EB;
+  }
+
+  .mcq-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .mcq-num {
+    font-size: 14px;
+    font-weight: 700;
+    color: #EA580C;
+    margin-bottom: 8px;
+  }
+
+  .mcq-num .point {
+    font-size: 12px;
+    color: #9CA3AF;
+    font-weight: 500;
+    margin-left: 6px;
+  }
+
+  .mcq-stem {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 14px;
+    color: #1F2937;
+  }
+
+  .mcq-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .mcq-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: #FFFBEB;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 15px;
+  }
+
+  .mcq-option:hover {
+    border-color: #F97316;
+    background: #FFF7ED;
+  }
+
+  .mcq-option.selected {
+    border-color: #F97316;
+    background: #FFF7ED;
+  }
+
+  .mcq-option.correct {
+    border-color: #10B981;
+    background: #D1FAE5;
+  }
+
+  .mcq-option.wrong {
+    border-color: #EF4444;
+    background: #FEE2E2;
+  }
+
+  .mcq-option.submitted {
+    cursor: default;
+  }
+
+  .option-label {
+    width: 28px;
+    height: 28px;
+    background: #E5E7EB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: #4B5563;
+    flex-shrink: 0;
+  }
+
+  .mcq-option.selected .option-label {
+    background: #F97316;
+    color: white;
+  }
+
+  .mcq-option.correct .option-label {
+    background: #10B981;
+    color: white;
+  }
+
+  .mcq-option.wrong .option-label {
+    background: #EF4444;
+    color: white;
+  }
+
+  .option-text {
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .mcq-explanation {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #FFFBEB;
+    border-left: 3px solid #F59E0B;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: #78350F;
+    line-height: 1.7;
+    display: none;
+  }
+
+  .mcq-explanation.show {
+    display: block;
+  }
+
+  .mcq-explanation strong {
+    color: #C2410C;
+  }
+
+  /* ========== 按钮样式 ========== */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #F97316, #EA580C);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .submit-btn:disabled {
+    background: #9CA3AF;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .reveal-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: white;
+    color: #EA580C;
+    border: 2px solid #F97316;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.2s ease;
+  }
+
+  .reveal-btn:hover {
+    background: #FFF7ED;
+  }
+
+  /* ========== 完形填空 ========== */
+  .cloze-passage {
+    font-size: 16px;
+    line-height: 2;
+    color: #1F2937;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+
+  .cloze-blank {
+    display: inline-block;
+    width: 110px;
+    height: 32px;
+    margin: 0 4px;
+    padding: 0 8px;
+    border: 2px solid #D1D5DB;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    background: #FFFBEB;
+    transition: all 0.2s ease;
+  }
+
+  .cloze-blank:focus {
+    outline: none;
+    border-color: #F97316;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+  }
+
+  .cloze-blank.correct {
+    border-color: #10B981;
+    background: #D1FAE5;
+    color: #065F46;
+    font-weight: 600;
+  }
+
+  .cloze-blank.wrong {
+    border-color: #EF4444;
+    background: #FEE2E2;
+    color: #991B1B;
+  }
+
+  /* 备选词库 */
+  .wordbank {
+    background: #FFFBEB;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .wordbank-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 10px;
+  }
+
+  .wordbank-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .word-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 999px;
+    font-size: 14px;
+    color: #374151;
+  }
+
+  .word-item .pos {
+    font-size: 11px;
+    color: #9CA3AF;
+    font-style: italic;
+  }
+
+  /* 完形答案解析 */
+  .cloze-answers {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .cloze-answers.show {
+    display: block;
+  }
+
+  .cloze-answer-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #E5E7EB;
+    font-size: 14px;
+  }
+
+  .cloze-answer-item:last-child {
+    border-bottom: none;
+  }
+
+  .ca-num {
+    width: 24px;
+    height: 24px;
+    background: #D1FAE5;
+    color: #065F46;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .ca-num.wrong {
+    background: #FEE2E2;
+    color: #991B1B;
+  }
+
+  .ca-content {
+    flex: 1;
+  }
+
+  .ca-answer {
+    font-weight: 600;
+    color: #065F46;
+  }
+
+  .ca-answer .user-wrong {
+    color: #991B1B;
+    text-decoration: line-through;
+    margin-right: 8px;
+  }
+
+  .ca-explanation {
+    color: #6B7280;
+    font-size: 13px;
+    margin-top: 2px;
+    line-height: 1.6;
+  }
+
+  /* ========== 翻译题 ========== */
+  .translation-source {
+    background: #FFFBEB;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.9;
+    color: #1F2937;
+  }
+
+  .translation-source p {
+    margin-bottom: 10px;
+  }
+
+  .translation-source p:last-child {
+    margin-bottom: 0;
+  }
+
+  .translation-textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 14px;
+    border: 2px solid #D1D5DB;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 1.8;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.2s ease;
+    background: white;
+  }
+
+  .translation-textarea:focus {
+    outline: none;
+    border-color: #F97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+  }
+
+  .translation-textarea::placeholder {
+    color: #9CA3AF;
+  }
+
+  /* 参考译文 */
+  .reference-section {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .reference-section.show {
+    display: block;
+  }
+
+  .reference-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #EA580C;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .reference-text {
+    background: #FFF7ED;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: #7C2D12;
+    margin-bottom: 16px;
+  }
+
+  .reference-text p {
+    margin-bottom: 10px;
+  }
+
+  .reference-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 评分要点清单 */
+  .checklist-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 10px;
+  }
+
+  .checklist {
+    background: #FFFBEB;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    cursor: pointer;
+    border-bottom: 1px dashed #FDE68A;
+  }
+
+  .checklist-item:last-child {
+    border-bottom: none;
+  }
+
+  .checklist-item input[type="checkbox"] {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    accent-color: #F97316;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .checklist-item label {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #78350F;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .checklist-item.checked label {
+    text-decoration: line-through;
+    color: #9CA3AF;
+  }
+
+  .self-eval-hint {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  /* ========== 结构化数据面板（给Agent读取） ========== */
+  .agent-panel {
+    margin-top: 24px;
+    padding: 20px;
+    background: #1F2937;
+    border-radius: 14px;
+    display: none;
+  }
+
+  .agent-panel.show {
+    display: block;
+  }
+
+  .agent-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #374151;
+  }
+
+  .agent-panel-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #FBBF24;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .agent-copy-btn {
+    padding: 6px 14px;
+    background: #374151;
+    color: #D1D5DB;
+    border: 1px solid #4B5563;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .agent-copy-btn:hover {
+    background: #4B5563;
+  }
+
+  .agent-data {
+    background: #111827;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'SF Mono', 'Consolas', 'Menlo', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #9CA3AF;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  /* ========== 底部得分栏 ========== */
+  .score-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #E5E7EB;
+    padding: 12px 16px;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+    z-index: 100;
+  }
+
+  .score-bar-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .score-info {
+    flex: 1;
+  }
+
+  .score-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .score-item {
+    font-size: 13px;
+    color: #6B7280;
+  }
+
+  .score-item strong {
+    color: #EA580C;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .score-item .self {
+    color: #F59E0B;
+  }
+
+  .reset-btn {
+    padding: 10px 20px;
+    background: white;
+    color: #EF4444;
+    border: 2px solid #FCA5A5;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+
+  .reset-btn:hover {
+    background: #FEF2F2;
+  }
+
+  body { padding-bottom: 80px; }
+
+  /* ========== 响应式 ========== */
+  @media (max-width: 480px) {
+    body { font-size: 15px; background: #FFFBF5; }
+    .header { padding: 12px 16px; }
+    .header-title { font-size: 18px; }
+    .timer-box { font-size: 16px; padding: 5px 12px; }
+    .container { padding: 16px 12px 90px; }
+    .module { padding: 18px 14px; border-radius: 12px; }
+    .module-title { font-size: 16px; }
+    .mcq-stem { font-size: 15px; }
+    .mcq-option { font-size: 14px; padding: 10px 12px; }
+    .cloze-passage { font-size: 15px; line-height: 1.9; }
+    .cloze-blank { width: 90px; height: 30px; font-size: 13px; }
+    .translation-source { font-size: 15px; }
+    .translation-textarea { font-size: 15px; min-height: 180px; }
+    .score-row { gap: 10px; }
+    .score-item { font-size: 12px; }
+    .score-item strong { font-size: 15px; }
+    .reset-btn { padding: 8px 14px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== 顶部栏 ========== -->
+<div class="header">
+  <div class="header-inner">
+    <span class="header-tag">👴 银发经济专题</span>
+    <div class="header-title">练习卷四 · 银发经济专题</div>
+    <div class="header-info">
+      <span class="time-hint">建议时长 100 分钟</span>
+      <div class="timer-box">
+        <span id="timerDisplay">100:00</span>
+        <button class="timer-btn" id="timerBtn" onclick="toggleTimer()">开始</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 主体内容 ========== -->
+<div class="container">
+
+  <!-- 模块一：选词填空 -->
+  <div class="module" id="module1">
+    <div class="module-header">
+      <div class="module-num">一</div>
+      <div>
+        <div class="module-title">选词填空</div>
+        <div class="module-sub">共 5 题，每题 2 分，共 10 分</div>
+      </div>
+    </div>
+
+    <div id="mcqContainer">
+      <!-- 第 1 题 -->
+      <div class="mcq-item" data-q="1">
+        <div class="mcq-num">第 1 题 <span class="point">（考点：短语动词）</span></div>
+        <div class="mcq-stem">With the rapid aging of the population, more and more seniors are looking ______ new ways to stay active and engaged in society.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(1, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">up</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(1, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">for</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(1, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">after</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(1, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">into</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>look for 是固定短语动词，表示"寻找"，符合句意（寻找新方式）。look up 意为"查阅；好转"，look after 意为"照顾"，look into 意为"调查"，均不符合。
+        </div>
+      </div>
+
+      <!-- 第 2 题 -->
+      <div class="mcq-item" data-q="2">
+        <div class="mcq-num">第 2 题 <span class="point">（考点：形近词辨析）</span></div>
+        <div class="mcq-stem">The government has introduced various policies to ______ the development of the silver economy and improve the quality of life for the elderly.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(2, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">promote</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(2, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">prompt</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(2, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">proceed</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(2, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">propose</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>promote 意为"促进、推动"，promote the development 表示促进发展，符合句意。prompt 是"促使；提示"，proceed 是"继续进行"，propose 是"提议"，均不如 promote 准确。
+        </div>
+      </div>
+
+      <!-- 第 3 题 -->
+      <div class="mcq-item" data-q="3">
+        <div class="mcq-num">第 3 题 <span class="point">（考点：近义词语境辨析）</span></div>
+        <div class="mcq-stem">Many cities are now ______ their public facilities to make them more senior-friendly, such as installing handrails and lowering bus steps.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(3, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">altering</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(3, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">transforming</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(3, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">adapting</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(3, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">varying</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>adapt 意为"改造、使适应"，adapt facilities 表示改造设施以适应老年人需求，符合语境。alter 是"改变"但不强调"适应"；transform 是"彻底改造"，程度过重；vary 是"变化"，均不合适。
+        </div>
+      </div>
+
+      <!-- 第 4 题 -->
+      <div class="mcq-item" data-q="4">
+        <div class="mcq-num">第 4 题 <span class="point">（考点：词性/词形判断）</span></div>
+        <div class="mcq-stem">The ______ growth of the elderly population has created both challenges and opportunities for China's social and economic development.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(4, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">accelerate</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(4, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">acceleration</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(4, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">accelerated</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(4, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">accelerating</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>空格修饰名词 growth，需要填入形容词。accelerating（adj. 正在加速的）表示持续进行的动作，符合"人口老龄化加速增长"的语境。accelerate 是动词，acceleration 是名词，accelerated 是"已加速的"，表示已完成的状态。
+        </div>
+      </div>
+
+      <!-- 第 5 题 -->
+      <div class="mcq-item" data-q="5">
+        <div class="mcq-num">第 5 题 <span class="point">（考点：动词+介词搭配）</span></div>
+        <div class="mcq-stem">As people live longer, they need to ______ for their retirement years both financially and emotionally.</div>
+        <div class="mcq-options">
+          <div class="mcq-option" data-val="A" onclick="selectMCQ(5, 'A')">
+            <span class="option-label">A</span>
+            <span class="option-text">prepare</span>
+          </div>
+          <div class="mcq-option" data-val="B" onclick="selectMCQ(5, 'B')">
+            <span class="option-label">B</span>
+            <span class="option-text">plan</span>
+          </div>
+          <div class="mcq-option" data-val="C" onclick="selectMCQ(5, 'C')">
+            <span class="option-label">C</span>
+            <span class="option-text">provide</span>
+          </div>
+          <div class="mcq-option" data-val="D" onclick="selectMCQ(5, 'D')">
+            <span class="option-label">D</span>
+            <span class="option-text">account</span>
+          </div>
+        </div>
+        <div class="mcq-explanation">
+          <strong>解析：</strong>prepare for 是固定搭配，表示"为……做准备"，符合句意（为退休生活做准备）。plan 后接 for 时通常 plan for sth 表"为某事做计划"，但不如 prepare for 常用和准确；provide for 意为"供养"；account for 意为"占比；解释"。
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="mcqSubmitBtn" onclick="submitMCQ()">提交判分</button>
+  </div>
+
+  <!-- 模块二：完形填空 -->
+  <div class="module" id="module2">
+    <div class="module-header">
+      <div class="module-num">二</div>
+      <div>
+        <div class="module-title">完形填空</div>
+        <div class="module-sub">共 10 题，每题 2 分，共 20 分 · 15 选 10，用适当形式</div>
+      </div>
+    </div>
+
+    <!-- 短文 -->
+    <div class="cloze-passage">
+      <strong style="color:#EA580C">The Rise of the Silver Economy</strong><br><br>
+      China's aging population is not just a demographic challenge; it is also giving birth to a vast and growing market known as the "silver economy." With more than 280 million people aged 60 and above, China has the largest elderly population in the world. This demographic shift is reshaping industries from healthcare and eldercare to tourism and education,
+      <input type="text" class="cloze-blank" id="cloze-1" placeholder="①">
+      new business opportunities along the way.<br><br>
+      Recent studies
+      <input type="text" class="cloze-blank" id="cloze-2" placeholder="②">
+      the spending patterns of senior citizens show that today's elderly are no longer passive recipients of care.
+      <input type="text" class="cloze-blank" id="cloze-3" placeholder="③">
+      more active lifestyles and higher disposable incomes, they are willing to spend on products and services that improve their quality of life. These changes have produced
+      <input type="text" class="cloze-blank" id="cloze-4" placeholder="④">
+      results: the silver economy is expected to account for more than 30 percent of GDP by 2050.<br><br>
+      One major challenge is the
+      <input type="text" class="cloze-blank" id="cloze-5" placeholder="⑤">
+      of standardized eldercare services in many rural and small-town areas. While big cities boast modern nursing homes and home care platforms,
+      <input type="text" class="cloze-blank" id="cloze-6" placeholder="⑥">
+      regions often lack even basic senior-friendly facilities. To address this gap, the government has launched a national action plan,
+      <input type="text" class="cloze-blank" id="cloze-7" placeholder="⑦">
+      local communities to develop home-based care services and training more professional caregivers.<br><br>
+      Another important factor is public
+      <input type="text" class="cloze-blank" id="cloze-8" placeholder="⑧">
+      of the economic potential of the aging population. For a long time, aging was seen purely as a burden rather than an opportunity. This perception is gradually changing, creating a more supportive environment
+      <input type="text" class="cloze-blank" id="cloze-9" placeholder="⑨">
+      which innovative silver economy businesses can thrive.<br><br>
+      The silver economy is not just about providing for the elderly; it is about creating a society where people of all ages can lead dignified and fulfilling lives. When aging is no longer feared but embraced as a natural stage of life, the silver economy will no longer be a niche market
+      <input type="text" class="cloze-blank" id="cloze-10" placeholder="⑩">
+      a mainstream force that drives inclusive growth.
+    </div>
+
+    <!-- 备选词库 -->
+    <div class="wordbank">
+      <div class="wordbank-title">📝 备选词（15 选 10，注意适当形式）</div>
+      <div class="wordbank-list">
+        <span class="word-item">create <span class="pos">v.</span></span>
+        <span class="word-item">examine <span class="pos">v.</span></span>
+        <span class="word-item">drive <span class="pos">v.</span></span>
+        <span class="word-item">lack <span class="pos">n.</span></span>
+        <span class="word-item">enjoy <span class="pos">v.</span></span>
+        <span class="word-item">encourage <span class="pos">v.</span></span>
+        <span class="word-item">aware <span class="pos">adj.</span></span>
+        <span class="word-item">on <span class="pos">prep.</span></span>
+        <span class="word-item">rural <span class="pos">adj.</span></span>
+        <span class="word-item">but <span class="pos">conj.</span></span>
+        <span class="word-item">impress <span class="pos">v.</span></span>
+        <span class="word-item">significant <span class="pos">adj.</span></span>
+        <span class="word-item">instead <span class="pos">adv.</span></span>
+        <span class="word-item">that <span class="pos">pron.</span></span>
+        <span class="word-item">with <span class="pos">prep.</span></span>
+      </div>
+    </div>
+
+    <!-- 答案解析 -->
+    <div class="cloze-answers" id="clozeAnswers">
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-1">1</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-1">creating</div>
+          <div class="ca-explanation">现在分词作结果状语：shift is reshaping... creating... 主动关系。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-2">2</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-2">examining</div>
+          <div class="ca-explanation">现在分词作后置定语：studies examining... 修饰 studies，主动关系。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-3">3</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-3">Enjoying</div>
+          <div class="ca-explanation">现在分词作原因状语：句首分词短语表原因，they 与 enjoy 是主动关系。注意首字母大写。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-4">4</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-4">impressive</div>
+          <div class="ca-explanation">形容词：修饰 results，表示令人印象深刻的成果。impress 变形为形容词 impressive。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-5">5</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-5">lack</div>
+          <div class="ca-explanation">名词：the lack of 表示"……的缺乏"。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-6">6</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-6">rural</div>
+          <div class="ca-explanation">形容词：修饰 regions，表示农村地区，与 big cities 形成对比。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-7">7</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-7">encouraging</div>
+          <div class="ca-explanation">现在分词作伴随状语：government launches plan, encouraging... 主动关系。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-8">8</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-8">awareness</div>
+          <div class="ca-explanation">名词：public awareness 表示公众意识，aware 变形为名词 awareness。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-9">9</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-9">in</div>
+          <div class="ca-explanation">介词：in which 引导定语从句，相当于 businesses can thrive in this environment。</div>
+        </div>
+      </div>
+      <div class="cloze-answer-item">
+        <div class="ca-num" id="ca-num-10">10</div>
+        <div class="ca-content">
+          <div class="ca-answer" id="ca-answer-10">but</div>
+          <div class="ca-explanation">连词：not... but... 结构，表示"不是……而是……"。</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="clozeSubmitBtn" onclick="submitCloze()">提交判分</button>
+  </div>
+
+  <!-- 模块三：英译汉 -->
+  <div class="module" id="module3">
+    <div class="module-header">
+      <div class="module-num">三</div>
+      <div>
+        <div class="module-title">英译汉</div>
+        <div class="module-sub">15 分 · 写完后展开参考译文自评</div>
+      </div>
+    </div>
+
+    <div class="translation-source" id="trans1Source">
+      <p>The silver economy is not about selling products to a passive group of consumers, but about building an inclusive ecosystem that respects the dignity and diversity of older adults. For many years, the elderly were often portrayed as frail and dependent, with products designed for them focusing mainly on healthcare and basic necessities. This narrow view of aging is now being challenged by a new generation of seniors who are healthier, more educated, and more willing to spend on experiences and self-improvement.</p>
+      <p>The rise of the silver economy recognizes that older people are not just recipients of social support but also important contributors to economic and social life. It means developing age-friendly communities, promoting lifelong learning, and creating more employment opportunities for seniors who wish to remain active in the workforce. At the same time, it emphasizes the need for better pension systems and long-term care insurance, ensuring that every senior citizen can enjoy their later years with security and dignity.</p>
+      <p>Technology is playing an increasingly important role in this transformation. From smart healthcare devices and telemedicine platforms to social apps designed specifically for the elderly, digital innovations are helping bridge the digital divide and making life more convenient for older people. When technology is designed with senior users in mind, it does not just make life easier — it helps maintain social connections, preserve mental agility, and foster a greater sense of independence.</p>
+    </div>
+
+    <textarea class="translation-textarea" id="trans1Input" placeholder="请在此处输入你的译文……"></textarea>
+
+    <button class="reveal-btn" onclick="revealTranslation(1)">我写完了，展开参考译文</button>
+
+    <div class="reference-section" id="trans1Ref">
+      <div class="reference-title">📖 参考译文</div>
+      <div class="reference-text" id="trans1Reference">
+        <p>银发经济并非要向一群被动的消费者推销产品，而是要构建一个尊重老年人尊严与多样性的包容性生态系统。长期以来，老年人常常被描绘成虚弱、依赖他人的形象，为他们设计的产品也主要集中在医疗和基本生活用品上。如今，这种对老龄化的狭隘看法正受到新一代老年人的挑战——他们更健康、受教育程度更高，也更愿意为体验和自我提升付费。</p>
+        <p>银发经济的兴起认识到，老年人不仅是社会支持的接受者，也是经济和社会生活的重要贡献者。它意味着建设老年友好型社区、推动终身学习、为希望继续工作的老年人创造更多就业机会。同时，它强调完善养老金体系和长期护理保险的必要性，确保每一位老年人都能有保障、有尊严地安享晚年。</p>
+        <p>技术在这一转型中发挥着日益重要的作用。从智能医疗设备和远程医疗平台，到专门为老年人设计的社交应用，数字创新正在帮助弥合数字鸿沟，让老年人的生活更加便捷。当技术在设计时真正考虑到老年用户时，它不仅仅是让生活变得更轻松——它还有助于维持社会联系、保持思维敏捷，并培养更强的独立感。</p>
+      </div>
+
+      <div class="checklist-title">✅ 评分要点自评（对照你的译文逐条打勾）</div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-1" onchange="toggleCheck(this)">
+          <label for="c1-1">"not about... but about..." 译为"并非……而是……"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-2" onchange="toggleCheck(this)">
+          <label for="c1-2">"silver economy" 译为"银发经济"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-3" onchange="toggleCheck(this)">
+          <label for="c1-3">"age-friendly communities" 译为"老年友好型社区"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-4" onchange="toggleCheck(this)">
+          <label for="c1-4">"digital divide" 译为"数字鸿沟"</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-5" onchange="toggleCheck(this)">
+          <label for="c1-5">第三段排比结构（从……到……）保持中文节奏</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c1-6" onchange="toggleCheck(this)">
+          <label for="c1-6">破折号后的递进句翻译自然流畅</label>
+        </div>
+      </div>
+      <div class="self-eval-hint">自评完成后，可在底部栏查看得分情况</div>
+    </div>
+  </div>
+
+  <!-- 模块四：汉译英 -->
+  <div class="module" id="module4">
+    <div class="module-header">
+      <div class="module-num">四</div>
+      <div>
+        <div class="module-title">汉译英</div>
+        <div class="module-sub">15 分 · 写完后展开参考译文自评</div>
+      </div>
+    </div>
+
+    <div class="translation-source" id="trans2Source">
+      <p>人口老龄化是中国未来发展面临的重要课题。截至2025年底，中国60岁及以上人口已超过2.8亿，占总人口的比例接近20%。积极应对人口老龄化，不仅关系到亿万老年人的福祉，也关系到经济社会的高质量发展。</p>
+      <p>银发经济正在成为新的经济增长点。各地积极发展养老服务、健康医疗、文化旅游等银发产业，不断满足老年人多样化、多层次的需求。与此同时，智慧养老快速发展，智能手环、远程问诊、老年大学线上课程等新模式层出不穷，让老年人的生活更加便捷和丰富多彩。</p>
+      <p>值得一提的是，积极老龄化的理念正在深入人心。越来越多的老年人不再满足于在家养老，而是选择走出家门，参与社区活动、学习新技能、投身志愿服务。可以说，银发经济不仅为经济增长注入了新动能，也让老年人找到了新的人生价值和社会归属感。</p>
+    </div>
+
+    <textarea class="translation-textarea" id="trans2Input" placeholder="请在此处输入你的译文……"></textarea>
+
+    <button class="reveal-btn" onclick="revealTranslation(2)">我写完了，展开参考译文</button>
+
+    <div class="reference-section" id="trans2Ref">
+      <div class="reference-title">📖 参考译文</div>
+      <div class="reference-text" id="trans2Reference">
+        <p>Population aging is an important issue facing China's future development. By the end of 2025, the number of people aged 60 and above in China had exceeded 280 million, accounting for nearly 20 percent of the total population. Proactively responding to population aging is not only related to the well-being of hundreds of millions of elderly people but also to the high-quality development of the economy and society.</p>
+        <p>The silver economy is becoming a new growth point. Local authorities have actively developed silver industries such as eldercare services, healthcare, and cultural tourism, continuously meeting the diverse and multi-level needs of the elderly. Meanwhile, smart eldercare has developed rapidly, with new models such as smart bracelets, remote medical consultations, and online courses for senior universities emerging one after another, making life for the elderly more convenient and colorful.</p>
+        <p>It is worth mentioning that the concept of active aging is taking deep root among the people. An increasing number of seniors are no longer satisfied with aging at home; instead, they choose to step out, participate in community activities, learn new skills, and engage in volunteer services. It can be said that the silver economy has not only injected new momentum into economic growth but also helped older people find new meaning in life and a greater sense of social belonging.</p>
+      </div>
+
+      <div class="checklist-title">✅ 评分要点自评（对照你的译文逐条打勾）</div>
+      <div class="checklist">
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-1" onchange="toggleCheck(this)">
+          <label for="c2-1">"银发经济" 译为 silver economy</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-2" onchange="toggleCheck(this)">
+          <label for="c2-2">"人口老龄化" 译为 population aging</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-3" onchange="toggleCheck(this)">
+          <label for="c2-3">"积极老龄化" 译为 active aging</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-4" onchange="toggleCheck(this)">
+          <label for="c2-4">"智慧养老" 译为 smart eldercare</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-5" onchange="toggleCheck(this)">
+          <label for="c2-5">"数字鸿沟" 译为 digital divide</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-6" onchange="toggleCheck(this)">
+          <label for="c2-6">not only... but also... 正确使用（没有漏掉 but）</label>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" id="c2-7" onchange="toggleCheck(this)">
+          <label for="c2-7">时态一致性和主谓一致</label>
+        </div>
+      </div>
+      <div class="self-eval-hint">自评完成后，可在底部栏查看得分情况</div>
+    </div>
+  </div>
+
+  <!-- ===== 结构化数据面板（给Agent读取） ===== -->
+  <div class="agent-panel" id="agentPanel">
+    <div class="agent-panel-header">
+      <div class="agent-panel-title">🤖 结构化答题数据（供 Agent 深度批改）</div>
+      <button class="agent-copy-btn" onclick="copyAgentData()">复制</button>
+    </div>
+    <div class="agent-data" id="agentData"></div>
+  </div>
+
+</div>
+
+<!-- ========== 底部得分栏 ========== -->
+<div class="score-bar">
+  <div class="score-bar-inner">
+    <div class="score-info">
+      <div class="score-row">
+        <div class="score-item">选词 <strong id="mcqScore">0</strong>/10 分</div>
+        <div class="score-item">完形 <strong id="clozeScore">0</strong>/20 分</div>
+        <div class="score-item">英译汉 <strong class="self">自评中</strong></div>
+        <div class="score-item">汉译英 <strong class="self">自评中</strong></div>
+      </div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">🔄 重做一遍</button>
+  </div>
+</div>
+
+<script>
+  // ========== 参考答案数据 ==========
+  const mcqAnswers = {
+    1: { answer: 'B', explanation: 'look for 是固定短语动词，表示"寻找"。' },
+    2: { answer: 'A', explanation: 'promote 意为"促进、推动"，promote the development 符合句意。' },
+    3: { answer: 'C', explanation: 'adapt 意为"改造、使适应"，符合改造设施以适应老年人需求的语境。' },
+    4: { answer: 'D', explanation: '修饰名词 growth 需要形容词，accelerating 表示正在加速的，符合语境。' },
+    5: { answer: 'A', explanation: 'prepare for 是固定搭配，表示"为……做准备"。' }
+  };
+
+  const clozeAnswers = [
+    { answer: 'creating', explanation: '现在分词作结果状语：主动关系。' },
+    { answer: 'examining', explanation: '现在分词作后置定语：studies examining... 主动关系。' },
+    { answer: 'enjoying', explanation: '现在分词作原因状语：句首，主动关系，注意首字母大写。' },
+    { answer: 'impressive', explanation: '形容词：修饰 results，impress 变形为 impressive。' },
+    { answer: 'lack', explanation: '名词：the lack of 表示"……的缺乏"。' },
+    { answer: 'rural', explanation: '形容词：修饰 regions，与 big cities 形成对比。' },
+    { answer: 'encouraging', explanation: '现在分词作伴随状语：主动关系。' },
+    { answer: 'awareness', explanation: '名词：public awareness，aware 变形为名词。' },
+    { answer: 'in', explanation: '介词：in which 引导定语从句。' },
+    { answer: 'but', explanation: '连词：not... but... 结构。' }
+  ];
+
+  const translationData = {
+    c2e: {
+      source: '',
+      reference: '',
+      scoringPoints: [
+        '"not about... but about..." 译为"并非……而是……"',
+        '"silver economy" 译为"银发经济"',
+        '"age-friendly communities" 译为"老年友好型社区"',
+        '"digital divide" 译为"数字鸿沟"',
+        '排比结构保持中文节奏',
+        '破折号递进句翻译自然流畅'
+      ]
+    },
+    e2c: {
+      source: '',
+      reference: '',
+      scoringPoints: [
+        '"银发经济" 译为 silver economy',
+        '"人口老龄化" 译为 population aging',
+        '"积极老龄化" 译为 active aging',
+        '"智慧养老" 译为 smart eldercare',
+        '"数字鸿沟" 译为 digital divide',
+        'not only... but also... 正确使用',
+        '时态一致性和主谓一致'
+      ]
+    }
+  };
+
+  // ========== 计时器功能 ==========
+  let timerSeconds = 100 * 60;
+  let timerInterval = null;
+  let timerRunning = false;
+
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  }
+
+  function updateTimerDisplay() {
+    document.getElementById('timerDisplay').textContent = formatTime(timerSeconds);
+  }
+
+  function toggleTimer() {
+    const btn = document.getElementById('timerBtn');
+    if (timerRunning) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      btn.textContent = '继续';
+    } else {
+      timerInterval = setInterval(function() {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          timerRunning = false;
+          document.getElementById('timerBtn').textContent = '时间到';
+          alert('⏰ 时间到！建议停止作答。');
+        }
+      }, 1000);
+      timerRunning = true;
+      btn.textContent = '暂停';
+    }
+  }
+
+  // ========== 选词填空 ==========
+  let mcqUserAnswers = {};
+  let mcqSubmitted = false;
+
+  function selectMCQ(qNum, val) {
+    if (mcqSubmitted) return;
+    mcqUserAnswers[qNum] = val;
+    const item = document.querySelector('.mcq-item[data-q="' + qNum + '"]');
+    const options = item.querySelectorAll('.mcq-option');
+    options.forEach(function(opt) {
+      opt.classList.remove('selected');
+      if (opt.dataset.val === val) opt.classList.add('selected');
+    });
+  }
+
+  function submitMCQ() {
+    if (mcqSubmitted) return;
+
+    let unanswered = [];
+    for (let i = 1; i <= 5; i++) {
+      if (!mcqUserAnswers[i]) unanswered.push(i);
+    }
+    if (unanswered.length > 0) {
+      if (!confirm('还有第 ' + unanswered.join('、') + ' 题未作答，确定要提交吗？')) return;
+    }
+
+    mcqSubmitted = true;
+    let correctCount = 0;
+
+    for (let i = 1; i <= 5; i++) {
+      const item = document.querySelector('.mcq-item[data-q="' + i + '"]');
+      const options = item.querySelectorAll('.mcq-option');
+      const explanation = item.querySelector('.mcq-explanation');
+      const userAns = mcqUserAnswers[i];
+      const correctAns = mcqAnswers[i].answer;
+
+      options.forEach(function(opt) {
+        opt.classList.add('submitted');
+        opt.style.cursor = 'default';
+        const val = opt.dataset.val;
+        if (val === correctAns) opt.classList.add('correct');
+        else if (val === userAns && userAns !== correctAns) opt.classList.add('wrong');
+      });
+
+      explanation.classList.add('show');
+      if (userAns === correctAns) correctCount++;
+    }
+
+    document.getElementById('mcqScore').textContent = correctCount * 2;
+    document.getElementById('mcqSubmitBtn').textContent = '已提交';
+    document.getElementById('mcqSubmitBtn').disabled = true;
+
+    updateAgentPanel();
+  }
+
+  // ========== 完形填空 ==========
+  let clozeSubmitted = false;
+
+  function submitCloze() {
+    if (clozeSubmitted) return;
+
+    let unanswered = [];
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      if (!input.value.trim()) unanswered.push(i);
+    }
+    if (unanswered.length > 0) {
+      if (!confirm('还有第 ' + unanswered.join('、') + ' 空未填，确定要提交吗？')) return;
+    }
+
+    clozeSubmitted = true;
+    let correctCount = 0;
+
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      const userAns = input.value.trim().toLowerCase();
+      const correctAns = clozeAnswers[i - 1].answer;
+      const isCorrect = userAns === correctAns.toLowerCase();
+
+      input.classList.add(isCorrect ? 'correct' : 'wrong');
+      input.disabled = true;
+
+      const caNum = document.getElementById('ca-num-' + i);
+      const caAnswer = document.getElementById('ca-answer-' + i);
+
+      if (isCorrect) {
+        correctCount++;
+      } else {
+        caNum.classList.add('wrong');
+        caAnswer.innerHTML = '<span class="user-wrong">' + (input.value.trim() || '未作答') + '</span> → ' + correctAns;
+      }
+    }
+
+    document.getElementById('clozeAnswers').classList.add('show');
+    document.getElementById('clozeScore').textContent = correctCount * 2;
+    document.getElementById('clozeSubmitBtn').textContent = '已提交';
+    document.getElementById('clozeSubmitBtn').disabled = true;
+
+    updateAgentPanel();
+  }
+
+  // ========== 翻译题 ==========
+  function revealTranslation(num) {
+    const textarea = document.getElementById('trans' + num + 'Input');
+    const refSection = document.getElementById('trans' + num + 'Ref');
+
+    if (refSection.classList.contains('show')) return;
+
+    if (!textarea.value.trim()) {
+      if (!confirm('你的译文还是空的，确定要直接看参考译文吗？')) return;
+    }
+
+    refSection.classList.add('show');
+    updateAgentPanel();
+
+    setTimeout(function() {
+      refSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function toggleCheck(checkbox) {
+    const item = checkbox.parentElement;
+    if (checkbox.checked) item.classList.add('checked');
+    else item.classList.remove('checked');
+  }
+
+  // ========== 结构化数据面板（给Agent） ==========
+  function updateAgentPanel() {
+    // 收集翻译原文和参考译文
+    translationData.c2e.source = document.getElementById('trans1Source').innerText.trim();
+    translationData.c2e.reference = document.getElementById('trans1Reference').innerText.trim();
+    translationData.e2c.source = document.getElementById('trans2Source').innerText.trim();
+    translationData.e2c.reference = document.getElementById('trans2Reference').innerText.trim();
+
+    const data = {
+      // 基本信息
+      paper: '练习卷四 · 银发经济专题',
+      topic: '银发经济与人口老龄化',
+      totalTimeMinutes: 100,
+      elapsedTimeSeconds: 100 * 60 - timerSeconds,
+
+      // 选词填空
+      mcq: {
+        total: 5,
+        scoreEach: 2,
+        userAnswers: mcqUserAnswers,
+        correctAnswers: {},
+        explanations: {}
+      },
+
+      // 完形填空
+      cloze: {
+        total: 10,
+        scoreEach: 2,
+        wordBank: [
+          { word: 'create', pos: 'v.' },
+          { word: 'examine', pos: 'v.' },
+          { word: 'drive', pos: 'v.' },
+          { word: 'lack', pos: 'n.' },
+          { word: 'enjoy', pos: 'v.' },
+          { word: 'encourage', pos: 'v.' },
+          { word: 'aware', pos: 'adj.' },
+          { word: 'on', pos: 'prep.' },
+          { word: 'rural', pos: 'adj.' },
+          { word: 'but', pos: 'conj.' },
+          { word: 'impress', pos: 'v.' },
+          { word: 'significant', pos: 'adj.' },
+          { word: 'instead', pos: 'adv.' },
+          { word: 'that', pos: 'pron.' },
+          { word: 'with', pos: 'prep.' }
+        ],
+        userAnswers: {},
+        correctAnswers: {},
+        explanations: {}
+      },
+
+      // 英译汉
+      c2e: {
+        source: translationData.c2e.source,
+        userTranslation: document.getElementById('trans1Input').value,
+        referenceTranslation: translationData.c2e.reference,
+        scoringPoints: translationData.c2e.scoringPoints
+      },
+
+      // 汉译英
+      e2c: {
+        source: translationData.e2c.source,
+        userTranslation: document.getElementById('trans2Input').value,
+        referenceTranslation: translationData.e2c.reference,
+        scoringPoints: translationData.e2c.scoringPoints
+      }
+    };
+
+    // 填入选词答案
+    for (let i = 1; i <= 5; i++) {
+      data.mcq.correctAnswers[i] = mcqAnswers[i].answer;
+      data.mcq.explanations[i] = mcqAnswers[i].explanation;
+    }
+
+    // 填入完形答案
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      data.cloze.userAnswers[i] = input.value.trim();
+      data.cloze.correctAnswers[i] = clozeAnswers[i - 1].answer;
+      data.cloze.explanations[i] = clozeAnswers[i - 1].explanation;
+    }
+
+    // 展示
+    const panel = document.getElementById('agentPanel');
+    panel.classList.add('show');
+    document.getElementById('agentData').textContent = JSON.stringify(data, null, 2);
+  }
+
+  function copyAgentData() {
+    const text = document.getElementById('agentData').textContent;
+    navigator.clipboard.writeText(text).then(function() {
+      const btn = document.querySelector('.agent-copy-btn');
+      const original = btn.textContent;
+      btn.textContent = '已复制 ✓';
+      setTimeout(function() { btn.textContent = original; }, 1500);
+    }).catch(function() {
+      alert('复制失败，请手动复制');
+    });
+  }
+
+  // ========== 重做一遍 ==========
+  function resetAll() {
+    if (!confirm('确定要重做一遍吗？所有作答和判分状态都会被清空。')) return;
+
+    // 重置计时器
+    clearInterval(timerInterval);
+    timerSeconds = 100 * 60;
+    timerRunning = false;
+    updateTimerDisplay();
+    document.getElementById('timerBtn').textContent = '开始';
+
+    // 重置选词填空
+    mcqSubmitted = false;
+    mcqUserAnswers = {};
+    document.querySelectorAll('.mcq-item').forEach(function(item) {
+      item.querySelectorAll('.mcq-option').forEach(function(opt) {
+        opt.classList.remove('selected', 'correct', 'wrong', 'submitted');
+        opt.style.cursor = 'pointer';
+      });
+      item.querySelector('.mcq-explanation').classList.remove('show');
+    });
+    document.getElementById('mcqScore').textContent = '0';
+    const mcqBtn = document.getElementById('mcqSubmitBtn');
+    mcqBtn.textContent = '提交判分';
+    mcqBtn.disabled = false;
+
+    // 重置完形填空
+    clozeSubmitted = false;
+    for (let i = 1; i <= 10; i++) {
+      const input = document.getElementById('cloze-' + i);
+      input.value = '';
+      input.classList.remove('correct', 'wrong');
+      input.disabled = false;
+      const caNum = document.getElementById('ca-num-' + i);
+      const caAnswer = document.getElementById('ca-answer-' + i);
+      caNum.classList.remove('wrong');
+      caAnswer.innerHTML = clozeAnswers[i - 1].answer;
+    }
+    document.getElementById('clozeAnswers').classList.remove('show');
+    document.getElementById('clozeScore').textContent = '0';
+    const clozeBtn = document.getElementById('clozeSubmitBtn');
+    clozeBtn.textContent = '提交判分';
+    clozeBtn.disabled = false;
+
+    // 重置翻译题
+    document.getElementById('trans1Input').value = '';
+    document.getElementById('trans2Input').value = '';
+    document.getElementById('trans1Ref').classList.remove('show');
+    document.getElementById('trans2Ref').classList.remove('show');
+
+    // 重置评分要点勾选
+    document.querySelectorAll('.checklist-item input').forEach(function(cb) {
+      cb.checked = false;
+      cb.parentElement.classList.remove('checked');
+    });
+
+    // 隐藏Agent数据面板
+    document.getElementById('agentPanel').classList.remove('show');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // 初始化
+  updateTimerDisplay();
+</script>
+
+</body>
+</html>

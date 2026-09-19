@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>笔译备考方法论 · 深度笔记</title>
+<style>
+  /* ========== 基础样式 ========== */
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #FFFDF7;
+    color: #2D2A26;
+    line-height: 1.8;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== Hero 区 ========== */
+  .hero {
+    background: linear-gradient(135deg, #78350F 0%, #92400E 50%, #B45309 100%);
+    color: white;
+    padding: 48px 24px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(251,191,36,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    padding: 4px 14px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.4;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    line-height: 1.9;
+    opacity: 0.9;
+    margin-bottom: 24px;
+    max-width: 600px;
+  }
+
+  .hero-divider {
+    height: 1px;
+    background: linear-gradient(to right, rgba(255,255,255,0.5), transparent);
+    margin-bottom: 20px;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+
+  .meta-dot {
+    width: 6px;
+    height: 6px;
+    background: #FBBF24;
+    border-radius: 50%;
+  }
+
+  /* ========== 主体容器 ========== */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 16px 60px;
+  }
+
+  /* ========== 章节标题 ========== */
+  .section {
+    margin-bottom: 36px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #FDE68A;
+  }
+
+  .section-num {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #B45309, #92400E);
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #78350F;
+  }
+
+  /* ========== 卡片 ========== */
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(120, 53, 15, 0.06);
+    border: 1px solid #FEF3C7;
+  }
+
+  .card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #78350F;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title-icon {
+    font-size: 20px;
+  }
+
+  .card p {
+    margin-bottom: 12px;
+    color: #44403C;
+    line-height: 1.85;
+  }
+
+  .card p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ========== 金句框 ========== */
+  .quote-box {
+    background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+    border-left: 4px solid #F59E0B;
+    border-radius: 0 12px 12px 0;
+    padding: 18px 20px;
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 1.9;
+    color: #78350F;
+    font-weight: 500;
+  }
+
+  .quote-box strong {
+    color: #92400E;
+  }
+
+  /* ========== 流程图/步骤 ========== */
+  .steps {
+    margin: 20px 0;
+  }
+
+  .step {
+    display: flex;
+    gap: 14px;
+    position: relative;
+    padding-bottom: 24px;
+  }
+
+  .step:last-child {
+    padding-bottom: 0;
+  }
+
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 42px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #F59E0B, #FDE68A);
+  }
+
+  .step-num {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+  }
+
+  .step-content {
+    flex: 1;
+    padding-top: 6px;
+  }
+
+  .step-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #78350F;
+    margin-bottom: 6px;
+  }
+
+  .step-desc {
+    font-size: 15px;
+    color: #57534E;
+    line-height: 1.8;
+  }
+
+  /* ========== 对比双栏 ========== */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .compare-col {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    border: 2px solid #E5E7EB;
+  }
+
+  .compare-col.wrong {
+    border-color: #FCA5A5;
+    background: #FEF2F2;
+  }
+
+  .compare-col.right {
+    border-color: #6EE7B7;
+    background: #ECFDF5;
+  }
+
+  .compare-label {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .compare-col.wrong .compare-label { color: #DC2626; }
+  .compare-col.right .compare-label { color: #059669; }
+
+  .compare-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #44403C;
+  }
+
+  /* ========== 要点清单 ========== */
+  .check-list {
+    margin: 12px 0;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #FDE68A;
+  }
+
+  .check-item:last-child {
+    border-bottom: none;
+  }
+
+  .check-icon {
+    color: #F59E0B;
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .check-text {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #44403C;
+  }
+
+  .check-text strong {
+    color: #78350F;
+  }
+
+  /* ========== 数据面板 ========== */
+  .data-panel {
+    background: linear-gradient(135deg, #78350F 0%, #92400E 100%);
+    border-radius: 14px;
+    padding: 24px 20px;
+    color: white;
+    margin: 20px 0;
+  }
+
+  .data-panel-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-align: center;
+    opacity: 0.9;
+  }
+
+  .data-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .data-item {
+    text-align: center;
+    padding: 12px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+
+  .data-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: #FBBF24;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .data-label {
+    font-size: 12px;
+    opacity: 0.85;
+  }
+
+  /* ========== 漏斗图 ========== */
+  .funnel {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .funnel-layer {
+    color: white;
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    position: relative;
+  }
+
+  .funnel-layer:nth-child(1) {
+    width: 100%;
+    background: linear-gradient(135deg, #B45309, #92400E);
+    border-radius: 10px 10px 0 0;
+  }
+
+  .funnel-layer:nth-child(2) {
+    width: 85%;
+    background: linear-gradient(135deg, #D97706, #B45309);
+  }
+
+  .funnel-layer:nth-child(3) {
+    width: 70%;
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+  }
+
+  .funnel-layer:nth-child(4) {
+    width: 55%;
+    background: linear-gradient(135deg, #FBBF24, #F59E0B);
+    border-radius: 0 0 10px 10px;
+  }
+
+  .funnel-label {
+    font-size: 13px;
+    margin-bottom: 2px;
+    font-weight: 700;
+  }
+
+  .funnel-desc {
+    font-size: 11px;
+    opacity: 0.9;
+    font-weight: 400;
+  }
+
+  /* ========== 原则卡片网格 ========== */
+  .principle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .principle-card {
+    background: white;
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid #FDE68A;
+    text-align: center;
+  }
+
+  .principle-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .principle-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #78350F;
+    margin-bottom: 4px;
+  }
+
+  .principle-desc {
+    font-size: 12px;
+    color: #78716C;
+    line-height: 1.6;
+  }
+
+  /* ========== 周历 ========== */
+  .week-calendar {
+    margin: 16px 0;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #FDE68A;
+  }
+
+  .week-row {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    border-bottom: 1px solid #FEF3C7;
+  }
+
+  .week-row:last-child {
+    border-bottom: none;
+  }
+
+  .week-day {
+    background: #FFFBEB;
+    padding: 10px 8px;
+    text-align: center;
+    font-weight: 700;
+    color: #92400E;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #FDE68A;
+  }
+
+  .week-task {
+    padding: 10px 14px;
+    font-size: 14px;
+    color: #44403C;
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ========== 底部信 ========== */
+  .letter-box {
+    background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+    border-radius: 16px;
+    padding: 28px 24px;
+    margin-top: 24px;
+    position: relative;
+    border: 1px solid #FDE68A;
+  }
+
+  .letter-box::before {
+    content: '✉';
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    font-size: 24px;
+    background: #F59E0B;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+  }
+
+  .letter-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #78350F;
+    margin-bottom: 14px;
+    margin-top: 6px;
+  }
+
+  .letter-text {
+    font-size: 15px;
+    line-height: 2;
+    color: #57534E;
+  }
+
+  .letter-text p {
+    margin-bottom: 12px;
+  }
+
+  .letter-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .letter-sign {
+    text-align: right;
+    margin-top: 16px;
+    font-style: italic;
+    color: #92400E;
+    font-size: 14px;
+  }
+
+  /* ========== 响应式 ========== */
+  @media (max-width: 480px) {
+    body { font-size: 15px; }
+    .hero { padding: 36px 20px 32px; }
+    .hero-title { font-size: 22px; }
+    .hero-subtitle { font-size: 14px; }
+    .container { padding: 24px 12px 48px; }
+    .section-title { font-size: 18px; }
+    .card { padding: 18px 16px; border-radius: 12px; }
+    .card-title { font-size: 16px; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .principle-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .principle-card { padding: 12px 8px; }
+    .principle-name { font-size: 13px; }
+    .principle-desc { font-size: 11px; }
+    .data-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .data-num { font-size: 22px; }
+    .data-label { font-size: 11px; }
+    .week-row { grid-template-columns: 56px 1fr; }
+    .week-day { font-size: 12px; }
+    .week-task { font-size: 13px; padding: 8px 10px; }
+    .letter-box { padding: 24px 18px; }
+    .letter-title { font-size: 16px; }
+    .letter-text { font-size: 14px; }
+    .funnel-layer { padding: 10px 12px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== Hero ========== -->
+<div class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">📚 备考方法论</span>
+    <div class="hero-title">外研社杯笔译备考<br>内容复盘方法论</div>
+    <div class="hero-subtitle">
+      从"教材内容"到"真题检验"再到"模拟实战"，用三步闭环建立真正的翻译能力。
+      不是死记硬背术语，而是让知识在做题中自然长出来。
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-meta">
+      <div class="meta-item"><span class="meta-dot"></span>三步闭环法</div>
+      <div class="meta-item"><span class="meta-dot"></span>7 套练习卷</div>
+      <div class="meta-item"><span class="meta-dot"></span>六大核心话题</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 主体 ========== -->
+<div class="container">
+
+  <!-- 模块一：核心认知 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">一</div>
+      <div class="section-title">核心认知：翻译不是背出来的</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">🧠</span>最大的误区：背完术语就会翻了</div>
+      <p>
+        很多同学备考笔译的第一个动作是：找一份术语表，开始背。
+        背完以后信心满满地去做题，结果发现——每个词都认识，但组合在一起就是翻不对。
+        为什么？因为<strong>翻译的本质不是词汇量的比拼，而是在两种语言体系之间建立对应关系的能力</strong>。
+      </p>
+      <p>
+        术语当然重要，但它只是"原料"。真正的翻译能力，是知道在什么语境下用什么词、
+        句子的骨架怎么搭、语序怎么调、文化意象怎么传。这些能力靠背是背不出来的，
+        只能在<strong>大量的刻意练习 + 及时的反馈校正</strong>中长出来。
+      </p>
+    </div>
+
+    <div class="quote-box">
+      <strong>核心公式：</strong>翻译能力 = 术语积累 × 句型搭建 × 语境判断 × 复盘密度
+      <br><br>
+      四个因子是乘法关系——任何一个为零，整体结果都是零。只背术语不做题，就像只买食材不下厨。
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-col wrong">
+        <div class="compare-label">❌ 低效备考</div>
+        <div class="compare-text">
+          从头到尾读教材<br>
+          孤立背单词和术语<br>
+            做完题对个答案就过<br>
+            追求刷题数量而非质量
+        </div>
+      </div>
+      <div class="compare-col right">
+        <div class="compare-label">✅ 高效备考</div>
+        <div class="compare-text">
+          教材提炼"小书"再精读<br>
+          术语在语境中理解记忆<br>
+          每题必复盘、每错必归因<br>
+          少量多练、螺旋上升
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模块二：三步闭环 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">二</div>
+      <div class="section-title">三步闭环法：教材 → 真题 → 模考</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">🔄</span>什么是三步闭环</div>
+      <p>
+        备考不是线性的"先学完再练"，而是一个螺旋上升的循环。
+        每一轮都经历三个阶段：<strong>读教材学知识 → 做真题验效果 → 模拟考找漏洞</strong>，
+        然后带着漏洞回到教材，开始下一轮。
+      </p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">第一步：教材读薄——做一本"小书"</div>
+          <div class="step-desc">
+            不要试图把整本教材都装进脑子里。先通读一遍，把核心术语、
+            高频句型、文化负载词提炼出来，做成你自己的"小书"。
+            小书的标准是：<strong>考前 30 分钟能翻完一遍</strong>。
+            提炼的过程本身就是最好的记忆——你是在筛选重点，而不是被动接收。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">第二步：真题检验——在做题中激活知识</div>
+          <div class="step-desc">
+            学完一个专题，立刻做对应专题的练习题。不要等"都学完了再做"——
+            那时候你已经忘了大半。做题的目的不是考自己会不会，
+            而是<strong>让知识从"认得"变成"能用"</strong>。
+            每做一题都是在给大脑建立"中文表达→英文对应"的神经通路。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">第三步：模拟实战——在压力下查漏补缺</div>
+          <div class="step-desc">
+            单个专题练得差不多了，就做综合模拟卷。限时、闭卷、完整做完一套。
+            模考的价值不在于分数，而在于<strong>暴露你在时间压力下的真实弱点</strong>：
+            是选词犹豫浪费时间？是长句不会拆？是术语想不起来？
+            把这些漏洞记下来，回到第一步针对性补。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-box">
+      记住：<strong>做题不是终点，复盘才是。</strong>
+      做完一道题，对完答案，问自己三个问题：
+      <br>① 我哪里翻得不好？
+      <br>② 为什么翻不好？（词汇缺了？句型错了？还是语序没调对？）
+      <br>③ 下次遇到类似的怎么改进？
+      <br>能回答这三个问题，这道题才算没白做。
+    </div>
+  </div>
+
+  <!-- 模块三：七大专题 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">三</div>
+      <div class="section-title">六大核心话题全覆盖</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">📊</span>练习卷全景</div>
+      <p>
+        本套练习共 7 套卷子，覆盖外研社杯笔译最常考的六大时政和社会话题，
+        外加一套综合模拟最终卷。每套卷子包含四种题型，完全对应比赛结构。
+      </p>
+    </div>
+
+    <div class="data-panel">
+      <div class="data-panel-title">📚 七套练习卷数据面板</div>
+      <div class="data-grid">
+        <div class="data-item">
+          <div class="data-num">7</div>
+          <div class="data-label">套练习卷</div>
+        </div>
+        <div class="data-item">
+          <div class="data-num">35</div>
+          <div class="data-label">道选词填空</div>
+        </div>
+        <div class="data-item">
+          <div class="data-num">70</div>
+          <div class="data-label">道完形填空</div>
+        </div>
+        <div class="data-item">
+          <div class="data-num">14</div>
+          <div class="data-label">篇翻译（互译各7）</div>
+        </div>
+        <div class="data-item">
+          <div class="data-num">6</div>
+          <div class="data-label">大核心话题</div>
+        </div>
+        <div class="data-item">
+          <div class="data-num">100</div>
+          <div class="data-label">分钟/套限时</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle-grid">
+      <div class="principle-card">
+        <div class="principle-icon">🌾</div>
+        <div class="principle-name">乡村振兴</div>
+        <div class="principle-desc">三农话题<br>扶贫·粮食安全</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-icon">🌿</div>
+        <div class="principle-name">生态文明</div>
+        <div class="principle-desc">绿色发展<br>碳中和·环保</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-icon">📈</div>
+        <div class="principle-name">高质量发展</div>
+        <div class="principle-desc">经济转型<br>共同富裕</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-icon">👴</div>
+        <div class="principle-name">银发经济</div>
+        <div class="principle-desc">人口老龄化<br>智慧养老</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-icon">🏮</div>
+        <div class="principle-name">文化自信</div>
+        <div class="principle-desc">传统文化<br>文明互鉴</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-icon">💻</div>
+        <div class="principle-name">数字中国</div>
+        <div class="principle-desc">科技创新<br>数字治理</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模块四：各题型攻略 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">四</div>
+      <div class="section-title">分题型解题策略</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">①</span>选词填空：先判词性，再读句意</div>
+      <div class="check-list">
+        <div class="check-item">
+          <span class="check-icon">✦</span>
+          <div class="check-text">
+            <strong>第一步：看空格前后，判断需要什么词性。</strong>
+            名词前可能填形容词，动词前可能填副词，the + 名词 + of 是经典结构。
+            先把选项按词性分组，范围立刻缩小。
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✦</span>
+          <div class="check-text">
+            <strong>第二步：读句子，理解空格处的逻辑含义。</strong>
+            是转折、因果、递进还是并列？语境线索比单词本身更重要。
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✦</span>
+          <div class="check-text">
+            <strong>第三步：选完代入读一遍。</strong>
+            语感通顺了才是真的对。不要只看语法对不对，要看整个句子顺不顺。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">②</span>完形填空：先通读全文，再逐空击破</div>
+      <div class="check-list">
+        <div class="check-item">
+          <span class="check-icon">✦</span>
+          <div class="check-text">
+            <strong>先花 1 分钟通读全文。</strong>
+            知道文章在讲什么主题，整体语气是积极还是消极，大方向就不会错。
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✦</span>
+          <div class="check-text">
+            <strong>15 个备选词按词性分类。</strong>
+            名词、动词、形容词、介词、连词各有几个，心里有数。
+            每填掉一个就划掉一个，逐步缩小范围。
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✦</span>
+          <div class="check-text">
+            <strong>注意"适当形式"。</strong>
+            动词可能变 -ing / -ed / 第三人称单数，
+            形容词可能变副词，形容词也可能变动名词。
+            <strong>这是最容易丢分的地方。</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">③</span>英译汉：先拆句子，再调语序</div>
+      <div class="check-list">
+        <div class="check-item">
+          <span class="check-icon">✦</span>
+          <div class="check-text">
+            <strong>找主谓骨架。</strong>
+            长难句先把主句的主谓找出来，其他都是修饰成分。
+            骨架立住了，句子就不会翻错。
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✦</span>
+          <div class="check-text">
+            <strong>英语多长句，中文多短句。</strong>
+            英文一句话可以套好几个从句，中文要拆成几句说才自然。
+            不要硬套英文语序翻出"翻译腔"。
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✦</span>
+          <div class="check-text">
+            <strong>术语要准，节奏要顺。</strong>
+            固定译法不能错（比如 common prosperity = 共同富裕），
+            但除了术语之外，句子的节奏和流畅度同样重要。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">④</span>汉译英：先搭骨架，再填血肉</div>
+      <div class="check-list">
+        <div class="check-item">
+          <span class="check-icon">✦</span>
+          <div class="check-text">
+            <strong>中文是流水句，一句话可能有好几个动词。</strong>
+            先判断哪个是主句动词，其他变成分词、从句或并列结构。
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✦</span>
+          <div class="check-text">
+            <strong>时政术语必须记准。</strong>
+            这是汉译英的核心得分点——术语翻错了，句子再顺也没用。
+            每做完一套题，把里面的时政术语整理进你的"小书"。
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✦</span>
+          <div class="check-text">
+            <strong>注意平行结构。</strong>
+            中文喜欢排比，英文也要保持平行。
+            几个并列的短语在语法形式上要一致（都是名词、都是动名词、都是从句）。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模块五：复盘漏斗 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">五</div>
+      <div class="section-title">复盘漏斗：从错题到能力增长</div>
+    </div>
+
+    <div class="card">
+      <p>
+        做完题不是结束，复盘才是真正长能力的环节。
+        把每一道错题都放进这个漏斗里，一层层往下挖，
+        直到找到真正的原因——然后针对性地补。
+      </p>
+    </div>
+
+    <div class="funnel">
+      <div class="funnel-layer">
+        <div class="funnel-label">第一层：表面错误</div>
+        <div class="funnel-desc">哪个词翻错了 / 哪道题选错了</div>
+      </div>
+      <div class="funnel-layer">
+        <div class="funnel-label">第二层：原因分析</div>
+        <div class="funnel-desc">是词汇不会？句型错了？还是理解偏差？</div>
+      </div>
+      <div class="funnel-layer">
+        <div class="funnel-label">第三层：知识漏洞</div>
+        <div class="funnel-desc">哪个知识点没掌握？哪个表达不熟悉？</div>
+      </div>
+      <div class="funnel-layer">
+        <div class="funnel-label">第四层：行动项</div>
+        <div class="funnel-desc">下一步具体做什么来补上这个漏洞</div>
+      </div>
+    </div>
+
+    <div class="quote-box">
+      <strong>举个例子：</strong>
+      <br>❌ 表面错误："数字鸿沟"翻成了 digital gap
+      <br>🔍 原因分析：术语记得不牢，混淆了 gap 和 divide
+      <br>📚 知识漏洞：科技类时政术语掌握不扎实
+      <br>✅ 行动项：把整套卷六中的科技术语整理进"小书"，每天晨读一遍
+    </div>
+  </div>
+
+  <!-- 模块六：周计划 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">六</div>
+      <div class="section-title">一周备考节奏参考</div>
+    </div>
+
+    <div class="card">
+      <p>以下是一个以"周"为单位的备考节奏，适合还有 4-6 周备考时间的同学。
+        可以根据自己的实际情况调整速度，但<strong>三个步骤的顺序不要乱</strong>。</p>
+    </div>
+
+    <div class="week-calendar">
+      <div class="week-row">
+        <div class="week-day">周一</div>
+        <div class="week-task">📖 读教材对应章节 → 提炼"小书"术语和句型</div>
+      </div>
+      <div class="week-row">
+        <div class="week-day">周二</div>
+        <div class="week-task">📝 做对应专题练习卷（选词 + 完形）→ 立即复盘</div>
+      </div>
+      <div class="week-row">
+        <div class="week-day">周三</div>
+        <div class="week-task">✍️ 做对应专题英译汉 → 对照参考译文 → 整理术语</div>
+      </div>
+      <div class="week-row">
+        <div class="week-day">周四</div>
+        <div class="week-task">✍️ 做对应专题汉译英 → 对照参考译文 → 整理句型</div>
+      </div>
+      <div class="week-row">
+        <div class="week-day">周五</div>
+        <div class="week-task">🔄 复习本周"小书" + 重做错题 + 查漏补缺</div>
+      </div>
+      <div class="week-row">
+        <div class="week-day">周六</div>
+        <div class="week-task">🏆 限时完整做一套综合卷 → 全面复盘</div>
+      </div>
+      <div class="week-row">
+        <div class="week-day">周日</div>
+        <div class="week-task">🧘 休息 + 轻量复习 + 规划下周专题</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模块七：避坑指南 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">七</div>
+      <div class="section-title">备考避坑指南</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-title-icon">⚠️</span>常见的六个坑</div>
+      <div class="check-list">
+        <div class="check-item">
+          <span class="check-icon">✗</span>
+          <div class="check-text">
+            <strong>只背术语不练手。</strong>
+            背了一千个术语，翻出来的句子还是中文语序。术语是砖块，
+            但你得会砌墙——只有在翻译练习中，术语才真正"活"起来。
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✗</span>
+          <div class="check-text">
+            <strong>刷题追求数量。</strong>
+            做了 10 套题但每套都不复盘，不如认认真真做 3 套、每套复盘 3 遍。
+            <strong>复盘一道题的价值 > 做十道新题。</strong>
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✗</span>
+          <div class="check-text">
+            <strong>翻译只看"差不多"。</strong>
+            "意思差不多就行"是笔译的大敌。
+            术语差一个词、语序换一下位置，得分可能差一个档次。
+            对答案的时候要抠细节。
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✗</span>
+          <div class="check-text">
+            <strong>忽视基础语法。</strong>
+            很多同学把精力都放在难词大词上，结果第三人称单数、
+            时态一致、介词搭配这些基础地方频频丢分。这些都是"送分题"，丢了太可惜。
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✗</span>
+          <div class="check-text">
+            <strong>从来不计时。</strong>
+            平时做题慢悠悠，到了考场发现时间根本不够用。
+            从第二套练习开始就养成计时习惯——时间压力下的表现才是真实水平。
+          </div>
+        </div>
+        <div class="check-item">
+          <span class="check-icon">✗</span>
+          <div class="check-text">
+            <strong>贪多嚼不烂。</strong>
+            七套卷子不是要你一周做完。一套一套吃透，
+            每套题里的术语和句型都变成你自己的，才是真的进步。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部信 -->
+  <div class="letter-box">
+    <div class="letter-title">最后想对你说的话</div>
+    <div class="letter-text">
+      <p>
+        笔译比赛考的不是天赋，是积累。你翻的每一句话、记的每一个术语、
+        复盘的每一道错题，都是在给自己的翻译能力添砖加瓦。
+      </p>
+      <p>
+        可能你现在翻得还不够流畅，可能术语总记混，可能长句总拆不开。
+        没关系，这很正常。<strong>翻译能力的增长不是线性的，是阶梯式的</strong>——
+        你会在很长一段时间里感觉不到进步，然后某一天突然发现，
+        之前觉得很难的句子，现在顺手就翻出来了。
+      </p>
+      <p>
+        那一天什么时候来？不知道。但你做的每一套题、
+        每一次复盘，都在让那一天更早到来。
+      </p>
+      <p>
+        七套卷子就在这里了。从第一套开始，慢慢来，一套一套吃透。
+        等你做到最终卷的时候，你会发现自己已经不一样了。
+      </p>
+    </div>
+    <div class="letter-sign">加油，赛场见 🌟</div>
+  </div>
+
+</div>
+
+</body>
+</html>

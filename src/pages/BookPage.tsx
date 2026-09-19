@@ -12,14 +12,17 @@ import { useNavigate, useParams } from 'react-router'
 import MarkdownView from '@/components/MarkdownView'
 import HtmlView from '@/components/HtmlView'
 import QuizView from '@/components/QuizView'
-import { BOOKS } from '@/lib/books'
+import { booksOfUser } from '@/lib/books'
+import { useActiveUserId } from '@/store/useBoard'
 import { cn } from '@/lib/utils'
 
 // 教材精读页（runoob 式三栏布局）：左侧章节目录 / 中间正文 / 右侧本书信息
 export default function BookPage() {
   const { bookId } = useParams()
   const navigate = useNavigate()
-  const book = BOOKS.find((b) => b.id === bookId)
+  const userId = useActiveUserId()
+  // 仅在当前用户可见的书里查找；无权限的书按「不存在」处理（直达 URL 守卫）
+  const book = booksOfUser(userId).find((b) => b.id === bookId)
 
   const progressKey = `book-progress-${bookId}`
   const [idx, setIdx] = useState(() => {

@@ -4,6 +4,13 @@ import { GraduationCap, KeyRound, LogIn, UserRound } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuth, getCurrentUser } from '@/store/useBoard'
 
+// 各账号登录后的默认落脚点
+function homeOf(userId?: string) {
+  if (userId === 'u-gege') return '/brother'
+  if (userId === 'u-jiujiu') return '/aunt'
+  return '/'
+}
+
 export default function Login() {
   const auth = useAuth()
   const navigate = useNavigate()
@@ -22,10 +29,10 @@ export default function Login() {
       void auth.login(u, p).then((err) => {
         if (err) return
         const user = getCurrentUser()
-        // 保留目标路径；仅默认首页时管理员分流到管理看板
+        // 保留目标路径；从默认首页登录时按账号分流到各自面板
         const target =
-          location.pathname === '/' && user?.role === 'admin'
-            ? '/brother'
+          location.pathname === '/'
+            ? homeOf(user?.id)
             : location.pathname + location.search + location.hash
         navigate(target, { replace: true })
       })
@@ -39,10 +46,7 @@ export default function Login() {
     const err = await auth.login(username, password)
     setBusy(false)
     if (err) setError(err)
-    else
-      navigate((getCurrentUser()?.role === 'admin' ? '/brother' : '/') + window.location.hash, {
-        replace: true,
-      })
+    else navigate(homeOf(getCurrentUser()?.id), { replace: true })
   }
 
   return (
